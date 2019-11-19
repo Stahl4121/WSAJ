@@ -1,5 +1,5 @@
 import React from 'react';
-import './DJShows.css';
+import '../compCSS/DJShows.css';
 
 class DJShows extends React.Component {
     render() {
@@ -10,7 +10,7 @@ class DJShows extends React.Component {
                      <h3>The Hairy Uncle</h3>
                </div>
                <div id="show-picture">
-                  <img src="images/18th-cent-group.jpg" alt="Show Picture"/>
+                  <img src="./src/images/18th-cent-group.jpg" alt="Show Picture"/>
                </div>
                <div id="host-members">
                   <h5>Host Members</h5>
