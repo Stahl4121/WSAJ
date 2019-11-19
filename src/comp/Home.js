@@ -8,7 +8,6 @@ class Home extends React.Component {
          <div>
             <div id="home-image-wrap">
                <img id="homepage-img" src={pic} alt="WSAJ Picture"/>
-               <p> Welcome Music Lovers! </p>
             </div>
             
             <div id="news">
