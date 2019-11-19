@@ -2,109 +2,41 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-    <title>Account Creation - GCC Gamers</title>
+    <title>DJ Account Request</title>
     <style>
         ul { list-style: none; }
     </style>
   </head>
 
   <body>
-    <h1>Create an Account</h1>
-    <form method="POST" action="superglobals.php" enctype="multipart/form-data">
-      <fieldset>
-        <legend>Account Information</legend>
-        <table>
-          <tr>
-            <td><label for="f-username">Username: </label></td>
-            <td><input type="text" name="username" id="f-username" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-password">Password: </label></td>
-            <td><input type="password" name="password" id="f-password" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-email">Email: </label></td>
-            <td><input type="email" name="email" id="f-email" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-dob">Date of Birth: </label></td>
-            <td><input type="date" name="dob" id="f-dob" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-dob-month">Birth month: </label></td>
-            <td><select name="dob-month" id="f-dob-month">
-              <option value="1">Jan</option>
-              <option value="2">Feb</option>
-              <option value="3">Mar</option>
-              <option value="4">Apr</option>
-              <option value="5">May</option>
-              <option value="6">Jun</option>
-              <option value="7">Jul</option>
-              <option value="8">Aug</option>
-              <option value="9">Sep</option>
-              <option value="10">Oct</option>
-              <option value="11">Nov</option>
-              <option value="12">Dec</option>
-            </select></td>
-          </tr>
-          <tr>
-            <td><label for="f-dob-year">Birth year: </label></td>
-            <td><input type="number" name="dob-year" id="f-dob-year" value="1970" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-profile-img">Profile Picture: </label></td>
-            <td><input type="file" name="profile-img" id="f-profile-img" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-profile">Profile: </label></td>
-            <td><textarea name="profile" id="f-profile"></textarea></td>
-          </tr>
-          <tr>
-            <td><label for="f-platform">Platform: </label></td>
-            <td><select name="platform" id="f-platform">
-              <option>PC</option>
-              <option>XBox</option>
-              <option value="PS4">PlayStation 4</option>
-            </select></td>
-          </tr>
-          <tr>
-            <td><label for="f-years">Years owned: </label></td>
-            <td><input type="number" name="years" id="f-years" /></td>
-          </tr>
-        </table>
-      </fieldset>
-      <fieldset>
-        <legend>Communication Preferences</legend>
-        <input type="checkbox" name="publish-email" id="f-publish-email" />
-        <label for="f-publish-email">You have permission to publish my email address.</label>
-        <br />
-        <br />
-        <input type="radio" name="email-announce" id="f-email-announce-no" checked="checked" />
-        <label for="f-email-announce-no">Do not send me email announcements.</label>
-        <br />
-        <input type="radio" name="email-announce" id="f-email-announce-yes" />
-        <label for="f-email-announce-yes">I wish to receive email announcements about the following topics:</label>
-        <br />
-        
-        <ul>
-            <li>
-                <input type="checkbox" name="email-type[]" id="f-email-type-hardware" />
-                <label for="f-email-type-hardware">Hardware accessories</label>
-                <br />
-            </li>
-            <li>
-                <input type="checkbox" name="email-type[]" id="f-email-type-tournaments" />
-                <label for="f-email-type-tournaments">Tournaments</label>
-                <br />
-            </li>
-            <li>
-                <input type="checkbox" name="email-type[]" id="f-email-type-games" />
-                <label for="f-email-type-games">New games</label>
-                <br />
-            </li>
-        </ul>
-      </fieldset>
-      <input type="submit" value="Create Account" />
-    </form>
-  </body>
+        <h1>Request an Account</h1>
+        <form method="POST" action="superglobals.php" enctype="multipart/form-data">
+          <fieldset>
+            <legend>Account Information</legend>
+            <table>
+              <tr>
+                <td><label for="f-username">Name: </label></td>
+                <td><input type="text" name="username" id="f-username" /></td>
+              </tr>
+              <tr>
+                <td><label for="f-password">Password: </label></td>
+                <td><input type="password" name="password" id="f-password" /></td>
+              </tr>
+              <tr>
+                <td><label for="f-retype-password">Retype Password: </label></td>
+                <td><input type="password" name="retype-password" id="f-retype-password" /></td>
+              </tr>
+              <tr>
+                <td><label for="f-set-name">Name: </label></td>
+                <td><input type="text" name="set-name" id="f-set-name" /></td>
+              </tr>
+              <tr>
+                <td><label for="f-email">Email: </label></td>
+                <td><input type="email" name="email" id="f-email" /></td>
+              </tr>
+            </table>
+          </fieldset>
+          <input type="submit" value="Submit Request" />
+        </form>
+      </body>
 </html>
