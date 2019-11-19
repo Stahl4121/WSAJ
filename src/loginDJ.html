@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>DJ Login</title>
+    <link rel="stylesheet" href="style.css" />
     <style>
         ul { list-style: none; }
     </style>
@@ -11,32 +12,24 @@
   <body>
     <h1>Request an Account</h1>
     <form method="POST" action="superglobals.php" enctype="multipart/form-data">
-      <fieldset>
-        <legend>Account Information</legend>
-        <table>
-          <tr>
-            <td><label for="f-username">Name: </label></td>
-            <td><input type="text" name="username" id="f-username" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-password">Password: </label></td>
-            <td><input type="password" name="password" id="f-password" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-retype-password">Retype Password: </label></td>
-            <td><input type="password" name="retype-password" id="f-retype-password" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-set-name">Name: </label></td>
-            <td><input type="text" name="set-name" id="f-set-name" /></td>
-          </tr>
-          <tr>
-            <td><label for="f-email">Email: </label></td>
-            <td><input type="email" name="email" id="f-email" /></td>
-          </tr>
-        </table>
-      </fieldset>
-      <input type="submit" value="Submit Request" />
+    
+    <table>
+        <tr>
+        <td><label for="f-username">Name: </label></td>
+        <td><input type="text" name="username" id="f-username" /></td>
+        </tr>
+        <tr>
+        <td><label for="f-password">Password: </label></td>
+        <td><input type="password" name="password" id="f-password" /></td>
+        </tr>
+    </table>
+    
+      <input type="submit" value="Login" />
     </form>
+        
+    <a href="forgotPassword.html">Forgot Password</a><br>
+
+    <a href="accountRequest.html">Create Account</a>
+
   </body>
 </html>

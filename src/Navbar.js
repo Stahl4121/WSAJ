@@ -3,7 +3,7 @@ import Schedule from './Schedule.js';
 import DJShows from './DJShows.js';
 import Contact from './Contact.js';
 import { Link, Route } from 'react-router-dom';
-import ReactDOM from 'react-dom';
+import './NavBar.css';
 import React from 'react';
 
 class Navbar extends React.Component {
