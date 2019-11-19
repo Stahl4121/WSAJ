@@ -1,7 +1,7 @@
 import Home from './Home.js';
 import Schedule from './Schedule.js';
 import DJShows from './DJShows.js';
-import Contact from './Contact.js';
+import ContactsPage from './ContactsPage.js';
 import { Link, Route } from 'react-router-dom';
 import '../compCSS/NavBar.css';
 import React from 'react';
@@ -40,7 +40,7 @@ class Navbar extends React.Component {
             <Route exact={true} path="/" component={Home}/>
             <Route exact={true} path="/shows" component={DJShows}/>
             <Route exact={true} path="/schedule" component={Schedule}/>
-            <Route exact={true} path="/contact" component={Contact}/>
+            <Route exact={true} path="/contact" component={ContactsPage}/>
         </React.Fragment>
        )
     }
