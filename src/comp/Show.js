@@ -8,7 +8,7 @@ class Show extends React.Component {
          <div className = "Show">
             <div id="dj-card">
                <div id="dj-show-name">
-                     <h3>The Hairy Uncle</h3>
+                     <h3>The Muzak Singalong Hour!</h3>
                </div>
                <div id="show-picture">
                   <img src={pic} alt="Show Picture"/>
