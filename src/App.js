@@ -1,17 +1,10 @@
 import React from 'react';
 import './App.css';
+import Navbar from './Navbar.js';
 
 function App() {
   return (
-    <div>
-       <ul>
-       <li>Home</li>
-       <li>DJ Shows</li>
-       <li>Schedule</li>
-       <li>Contact Info</li>
-       </ul>
-       {this.props.children}
-    </div>
- )
+   <Navbar/>
+  )
 }
 export default App;
