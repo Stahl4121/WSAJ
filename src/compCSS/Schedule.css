@@ -54,6 +54,7 @@ text-align: center;
 .month ul {
 margin: 0;
 padding: 0;
+display: inline-block;
 }
 
 .month ul li {
@@ -61,6 +62,8 @@ color: #F7FAFF;
 font-size: 20px;
 text-transform: uppercase;
 letter-spacing: 3px;
+float: left;
+padding: 2px 5px;
 }
 
 /* Previous button inside month header */
@@ -112,4 +115,8 @@ color: #464447;
 padding: 5px;
 background: #AF3F3F;
 color: #F7FAFF !important
+}
+
+.days li:hover {
+  background-color: grey;
 }
