@@ -1,0 +1,151 @@
+#home-image-wrap {
+    background-color: #464447;
+    text-align: center;
+}
+
+#pageTitle {
+    color: #464447;
+}
+
+#homepage-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 3em;
+    border: 5px #F7FAFF;
+    margin: 1em auto 1em auto;
+    width: 40em;
+}
+
+#exec-contact {
+    background-color: #F7FAFF;
+    text-align: left;
+}
+
+#exec-contact .a {
+    margin: 1em auto 1em 5px;
+}
+
+#contact-img {
+    padding: 1em;
+    border-radius: 70%;
+    border: 5px #AF3F3F;
+    width: 40em;
+    width: 10%;
+    height: auto;
+    float: left;
+}
+
+#dj-card{
+    display: inline-block;
+    padding: 10px;
+    border-style: solid;
+    border-color: #AF3F3F;
+}
+
+#changePword, #forgotPw, #loginDJ, #acctReq{
+    display: inline-block;
+    padding: 10px;
+    border-style: solid;
+    border-color: #AF3F3F;
+    background-color: rgb(229, 235, 247);
+    color: #464447;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #F7FAFF;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 0.5em;
+}
+
+tr{
+    border: 1px #AF3F3F;
+}
+
+
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+/* Month header */
+.month {
+  padding: 70px 25px;
+  width: 100%;
+  background: #AF3F3F;
+  text-align: center;
+}
+
+/* Month list */
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: #F7FAFF;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+/* Next button */
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color:#464447;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: #F7FAFF;
+  text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+  padding: 10px 0;
+  background: #F7FAFF;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #464447;
+}
+
+/* Highlight the "current" day */
+.days li .active {
+  padding: 5px;
+  background: #AF3F3F;
+  color: #F7FAFF !important
+}
