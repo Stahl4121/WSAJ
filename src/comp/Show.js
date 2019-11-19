@@ -5,7 +5,7 @@ import pic from '../images/18th-cent-group.jpg';
 class Show extends React.Component {
     render() {
        return (
-         <div id="dj-shows">
+         <div className = "Show">
             <div id="dj-card">
                <div id="dj-show-name">
                      <h3>The Hairy Uncle</h3>
