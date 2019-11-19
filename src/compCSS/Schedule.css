@@ -7,6 +7,11 @@
   color: #464447;
 }
 
+.month-year {
+  background-color: #AF3F3F;
+  text-align: center;
+
+}
 #homepage-img {
   display: block;
   margin-left: auto;

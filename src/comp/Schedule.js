@@ -9,7 +9,7 @@ class Schedule extends React.Component {
                <ul>
                   <li class="prev">&#10094;</li>
                   <li class="next">&#10095;</li>
-                  <li>September 2019</li>
+                  <li class="month-year">September 2019</li>
                </ul>
             </div>
             
