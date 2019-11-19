@@ -30,6 +30,9 @@
     height:100%;
 }
 
+#exec-contact:hover {
+    background-color: #b9b8b9;
+}
 .row {
   width:100%;
   height:50%;
