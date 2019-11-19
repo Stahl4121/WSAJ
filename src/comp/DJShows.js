@@ -5,7 +5,7 @@ import Show from './Show.js';
 class DJShows extends React.Component {
     render() {
        return (
-         <div>
+         <div className="DJShows">
             <Show/>
             <Show/>         
          </div>
