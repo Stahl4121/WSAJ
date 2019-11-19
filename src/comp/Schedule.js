@@ -9,19 +9,18 @@ class Schedule extends React.Component {
                <ul>
                   <li class="prev">&#10094;</li>
                   <li class="next">&#10095;</li>
-                  <li>August</li>
-                  <li>2019</li>
+                  <li>September 2019</li>
                </ul>
             </div>
             
             <ul class="weekdays">
-                  <li>Mo</li>
-                  <li>Tu</li>
-                  <li>We</li>
-                  <li>Th</li>
-                  <li>Fr</li>
-                  <li>Sa</li>
-                  <li>Su</li>
+                  <li>Sunday</li>
+                  <li>Monday</li>
+                  <li>Tuesday</li>
+                  <li>Wednesday</li>
+                  <li>Thursday</li>
+                  <li>Friday</li>
+                  <li>Saturday</li>
             </ul>
       
             <ul class="days">

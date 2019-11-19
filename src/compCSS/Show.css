@@ -41,7 +41,8 @@
     margin: 2%;
     padding: 20px;
     background-color: #FFFFFF;
-    color: #F7FAFF;
+    color: black;
+    border: none;
     border-radius: 25px;
     box-shadow: 5px 5px 5px #222222;
 }
