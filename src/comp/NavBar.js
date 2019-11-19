@@ -14,8 +14,9 @@ class Navbar extends React.Component {
     render() {
        return (
         <React.Fragment>
-            <h1>WSAJ</h1>
+           
             <ul>
+                <li> <h1>WSAJ      </h1></li>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/shows">DJ Shows</Link></li>
                 <li><Link to="/schedule">Schedule</Link></li>

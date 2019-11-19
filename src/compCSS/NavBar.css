@@ -4,6 +4,7 @@ h1 {
   align-items: center;
   margin: 0;
   padding-left: 14px;
+  padding-right: 14px;
 }
 ul {
     list-style-type: none;
