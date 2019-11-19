@@ -1,6 +1,10 @@
 #home-image-wrap {
-    background-color: #000000;
+    background-color: #464447;
     text-align: center;
+}
+
+#pageTitle {
+    color: #464447;
 }
 
 #homepage-img {
@@ -9,13 +13,13 @@
     margin-right: auto;
     width: 50%;
     padding: 3em;
-    border: 5px white solid;
+    border: 5px #F7FAFF;
     margin: 1em auto 1em auto;
     width: 40em;
 }
 
 #exec-contact {
-    background-color: #ffffff;
+    background-color: #F7FAFF;
     text-align: left;
 }
 
@@ -26,15 +30,23 @@
 #contact-img {
     padding: 1em;
     border-radius: 70%;
-    border: 5px white solid;
+    border: 5px #AF3F3F;
     width: 40em;
     width: 10%;
     height: auto;
     float: left;
 }
 
+#djCard{
+    display: inline-block;
+    padding: 10px;
+    border-style: solid;
+    border-color: #AF3F3F;
+}
+
 body {
     font-family: sans-serif;
+    background-color: #F7FAFF;
 }
 
 table {
@@ -46,6 +58,6 @@ td, th {
 }
 
 tr{
-    border: 1px black solid;
+    border: 1px #AF3F3F;
 }
 
