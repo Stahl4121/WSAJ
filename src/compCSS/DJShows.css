@@ -39,9 +39,13 @@
 
 #dj-card{
     display: inline-block;
-    padding: 10px;
+    margin: 2%;
+    padding: 20px;
     border-style: solid;
-    border-color: #AF3F3F;
+    background-color: #464447;
+    color: #F7FAFF;
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px grey;
 }
 
 body {
