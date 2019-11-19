@@ -19,13 +19,8 @@
 }
 
 #exec-contact {
-    background-color: #6f6b70;
-    display: inline-block;
+    background-color: #F7FAFF;
     text-align: left;
-    color: #F7FAFF;
-    border-radius: 25px;
-    box-shadow: 5px 5px 5px grey;
-    padding: 10px;
 }
 
 #exec-contact .a {
