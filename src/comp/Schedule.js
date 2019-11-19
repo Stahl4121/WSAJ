@@ -60,9 +60,9 @@ class Schedule extends React.Component {
 
 
                   </li>
-                  <li><span class="active">10
+                  <li>10
                   
-                  </span></li>
+                  </li>
                   <li>11
 
 
@@ -95,10 +95,10 @@ class Schedule extends React.Component {
 
 
                   </li>
-                  <li>19
+                  <li><span class="active">19
 
 
-                  </li>
+                  </span></li>
                   <li>20
 
 
