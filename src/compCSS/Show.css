@@ -13,7 +13,6 @@
     margin-right: auto;
     width: 50%;
     padding: 3em;
-    border: 5px #F7FAFF;
     margin: 1em auto 1em auto;
     width: 40em;
 }
@@ -41,11 +40,10 @@
     display: inline-block;
     margin: 2%;
     padding: 20px;
-    border-style: solid;
-    background-color: #464447;
+    background-color: #FFFFFF;
     color: #F7FAFF;
     border-radius: 25px;
-    box-shadow: 5px 5px 5px grey;
+    box-shadow: 5px 5px 5px #222222;
 }
 
 body {
