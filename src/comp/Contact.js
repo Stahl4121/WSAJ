@@ -1,6 +1,6 @@
 import React from 'react';
 import '../compCSS/Contact.css';
-import pic from '../images/images/headshot.jpg';
+import pic from '../images/headshot.jpg';
 
 class Contact extends React.Component {
     render() {
