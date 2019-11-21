@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,10 +13,12 @@ const useStyles = makeStyles(theme => ({
 
   },
   tabs: {
-    width: '100%',
   },
   tab: {
+    width: '100%',
 
+  },
+  loginTab: {
   },
 }));
 
@@ -30,6 +31,7 @@ export default function NavBar() {
         <Tab className={classes.tab} label="DJ Shows" />
         <Tab className={classes.tab} label="Calendar" />
         <Tab className={classes.tab} label="Contact" />
+        <Tab className={classes.loginTab} icon={<AccountCircle />}  />
         </Tabs>
     </AppBar>
   );
