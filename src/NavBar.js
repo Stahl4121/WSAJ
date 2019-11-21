@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+import { AppBar, Tab } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
 
@@ -13,8 +13,11 @@ const useStyles = makeStyles(theme => ({
 export default function NavBar() {
   const classes = useStyles();
   return (
-    <Typography className={classes.?} color=?>
-  
-    </Typography>
+    <AppBar title="WSAJ">
+        <Tab label="Home" />
+        <Tab label="DJ Shows" />
+        <Tab label="Calendar" />
+        <Tab label="Contact" />
+    </AppBar>
   );
 }
