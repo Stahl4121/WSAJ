@@ -1,7 +1,7 @@
 import React from 'react';
 import 'typeface-roboto';
 import './App.css';
-import NavBar from './comp/NavBar.js';
+import NavBar from './NavBar.js';
 
 function App() {
   return (
