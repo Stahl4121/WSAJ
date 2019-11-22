@@ -34,20 +34,20 @@ export default function NavBar() {
     <div>
     <AppBar className={classes.appBar} title="WSAJ">
       <Tabs className={classes.tabs}>
-        <Tab className={classes.tab} label="Home"><Link to="/"/></Tab>
-        <Tab className={classes.tab} label="DJ Shows" ><Link to="/shows"/></Tab>
-        <Tab className={classes.tab} label="Calendar" ><Link to="/schedule"/></Tab>
-        <Tab className={classes.tab} label="Contact" ><Link to="/contact"/></Tab>
-        <Tab className={classes.loginTab} icon={<AccountCircle />}  ><Link to="/shows"/></Tab>
+        <Tab className={classes.tab} label="Home" containerElement={<Link to="/"/>}/>
+        <Tab className={classes.tab} label="DJ Shows" containerElement={<Link to="/shows"/>} />
+        <Tab className={classes.tab} label="Calendar" containerElement={<Link to="/schedule"/>} />
+        <Tab className={classes.tab} label="Contact" containerElement={<Link to="/contact"/>} />
+        <Tab className={classes.loginTab} icon={<AccountCircle />} containerElement={<Link to="/shows"/>} />
         </Tabs>
     </AppBar>
     </div>
-    <div>
-    <Route exact={true} path="/" component={Home}/>
-    <Route exact={true} path="/shows" component={DJShows}/>
-    <Route exact={true} path="/schedule" component={Schedule}/>
-    <Route exact={true} path="/contact" component={ContactsPage}/>
-    </div>
+      <div>
+        <Route exact={true} path="/" component={Home}/>
+        <Route exact={true} path="/shows" component={DJShows}/>
+        <Route exact={true} path="/schedule" component={Schedule}/>
+        <Route exact={true} path="/contact" component={ContactsPage}/>
+      </div>
     </div>
   );
 }
