@@ -34,11 +34,11 @@ export default function NavBar() {
     <div>
     <AppBar className={classes.appBar} title="WSAJ">
       <Tabs className={classes.tabs}>
-        <Tab className={classes.tab} label="Home" containerElement={<Link to="/"/>}/>
-        <Tab className={classes.tab} label="DJ Shows" containerElement={<Link to="/shows"/>} />
-        <Tab className={classes.tab} label="Calendar" containerElement={<Link to="/schedule"/>} />
-        <Tab className={classes.tab} label="Contact" containerElement={<Link to="/contact"/>} />
-        <Tab className={classes.loginTab} icon={<AccountCircle />} containerElement={<Link to="/shows"/>} />
+        <Tab className={classes.tab} label="Home" to='/' component={Link} />
+        <Tab className={classes.tab} label="DJ Shows" to='/shows' component={Link} />
+        <Tab className={classes.tab} label="Calendar" to='/schedule' component={Link} />
+        <Tab className={classes.tab} label="Contact" to='/contact' component={Link} />
+        <Tab className={classes.loginTab} icon={<AccountCircle />} to='/Home' component={Link} />
         </Tabs>
     </AppBar>
     </div>
