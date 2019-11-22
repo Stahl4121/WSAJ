@@ -8,7 +8,7 @@ import 'typeface-roboto';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import * as serviceWorker from './comp/serviceWorker';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <BrowserRouter>
