@@ -25,7 +25,7 @@ export default function DJCard() {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/images/headshot.jpg"
+          image="headshot.jpg"
           title="MRM Headshot"
         />
         <CardContent>
