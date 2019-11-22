@@ -3,10 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 import { Link, Route } from 'react-router-dom';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Home from './Home.js';
-import Schedule from './Schedule.js';
-import DJShows from './DJShows.js';
-import ContactsPage from './ContactsPage.js';
+import Home from '../screens/HomeScreen.js';
+import Schedule from '../screens/CalendarScreen.js';
+import DJShows from '../screens/DJShowsScreen.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
