@@ -1,7 +1,7 @@
-import Home from './Home.js';
-import Schedule from './Schedule.js';
-import DJShows from './DJShows.js';
-import ContactsPage from './ContactsPage.js';
+import Home from '../Screens/HomeScreen.js';
+import Schedule from '../Screens/CalendarScreen.js';
+import DJShows from '../Screens/DJShowsScreen.js';
+import ContactsPage from '../Screens/ContactsScreen.js';
 import { Link, Route } from 'react-router-dom';
 import '../compCSS/NavBar.css';
 import React from 'react';
