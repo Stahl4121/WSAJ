@@ -6,6 +6,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Home from '../screens/HomeScreen.js';
 import Schedule from '../screens/CalendarScreen.js';
 import DJShows from '../screens/DJShowsScreen.js';
+import ContactsPage from '../screens/ContactScreen.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
