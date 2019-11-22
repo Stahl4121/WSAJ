@@ -11,14 +11,13 @@ import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <BrowserRouter>
-        <ThemeProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <App />
-        </ThemeProvider>
-    </BrowserRouter>,
-    document.querySelector('#root'),
+<BrowserRouter>
+<ThemeProvider theme={theme}>
+    <CssBaseline />
+    <App />
+    </ThemeProvider>
+    </BrowserRouter>, 
+    document.getElementById('root')
   );
 
 // If you want your app to work offline and load faster, you can change
