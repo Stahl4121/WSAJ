@@ -11,7 +11,12 @@ function App() {
       <NavBar/>
       <FullWidthGrid/>
       <FullWidthGrid/>
-      <Calendar/>
+      <Calendar
+        localizer={localizer}
+        defaultDate={new Date(2015, 3, 1)}
+        defaultView={Views.AGENDA}
+        
+      />
     </div> 
   )
 }
