@@ -1,7 +1,12 @@
 import React from 'react';
+import PaperSheet from '../components/HomePaper';
+
 
 export default function HomeScreen() {
     return (
-        <div></div> 
+        <div>
+            <PaperSheet/>
+        </div> 
     );
 }
+
