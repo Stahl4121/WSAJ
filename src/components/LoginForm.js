@@ -62,11 +62,12 @@ export default function LogForm() {
                 fullWidth
                 variant={"contained"}
             >
-                {submitting ? (
+                {/*submitting ? (
                 <CircularProgress className={classes.progress} />
                 ) : (
                 "Submit"
-                )}
+                )*/}
+                
             </Button>
             </form>
         </React.Fragment>
