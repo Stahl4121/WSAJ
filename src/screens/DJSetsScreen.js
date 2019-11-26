@@ -1,7 +1,8 @@
 import React from 'react';
+import DJSet from '../components/DJSet.js';
 
 export default function DJSetsScreen() {
     return (
-        <div></div> 
+        <DJSet></DJSet>
     );
 }

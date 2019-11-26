@@ -49,6 +49,30 @@ export default function DJCard() {
         </Card>
       </div>
       <div>
+        <Card className={classes.card}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image="headshot.jpg"
+              title="MRM Headshot"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                DJ SARAH
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                DJ SARAH continues the decathexis with dissociative jams to get you through your onerous meetings.
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary" to="/shows/sets" component={Link}>
+              Set History
+            </Button>
+          </CardActions>
+        </Card>
+      </div>
+      <div>
         <Route exact={true} path="/shows/sets" component={DJSets}/>
       </div>
     </div>
