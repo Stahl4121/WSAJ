@@ -7,6 +7,7 @@ import Home from '../screens/HomeScreen.js';
 import Schedule from '../screens/CalendarScreen.js';
 import DJShows from '../screens/DJShowsScreen.js';
 import ContactsPage from '../screens/ContactScreen.js';
+import LoginForm from '../screens/LoginScreen.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,7 +39,7 @@ export default function NavBar() {
         <Tab className={classes.tab} label="DJ Shows" to='/shows' component={Link} />
         <Tab className={classes.tab} label="Calendar" to='/schedule' component={Link} />
         <Tab className={classes.tab} label="Contact" to='/contact' component={Link} />
-        <Tab className={classes.loginTab} icon={<AccountCircle />} to='/Home' component={Link} />
+        <Tab className={classes.loginTab} icon={<AccountCircle />} to='/login' component={Link} />
         </Tabs>
     </AppBar>
     </div>
@@ -47,6 +48,7 @@ export default function NavBar() {
         <Route exact={true} path="/shows" component={DJShows}/>
         <Route exact={true} path="/schedule" component={Schedule}/>
         <Route exact={true} path="/contact" component={ContactsPage}/>
+        <Route exact={true} path="/login" component={LoginForm}/>
       </div>
     </div>
   );
