@@ -6,6 +6,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Home from '../screens/HomeScreen.js';
 import Schedule from '../screens/CalendarScreen.js';
 import DJShows from '../screens/DJShowsScreen.js';
+import DJSets from '../screens/DJSetsScreen.js';
 import ContactsPage from '../screens/ContactScreen.js';
 import LoginForm from '../screens/LoginScreen.js';
 
@@ -14,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0, 0, 0),
   },
   appBar: {
-    position: "sticky",
+    position: 'sticky',
     flexWrap: 'wrap',
 
   },
@@ -46,6 +47,7 @@ export default function NavBar() {
       <div>
         <Route exact={true} path="/" component={Home}/>
         <Route exact={true} path="/shows" component={DJShows}/>
+        <Route exact={true} path="/shows/sets" component={DJSets}/>
         <Route exact={true} path="/schedule" component={Schedule}/>
         <Route exact={true} path="/contact" component={ContactsPage}/>
         <Route exact={true} path="/login" component={LoginForm}/>
