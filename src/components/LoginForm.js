@@ -46,7 +46,7 @@ export default function LogForm() {
                 required
                 type={"email"}
                 label={"Email"}
-                value={email}
+                value={"email"}
                 onChange={this.handleChange("email")}
             />
             <TextField className={classes.fields}
@@ -54,7 +54,7 @@ export default function LogForm() {
                 required
                 type={"password"}
                 label={"Password"}
-                value={password}
+                value={"password"}
                 onChange={this.handleChange("password")}
             />
             <Button className={classes.button}
