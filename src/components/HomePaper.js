@@ -16,7 +16,13 @@ const useStyles = makeStyles(theme => ({
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
   },
-
+  announcement: {
+    margin: '20px',
+    padding: '20px',
+  },
+  paperholder: {
+    opacity: '0.85',
+  }
 }));
 
 export default function PaperSheet() {
@@ -24,13 +30,15 @@ export default function PaperSheet() {
 
   return (
     <div className={classes.root}>
-        <Paper >
+        <Paper className={classes.paperholder}>
+          <div className={classes.announcement}>
             <Typography variant="h5" component="h3">
                 Announcements
             </Typography>
             <Typography component="p">
                 Check out the other tabs:)
             </Typography>
+          </div>
         </Paper>
     </div>
   );
