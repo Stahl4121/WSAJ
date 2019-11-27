@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 
 export default function DJCard(props) {
   const classes = useStyles();
+  var linkTo="/shows/" + props.show["ShowName"].split(' ').join('-');
   return (
     <div>
       <div>
@@ -44,14 +45,16 @@ export default function DJCard(props) {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" to="/shows/sets" component={Link}>
-              Set History
+            <Button size="small" color="primary" >
+              <Link color="primary" to={linkTo}>
+                Set History
+              </Link>
             </Button>
           </CardActions>
         </Card>
       </div>
       <div>
-        <Route exact={true} path="/shows/sets" component={DJSets}/>
+        <Route path="/shows/:show" component={DJSets}/>
       </div>
     </div>
 

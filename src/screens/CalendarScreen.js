@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React /*, { Component }*/ from 'react';
+//import { render } from 'react-dom';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
