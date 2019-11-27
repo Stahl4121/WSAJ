@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import DJSets from '../screens/DJSetsScreen.js';
 import { Link, Route } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import DJShows from '../data/DJShows.json';
 
 const useStyles = makeStyles({
   card: {
@@ -21,7 +22,11 @@ const useStyles = makeStyles({
 
 export default function DJCard() {
   const classes = useStyles();
-
+  //var data = JSON.parse(DJShows);
+  //var shows = data["Shows"];
+  var shows = DJShows["Shows"];
+  console.log(shows);
+  console.log('um hello?????????');
   return (
     <div>
       <div>
