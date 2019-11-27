@@ -6,6 +6,7 @@ import DJShows from '../screens/DJShowsScreen.js';
 import ContactsPage from '../screens/ContactScreen.js';
 import LoginScreen from '../screens/LoginScreen.js';
 import SignUpScreen from '../screens/SignUpScreen.js';
+import DJSetsScreen from '../screens/DJSetsScreen.js';
 
 const Routes = () => {
     return (
@@ -16,6 +17,7 @@ const Routes = () => {
             <Route exact path="/contact" component={ContactsPage} />
             <Route exact path="/login" component={LoginScreen} />
             <Route exact path="/signup" component={SignUpScreen} />
+            <Route exact path="/shows/:show" component={DJSetsScreen}/>
         </React.Fragment>
     )
 }
