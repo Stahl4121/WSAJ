@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 export default function DJSetsScreen(props) {
     console.log('um hello')
-    console.log('Show name: ' + this.props.param.show);
+    console.log('Show name: ' + props.param.show);
     // var sets =[];
     // for (var i = 0; i < sets.length; i++) {
     //     // note: we add a key prop here to allow react to uniquely identify each
@@ -15,7 +15,7 @@ export default function DJSetsScreen(props) {
     return (
         <div>
             <Typography gutterBottom variant="h5" component="h2">
-                {this.props.param.show}
+                {props.param.show}
             </Typography>
             <DJSet/>
         </div>
