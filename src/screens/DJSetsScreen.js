@@ -1,7 +1,7 @@
 import React from 'react';
 import DJSet from '../components/DJSet.js';
 
-export default function DJSetsScreen(props) {
+export default function DJSetsScreen() {
     console.log('um hello')
     console.log('Show name: ' + this.props.param.show);
     // var sets =[];
@@ -11,6 +11,6 @@ export default function DJSetsScreen(props) {
     //     sets.push(<DJSet></DJSet>);
     // }
     return (
-       <div><typograhpy>HI</typograhpy><DJSet></DJSet></div>
+       <DJSet/>
     );
 }
