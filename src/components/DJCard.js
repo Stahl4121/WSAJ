@@ -47,7 +47,7 @@ export default function DJCard(props) {
           <Button size="small" color="primary" >
             <Link color="primary" to={linkTo}>
               Set History
-              </Link>
+            </Link>
           </Button>
         </CardActions>
       </Card>
