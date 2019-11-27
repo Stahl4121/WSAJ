@@ -18,7 +18,7 @@ export default function FullWidthGrid() {
   for (var i = 0; i < shows.length; i++) {
     // note: we add a key prop here to allow react to uniquely identify each
     // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-    cards.push(<Grid container item xs={3} spacing={0}><DJCard/></Grid>);
+    cards.push(<Grid container item xs={3} spacing={0}><DJCard show={shows[i]}/></Grid>);
   }
   return (
     <div className={classes.root}>

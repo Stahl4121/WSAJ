@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DJCard() {
+export default function DJCard(props) {
   const classes = useStyles();
   return (
     <div>
@@ -33,34 +33,13 @@ export default function DJCard() {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-                DJ MRM
+                {props.show["ShowName"]} with {props.show["ShowHost"]}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                DJ MRM delights her listeners by offering listening choices that encourage the listener to delve into stages of derealization and decathect.
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary" to="/shows/sets" component={Link}>
-              Set History
-            </Button>
-          </CardActions>
-        </Card>
-      </div>
-      <div>
-        <Card className={classes.card}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image="headshot.jpg"
-              title="MRM Headshot"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                DJ SARAH
+                {props.show["ShowDescription"]}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                DJ SARAH continues the decathexis with dissociative jams to get you through your onerous meetings.
+                Genre: {props.show["ShowGenre"]}
               </Typography>
             </CardContent>
           </CardActionArea>
