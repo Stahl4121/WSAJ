@@ -22,8 +22,6 @@ const useStyles = makeStyles({
 
 export default function DJCard() {
   const classes = useStyles();
-  //var data = JSON.parse(DJShows);
-  //var shows = data["Shows"];
   var shows = DJShows["Shows"];
   console.log(shows);
   console.log('um hello?????????');
