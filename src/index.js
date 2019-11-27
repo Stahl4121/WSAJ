@@ -5,20 +5,21 @@ import App from './App.js';
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
 import theme from './theme';
 import 'typeface-roboto';
-
 import { BrowserRouter } from 'react-router-dom';
+import Routes from "./components/Routes.js"
 
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-<BrowserRouter>
-<ThemeProvider theme={theme}>
-    <CssBaseline />
-    <App />
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+      <Routes />
     </ThemeProvider>
-    </BrowserRouter>, 
-    document.getElementById('root')
-  );
+  </BrowserRouter>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

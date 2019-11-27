@@ -6,7 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import DJSets from '../screens/DJSetsScreen.js';
+import DJSetsScreen from '../screens/DJSetsScreen.js';
 import { Link, Route } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 
@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 export default function DJCard(props) {
   const classes = useStyles();
   var linkTo="/shows/" + props.show["ShowName"].split(' ').join('-');
+
   return (
     <div>
       <div>
@@ -54,7 +55,7 @@ export default function DJCard(props) {
         </Card>
       </div>
       <div>
-        <Route path="/shows/:show" component={DJSet}/>
+        <Route path="/shows/:show" component={DJSetsScreen}/>
       </div>
     </div>
 
