@@ -13,8 +13,11 @@ export default function DJSetsScreen(props) {
     //     sets.push(<DJSet></DJSet>);
     // }
     return (
-        <Typography gutterBottom variant="h5" component="h2">
-            Hello
-        </Typography>
+        <div>
+            <Typography gutterBottom variant="h5" component="h2">
+                {this.props.param.show}
+            </Typography>
+            <DJSet/>
+        </div>
     );
 }
