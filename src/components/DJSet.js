@@ -39,6 +39,38 @@ export default function DJSet() {
                     </Typography>
                 </CardContent>
             </Card>
+            <Card>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        DJ LOGAN 11.26.2019
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        At the Table by Josh Garrels
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        Ghost Machine by Jon Foreman
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        What Is This Unto by Hunter G K Thompson
+                    </Typography>
+                </CardContent>
+            </Card>
+            <Card>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        DJ SPRECH 11.26.2019
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        We're Going To Be Friends by the White Stripes 
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        On the Nature of Daylight by Max Richter
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        Dare You to Move by Switchfoot
+                    </Typography>
+                </CardContent>
+            </Card>
         </div> 
     );
 }
