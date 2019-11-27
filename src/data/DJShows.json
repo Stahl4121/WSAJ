@@ -1,8 +1,29 @@
 {
-    "Shows": [{
-        "ShowName": "Decathection Hour",
-        "ShowHost": "DJ MRM",
-        "ShowDescription": "DJ MRM delights her listeners by offering listening choices that encourage the listener to delve into stages of derealization and decathect.",
-        "ShowGenre": "Country"
-    }]
+    "Shows":
+    [
+        {
+            "ShowName": "Decathection Hour",
+            "ShowHost": "DJ MRM",
+            "ShowDescription": "DJ MRM delights her listeners by offering listening choices that encourage the listener to delve into stages of derealization and decathect.",
+            "ShowGenre": "Country"
+        },
+        {
+            "ShowName": "Derealization Hour",
+            "ShowHost": "DJ SARAH",
+            "ShowDescription": "DJ SARAH continues the decathexis with dissociative jams to get you through your onerous meetings.",
+            "ShowGenre": "Country"
+        },
+        {
+            "ShowName": "Generic 1",
+            "ShowHost": "DJ LOGAN",
+            "ShowDescription": "This show speaks for itself.",
+            "ShowGenre": "Country"
+        },
+        {
+            "ShowName": "Generic 2",
+            "ShowHost": "DJ SPRECH",
+            "ShowDescription": "I'm to lazy to write this bio, too.",
+            "ShowGenre": "Country"
+        }
+    ]
 }
