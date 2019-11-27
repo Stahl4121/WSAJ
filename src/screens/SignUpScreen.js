@@ -1,5 +1,4 @@
 //from a sandbox tutuorial
-
 import React from "react";
 import { withStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
@@ -31,7 +30,7 @@ const styles = theme => ({
   },
 });
 
-class LoginScreen extends React.Component {
+class SignUpScreen extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -42,7 +41,7 @@ class LoginScreen extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
     this.validatePassword = this.validatePassword.bind(this);
-    this.signIn = this.signIn.bind(this);
+    this.signUp = this.signUp.bind(this);
   };
 
   handleChange(e) {
@@ -61,7 +60,7 @@ class LoginScreen extends React.Component {
     }
   }
 
-  signIn(e) {
+  signUp(e) {
     e.preventDefault();
     if (this.validateEmail() && this.validatePassword()) {
       //TODO: User Authentication 
@@ -159,7 +158,7 @@ class LoginScreen extends React.Component {
           <Typography component="h1" variant="h5" className={classes.header}>
             Sign In
                 </Typography>
-          <form className={classes.form} onSubmit={this.signIn}>
+          <form className={classes.form} onSubmit={this.signUp}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -203,8 +202,8 @@ class LoginScreen extends React.Component {
                 </Link>
               </Grid>
               <Grid item>
-                <Link to='/signup' variant="body2">
-                  "Don't have an account? Sign Up"
+                <Link to='/login' variant="body2">
+                  "Already have an account? Sign in"
                 </Link>
               </Grid>
             </Grid>
@@ -215,4 +214,4 @@ class LoginScreen extends React.Component {
   }
 }
 
-export default withStyles(styles)(LoginScreen);
+export default withStyles(styles)(SignUpScreen);
