@@ -8,7 +8,8 @@ import Schedule from '../screens/CalendarScreen.js';
 import DJShows from '../screens/DJShowsScreen.js';
 import DJSets from '../screens/DJSetsScreen.js';
 import ContactsPage from '../screens/ContactScreen.js';
-import LoginForm from '../screens/LoginScreen.js';
+import LoginScreen from '../screens/LoginScreen.js';
+import SignUpScreen from '../screens/SignUpScreen.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,7 +51,8 @@ export default function NavBar() {
         <Route exact={true} path="/shows/sets" component={DJSets}/>
         <Route exact={true} path="/schedule" component={Schedule}/>
         <Route exact={true} path="/contact" component={ContactsPage}/>
-        <Route exact={true} path="/login" component={LoginForm}/>
+        <Route exact={true} path="/login" component={LoginScreen}/>
+        <Route exact={true} path="/signup" component={SignUpScreen}/>
       </div>
     </div>
   );
