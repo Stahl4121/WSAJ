@@ -55,7 +55,7 @@ class LoginScreen extends React.Component {
 
   signIn(e) {
     e.preventDefault();
-    if (this.validateForm()) {
+    if (this.validateEmail() === "" && this.validatePassword() === "") {
       //TODO: User Authentication 
 
       //Clear Form
@@ -87,65 +87,40 @@ class LoginScreen extends React.Component {
   }
 
   validatePassword() {
+    let password = this.state.fields["password"];
+    let errorMsg = "";
 
-  }
-
-  validateForm() {
-    let fields = this.state.fields;
-    let errors = {};
-    let isValid = true;
-
-    if (!fields["emailid"]) {
-      isValid = false;
-      errors["emailid"] = "*Please enter your email-ID.";
+    if (!password) {
+      errorMsg = "*Please enter your password.";
     }
 
-    if (typeof fields["emailid"] !== "undefined") {
-      //regular expression for email validation
-      var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-      if (!pattern.test(fields["emailid"])) {
-        isValid = false;
-        errors["emailid"] = "*Please enter valid email-ID.";
-      }
-    }
+    if (typeof password !== "undefined") {
+      if (!password.match(/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])$/)) {
+        errorMsg = "*Password must contain the following:";
 
-    if (!fields["password"]) {
-      isValid = false;
-      errors["password"] = "*Please enter your password.";
-    }
-
-    if (typeof fields["password"] !== "undefined") {
-      if (!fields["password"].match(/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])$/)) {
-        errors["password"] = "*Password must contain the following:";
-
-        if (!fields["password"].match(/^(?=.{8,})$/)) {
-          errors["password"] += " a minimum of 8 characters";
+        if (!password.match(/^(?=.{8,})$/)) {
+          errorMsg += " a minimum of 8 characters";
         }
-        if (!fields["password"].match(/^(?=.*\d)$/)) {
-          errors["password"] += ", a number";
+        if (!password.match(/^(?=.*\d)$/)) {
+          errorMsg += ", a number";
         }
-        if (!fields["password"].match(/^(?=.*[a-z])$/)) {
-          errors["password"] += ", a lowercase letter";
+        if (!password.match(/^(?=.*[a-z])$/)) {
+          errorMsg += ", a lowercase letter";
         }
-        if (!fields["password"].match(/^(?=.*[A-Z])$/)) {
-          errors["password"] += ", an uppercase letter";
+        if (!password.match(/^(?=.*[A-Z])$/)) {
+          errorMsg += ", an uppercase letter";
         }
-        if (!fields["password"].match(/^(?=.*[\W])$/)) {
-          errors["password"] += ", a special character (e.g. !@#$%^&*)";
+        if (!password.match(/^(?=.*[\W])$/)) {
+          errorMsg += ", a special character (e.g. !@#$%^&*)";
         }
 
         //Fix potentially ugly string syntax
-        errors["password"] = errors["password"].replace(": ,", ":");
+        errorMsg = errorMsg.replace(": ,", ":");
       }
     }
 
-    this.setState({
-      errors: errors
-    });
-    return isValid;
+    return errorMsg;
   }
-
-
 
   render() {
     const { classes } = this.props;
@@ -171,7 +146,7 @@ class LoginScreen extends React.Component {
               autoComplete="email"
               autoFocus
               onChange={this.handleChange}
-              error={this.validateEmail === ""}
+              error={this.validateEmail !== ""}
               helperText={this.validateEmail}
             />
             <TextField
@@ -185,6 +160,8 @@ class LoginScreen extends React.Component {
               id="password"
               autoComplete="current-password"
               onChange={this.handleChange}
+              error={this.validatePassword !== ""}
+              helperText={this.validatePassword}
             />
             <Button className={classes.submit}
               type="submit"
