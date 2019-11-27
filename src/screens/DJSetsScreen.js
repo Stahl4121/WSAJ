@@ -1,7 +1,9 @@
 import React from 'react';
 import DJSet from '../components/DJSet.js';
+import Typography from '@material-ui/core/Typography';
 
-export default function DJSetsScreen() {
+
+export default function DJSetsScreen(props) {
     console.log('um hello')
     console.log('Show name: ' + this.props.param.show);
     // var sets =[];
@@ -11,6 +13,8 @@ export default function DJSetsScreen() {
     //     sets.push(<DJSet></DJSet>);
     // }
     return (
-       <DJSet/>
+        <Typography gutterBottom variant="h5" component="h2">
+            Hello
+        </Typography>
     );
 }

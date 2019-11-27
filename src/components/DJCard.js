@@ -54,7 +54,7 @@ export default function DJCard(props) {
         </Card>
       </div>
       <div>
-        <Route path="/shows/:show" component={DJSets}/>
+        <Route path="/shows/:show" component={DJSet}/>
       </div>
     </div>
 
