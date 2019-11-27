@@ -24,6 +24,18 @@
             "ShowHost": "DJ SPRECH",
             "ShowDescription": "I'm to lazy to write this bio, too.",
             "ShowGenre": "Country"
+        },
+        {
+            "ShowName": "Classical Music Hour",
+            "ShowHost": "DJ RHYS",
+            "ShowDescription": "Rhys always talks about how he likes classical music but Miriam's been listening to it for wayyyyyyyyyyyyyy longer.",
+            "ShowGenre": "Country"
+        },
+        {
+            "ShowName": "CCM Hour",
+            "ShowHost": "DJ WOLFE",
+            "ShowDescription": "Based on Dr. Wolfe's Pandora screenshots he showed us in class.",
+            "ShowGenre": "Country"
         }
     ]
 }
