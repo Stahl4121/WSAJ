@@ -9,7 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Grid from "@material-ui/core/Grid";
 import MUILink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-
+import firebase from "../firebase.js"
 
 const styles = theme => ({
   root: {
@@ -63,6 +63,12 @@ class LoginScreen extends React.Component {
     e.preventDefault();
     if (this.validateEmail()) {
       //TODO: User Authentication 
+      firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"]).catch(function(error) {
+        // Handle Errors 
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("ERROR CODE: " + errorCode + "MSG: " + errorMessage);
+      });
 
       //Clear Form
       let fields = {};
