@@ -4,6 +4,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 export default function DJSet(props) {
+    var date = Object.keys(props.set);
+    var songs = props.set[date];
+    console.log(songs);
     return (
         <div>
             <Card>
