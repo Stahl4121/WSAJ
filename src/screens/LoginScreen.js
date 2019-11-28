@@ -1,6 +1,5 @@
-//from a sandbox tutuorial
-
 import React from "react";
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
@@ -8,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
+import MUILink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 
 
@@ -29,6 +28,9 @@ const styles = theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  links: {
+    textDecoration: 'none'
+  },
 });
 
 class LoginScreen extends React.Component {
@@ -41,7 +43,6 @@ class LoginScreen extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
-    this.validatePassword = this.validatePassword.bind(this);
     this.signIn = this.signIn.bind(this);
   };
 
@@ -56,14 +57,11 @@ class LoginScreen extends React.Component {
     if (e.target.name === "email") {
       this.validateEmail()
     }
-    else{
-      this.validatePassword()
-    }
   }
 
   signIn(e) {
     e.preventDefault();
-    if (this.validateEmail() && this.validatePassword()) {
+    if (this.validateEmail()) {
       //TODO: User Authentication 
 
       //Clear Form
@@ -90,55 +88,7 @@ class LoginScreen extends React.Component {
         errorMsg = "*Please enter a valid email.";
       }
     }
-
-    console.log("LOGGING EMAIL: " + email + " ERROR: " + errorMsg);
-
     errors["email"] = errorMsg;
-
-    this.setState({
-      errors: errors
-    });
-
-    return (errorMsg === "" ? true : false);
-  }
-
-  validatePassword() {
-    let errors = this.state.errors;
-    let password = this.state.fields["password"];
-    let errorMsg = "";
-
-    if (!password || password === "") {
-      errorMsg = "*Please enter your password.";
-    }
-    else if (typeof password !== "undefined") {
-      if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}$/)) {
-        errorMsg = "*Password fails the following requirements: ";
-
-        if (!password.match(/^.{8,}$/)) {
-          errorMsg += "a minimum of 8 characters";
-        }
-        if (!password.match(/\d/)) {
-          errorMsg += ", a number";
-        }
-        if (!password.match(/[a-z]/)) {
-          errorMsg += ", a lowercase letter";
-        }
-        if (!password.match(/[A-Z]/)) {
-          errorMsg += ", an uppercase letter";
-        }
-        if (!password.match(/\W/)) {
-          errorMsg += ", a special character (e.g. !@#$%^&*)";
-        }
-
-        //Fix potentially ugly string syntax
-        errorMsg = errorMsg.replace(": ,", ":");
-      }
-    }
-
-    console.log("LOGGING PASSWORD: " + password + " ERROR: " + errorMsg);
-
-
-    errors["password"] = errorMsg;
 
     this.setState({
       errors: errors
@@ -158,7 +108,7 @@ class LoginScreen extends React.Component {
           </Avatar>
           <Typography component="h1" variant="h5" className={classes.header}>
             Sign In
-                </Typography>
+          </Typography>
           <form className={classes.form} onSubmit={this.signIn}>
             <TextField
               variant="outlined"
@@ -171,7 +121,7 @@ class LoginScreen extends React.Component {
               autoComplete="email"
               autoFocus
               onChange={this.handleChange}
-              error={this.state.errors["email"] !== ""}
+              error={!this.state.errors["email"] ? false : this.state.errors["email"] !== ""}
               helperText={this.state.errors["email"]}
             />
             <TextField
@@ -184,9 +134,6 @@ class LoginScreen extends React.Component {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={this.handleChange}
-              error={this.state.errors["password"] !== ""}
-              helperText={this.state.errors["password"]}
             />
             <Button className={classes.submit}
               type="submit"
@@ -198,13 +145,17 @@ class LoginScreen extends React.Component {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to='/forgot' variant="body2">
-                  Forgot password?
+                <Link to='/forgot' className={classes.links}>
+                  <MUILink variant="body2" component = {'span'}>
+                    Forgot password?
+                </MUILink>
                 </Link>
               </Grid>
               <Grid item>
-                <Link to='/signup' variant="body2">
-                  "Don't have an account? Sign Up"
+                <Link to='/signup' className={classes.links}>
+                  <MUILink variant="body2" component = {'span'}>
+                    Don't have an account? Sign up
+                </MUILink>
                 </Link>
               </Grid>
             </Grid>
