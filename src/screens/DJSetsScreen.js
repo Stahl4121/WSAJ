@@ -13,9 +13,9 @@ export default function DJSetsScreen(props) {
     return (
         <div>
             <Typography gutterBottom variant="h5" component="h2">
-                {props.match.params.name}
+                {props.match.params.name.split('-').join(' ')}
             </Typography>
-            <DJSet/>
+            <DJSet ShowName={props.match.params.name.split('-').join(' ')}/>
         </div>
     );
 }
