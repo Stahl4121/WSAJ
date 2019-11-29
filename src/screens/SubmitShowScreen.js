@@ -7,6 +7,7 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import PropTypes from "prop-types";
+import ShowForm from '../components/ShowForm.js';
 import MaskedInput from "react-text-mask";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -42,7 +43,7 @@ const styles = theme => ({
     margin: theme.spacing(3, 0, 2),
   },
 });
-
+/*
 class SubmitShowScreen extends React.Component {
     constructor() {
         super();
@@ -307,3 +308,11 @@ class SubmitShowScreen extends React.Component {
 }
 
 export default withStyles(styles)(SubmitShowScreen);
+*/
+export default function SubmitShowScreen() {
+  return (
+      <div>
+          <ShowForm/>
+      </div> 
+  );
+}

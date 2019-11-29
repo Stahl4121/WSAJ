@@ -126,6 +126,132 @@
                     ]
                 }
             ]
+        },
+        {
+            "ShowName": "Decathection Hour",
+            "ShowHost": "DJ MRM",
+            "ShowDescription": "DJ MRM delights her listeners by offering listening choices that encourage the listener to delve into stages of derealization and decathect.",
+            "ShowGenre": "Country",
+            "SetHistory": [
+                {"11.26.2019": 
+                    [
+                        "Leftovers by Max Richter",
+                        "The Search by NF",
+                        "I Need My Girl by The National"
+                    ]
+                },
+                {"11.25.2019":
+                    [
+                        "Memories by Maroon 5",
+                        "Canon in D by Pachelbel"
+                    ]
+                }
+            ]
+        },
+        {
+            "ShowName": "Derealization Hour",
+            "ShowHost": "DJ SARAH",
+            "ShowDescription": "DJ SARAH continues the decathexis with dissociative jams to get you through your onerous meetings.",
+            "ShowGenre": "Country",
+            "SetHistory": [
+                {"11.26.2019": 
+                    [
+                        "There's Something Dark by Dustin Kensrue",
+                        "Hard to Get by Rich Mullins",
+                        "The Artist by Sarah Sparks"
+                    ]
+                },
+                {"11.25.2019":
+                    [
+                        "Dwelling Place by Joel Ansett",
+                        "You Want It Darker by Leonard Cohen"
+                    ]
+                }
+            ]
+        },
+        {
+            "ShowName": "Generic 1",
+            "ShowHost": "DJ LOGAN",
+            "ShowDescription": "This show speaks for itself.",
+            "ShowGenre": "Country",
+            "SetHistory": [
+                {"11.26.2019": 
+                    [
+                        "Leftovers by Max Richter",
+                        "The Search by NF",
+                        "I Need My Girl by The National"
+                    ]
+                },
+                {"11.25.2019":
+                    [
+                        "Memories by Maroon 5",
+                        "Canon in D by Pachelbel"
+                    ]
+                }
+            ]
+        },
+        {
+            "ShowName": "Generic 2",
+            "ShowHost": "DJ SPRECH",
+            "ShowDescription": "I'm to lazy to write this bio, too.",
+            "ShowGenre": "Country",
+            "SetHistory": [
+                {"11.26.2019": 
+                    [
+                        "There's Something Dark by Dustin Kensrue",
+                        "Hard to Get by Rich Mullins",
+                        "The Artist by Sarah Sparks"
+                    ]
+                },
+                {"11.25.2019":
+                    [
+                        "Dwelling Place by Joel Ansett",
+                        "You Want It Darker by Leonard Cohen"
+                    ]
+                }
+            ]
+        },
+        {
+            "ShowName": "Classical Music Hour",
+            "ShowHost": "DJ RHYS",
+            "ShowDescription": "Rhys always talks about how he likes classical music but Miriam's been listening to it for wayyyyyyyyyyyyyy longer.",
+            "ShowGenre": "Country",
+            "SetHistory": [
+                {"11.26.2019": 
+                    [
+                        "Leftovers by Max Richter",
+                        "The Search by NF",
+                        "I Need My Girl by The National"
+                    ]
+                },
+                {"11.25.2019":
+                    [
+                        "Memories by Maroon 5",
+                        "Canon in D by Pachelbel"
+                    ]
+                }
+            ]
+        },
+        {
+            "ShowName": "CCM Hour",
+            "ShowHost": "DJ WOLFE",
+            "ShowDescription": "Based on Dr. Wolfe's Pandora screenshots he showed us in class.",
+            "ShowGenre": "Country",
+            "SetHistory": [
+                {"11.26.2019": 
+                    [
+                        "There's Something Dark by Dustin Kensrue",
+                        "Hard to Get by Rich Mullins",
+                        "The Artist by Sarah Sparks"
+                    ]
+                },
+                {"11.25.2019":
+                    [
+                        "Dwelling Place by Joel Ansett",
+                        "You Want It Darker by Leonard Cohen"
+                    ]
+                }
+            ]
         }
     ]
 }
