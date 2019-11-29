@@ -3,10 +3,37 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import DJCard from '../components/DJCard';
 import DJShows from '../data/DJShows.json';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({
-    root: {
+    icon: {
+        marginRight: theme.spacing(2),
+    },
+    heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 0, 6),
+    },
+    heroButtons: {
+        marginTop: theme.spacing(4),
+    },
+    cardGrid: {
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),
+    },
+    card: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    cardMedia: {
+        paddingTop: '56.25%', // 16:9
+    },
+    cardContent: {
         flexGrow: 1,
+    },
+    footer: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(6),
     },
 }));
 
@@ -18,11 +45,13 @@ export default function DJShowsScreen() {
     for (var i = 0; i < shows.length; i++) {
         // note: we add a key prop here to allow react to uniquely identify each
         // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-        cards.push(<Grid container item xs={3} spacing={0}><DJCard show={shows[i]} /></Grid>);
+        cards.push(<Grid item /*key={card}*/ xs={12} sm={6} md={4}><DJCard show={shows[i]} /></Grid>);
     }
     return (
-        <div className={classes.root}>
-            <Grid container spacing={0}>{cards}</Grid>
-        </div>
+        <Container className={classes.cardGrid} maxWidth="md">
+            <Grid container spacing={4} >
+                {cards}
+            </Grid>
+        </Container>
     );
 }
