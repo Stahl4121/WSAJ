@@ -29,19 +29,34 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
 export default function NavBar() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <AppBar className={classes.appBar} title="WSAJ">
-        <Tabs className={classes.tabs}>
-          <Tab className={classes.tab} label="Home" to='/' component={Link} />
-          <Tab className={classes.tab} label="DJ Shows" to='/shows' component={Link} />
-          <Tab className={classes.tab} label="Calendar" to='/schedule' component={Link} />
-          <Tab className={classes.tab} label="Contact" to='/contact' component={Link} />
-          <Tab className={classes.loginTab} icon={<AccountCircle />} to='/login' component={Link} />
-        </Tabs>
-      </AppBar>
+    {/* Footer */}
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+          Something here to give the footer a purpose!
+        </Typography>
+        <Copyright />
+      </footer>
+      {/* End footer */}
       </React.Fragment>
 
   );

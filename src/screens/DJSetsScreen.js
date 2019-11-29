@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import DJSet from '../components/DJSet';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import DJShows from '../data/DJShows.json';
 
@@ -12,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     },
     heroContent: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(8, 0, 6),
+        padding: theme.spacing(8, 0, 0),
     },
     heroButtons: {
         marginTop: theme.spacing(4),
@@ -42,28 +43,61 @@ const useStyles = makeStyles(theme => ({
 export default function DJSetsScreen(props) {
     const classes = useStyles();
 
-    var ShowName = props.match.params.name.split('-').join(' ');
+    var showName = props.match.params.name.split('-').join(' ');
     var shows = DJShows['Shows'];
     var sets = [];
+    var showSets = '';
+    var showHost = '';
+    var showDescription = '';
+    var showGenre = '';
+    var showTime = '';
     for (var i = 0; i < shows.length; i++) {
-        // console.log(DJShows['Shows'][i]);
         // note: we add a key prop here to allow react to uniquely identify each
         // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
         console.log('show: ' + shows[i]['ShowName']);
-        if (shows[i]['ShowName'] === ShowName) {
-            var showSets = shows[i]['SetHistory'];
+        if (shows[i]['ShowName'] === showName) {
+            showDescription = shows[i]['ShowDescription'];
+            showHost = shows[i]['ShowHost'];
+            showGenre = shows[i]['ShowGenre'];
+            showSets = shows[i]['SetHistory'];
             console.log('set ' + showSets);
             for (var j = 0; j < showSets.length; j++) {
                 console.log('your set, my good sir: ' + showSets[j]);
-                sets.push(<Grid item /*key={card}*/ xs={12} sm={6} md={4}><DJSet set={showSets[j]} /></Grid>);
+                sets.push(
+                    <Grid item xs={12} sm={6} md={4}>
+                        <DJSet set={showSets[j]} />
+                    </Grid>
+                );
             }
         }
     }
     return (
         <div>
-            <Typography gutterBottom variant="h5" component="h2">
-                {ShowName}
-            </Typography>
+            {/* Hero unit */}
+            <div className={classes.heroContent}>
+                <Container maxWidth="sm">
+                    <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                        {showName}
+                    </Typography>
+                    <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                       {showDescription}
+                    </Typography>
+                    <div className={classes.heroButtons}>
+                        <Grid container spacing={2} justify="center">
+                            <Grid item>
+                                <Button variant="contained" color="primary">
+                                    Main call to action
+                  </Button>
+                            </Grid>
+                            <Grid item>
+                                <Button variant="outlined" color="primary">
+                                    Secondary action
+                  </Button>
+                            </Grid>
+                        </Grid>
+                    </div>
+                </Container>
+            </div>
             <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={4} >
                     {sets}
