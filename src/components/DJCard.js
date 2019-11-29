@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import TextField from "@material-ui/core/TextField";
 import { Link } from 'react-router-dom';
+import MiriamsFace from '../img/headshot.jpg';
 import Typography from '@material-ui/core/Typography';
 
 /*const useStyles = makeStyles({
@@ -43,6 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
+    height: 250,
   },
   cardContent: {
     flexGrow: 1,
@@ -61,45 +63,19 @@ export default function DJCard(props) {
     <div>
       <Card className={classes.card}>
         <CardActionArea component={Link} to={linkTo}>
-        <CardMedia
-          className={classes.cardMedia}
-          image="../img/headshot.jpg"
-          title="Show Image"
-        />
-        <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.show["ShowName"]} with {props.show["ShowHost"]}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.show["ShowDescription"]}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Genre: {props.show["ShowGenre"]}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            name="songrequest"
-            fullWidth
-            label="Song Request"
-            id="songrquest"
-            autoComplete="current-password"
+          <CardMedia
+            className={classes.cardMedia}
+            image={MiriamsFace}
+            title="Show Image"
           />
-          {/*<Button className={classes.submit}
-              type="submit"
-              variant="contained"
-              color="primary"
-            >
-              Request
-            </Button>*/}
-        </CardActions>
-        <CardActions>
-          <Button size="small" color="primary" component={Link} to={linkTo}>
-            Set History
-          </Button>
-        </CardActions>
+          <CardContent className={classes.cardContent}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {props.show["ShowName"]}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Hosted by {props.show["ShowHost"]}
+            </Typography>
+          </CardContent>
         </CardActionArea>
       </Card>
     </div>
