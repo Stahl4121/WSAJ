@@ -12,6 +12,7 @@ import MaskedInput from "react-text-mask";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -71,10 +72,15 @@ TextMaskCustom.propTypes = {
   inputRef: PropTypes.func.isRequired
 };
 
+
 export default function MultilineTextFields() {
   const classes = useStyles();
+  const [email, setEmail] = React.useState('');
+  const [showName, setShowName] = React.useState('');  
   const [selectedTime, setSelectedTime] = React.useState(new Date());
-
+  const [djName, setDJName] = React.useState('');
+  const [lName, setLName] = React.useState('');
+  const [fName, setFName] = React.useState('');
   const handleTimeChange = time => {
     setSelectedTime(time);
   };
@@ -97,8 +103,23 @@ export default function MultilineTextFields() {
     });
   };
 
+  function submitForm(event) {
+    event.preventDefault();
+    console.log( 'Email:', email); 
+    console.log( 'PhoneNumber:', phoneNumber); 
+    console.log( 'Show Name:', showName); 
+    console.log( 'First Name:', fName); 
+    console.log( 'Last Name:', lName); 
+    console.log( 'DJ Names:', djName); 
+    console.log( 'Date:', selectedDay); 
+    console.log( 'Time:', selectedTime); 
+    // You should see email and password in console.
+    // ..code to submit form to backend here...
+
+    }
+  
   return (
-    <form className={classes.container} noValidate autoComplete="off">
+    <form className={classes.container} noValidate onSubmit={submitForm} autoComplete="off">
       <div>
         <TextField
           id="show-name"
@@ -106,6 +127,8 @@ export default function MultilineTextFields() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          value={showName}
+          onInput={ e=>setShowName(e.target.value)}
         />
       </div>
       <div>
@@ -137,6 +160,8 @@ export default function MultilineTextFields() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          value={fName}
+          onInput={ e=>setFName(e.target.value)}
         />
         <TextField
           id="last-name"
@@ -144,6 +169,8 @@ export default function MultilineTextFields() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          value={lName}
+          onInput={ e=>setLName(e.target.value)}
         />
         <TextField
           id="dj-name"
@@ -151,6 +178,8 @@ export default function MultilineTextFields() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          value={djName}
+          onInput={ e=>setDJName(e.target.value)}
         />
       </div>
       <div>
@@ -160,6 +189,8 @@ export default function MultilineTextFields() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          value={email}
+          onInput={ e=>setEmail(e.target.value)}
         />
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="phone-number-mask-input">
@@ -173,6 +204,14 @@ export default function MultilineTextFields() {
           />
         </FormControl>
       </div>
+      <Button className={classes.submit}
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Send Show Request
+      </Button>
     </form>
   );
 }
