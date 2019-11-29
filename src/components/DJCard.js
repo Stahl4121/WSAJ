@@ -11,17 +11,6 @@ import { Link } from 'react-router-dom';
 import MiriamsFace from '../img/headshot.jpg';
 import Typography from '@material-ui/core/Typography';
 
-/*const useStyles = makeStyles({
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 200,
-  },
-  description: {
-    //height: 50,
-  }
-});*/
 const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -60,24 +49,22 @@ export default function DJCard(props) {
   var linkTo = "/shows/" + props.show["ShowName"].split(' ').join('-');
 
   return (
-    <div>
-      <Card className={classes.card}>
-        <CardActionArea component={Link} to={linkTo}>
-          <CardMedia
-            className={classes.cardMedia}
-            image={MiriamsFace}
-            title="Show Image"
-          />
-          <CardContent className={classes.cardContent}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {props.show["ShowName"]}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Hosted by {props.show["ShowHost"]}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </div>
+    <Card className={classes.card}>
+      <CardActionArea component={Link} to={linkTo}>
+        <CardMedia
+          className={classes.cardMedia}
+          image={MiriamsFace}
+          title="Show Image"
+        />
+        <CardContent className={classes.cardContent}>
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.show["ShowName"]}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Hosted by {props.show["ShowHost"]}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 }
