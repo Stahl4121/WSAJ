@@ -8,6 +8,7 @@ import LoginScreen from '../screens/LoginScreen.js';
 import SignUpScreen from '../screens/SignUpScreen.js';
 import DJSetsScreen from '../screens/DJSetsScreen.js';
 import SubmitShowScreen from '../screens/SubmitShowScreen.js';
+import AddSetScreen from '../screens/AddSetScreen.js';
 import NotFound from './NotFound.js'
 
 const Routes = () => {
@@ -21,6 +22,7 @@ const Routes = () => {
             <Route exact path="/signup" component={SignUpScreen} />
             <Route exact path="/shows/:name" component={DJSetsScreen}/>
             <Route exact path="/request-show" component={SubmitShowScreen}/>
+            <Route exact path="/add-set" component={AddSetScreen}/>
             <Route component={NotFound}/>
         </Switch>
     )
