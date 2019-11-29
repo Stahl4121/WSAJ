@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 
@@ -44,10 +45,26 @@ export default function DJCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" >
-            <Link color="primary" to={linkTo}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              name="songrequest"
+              fullWidth
+              label="Song Request"
+              id="songrquest"
+              autoComplete="current-password"
+            />
+            {/*<Button className={classes.submit}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Request
+            </Button>*/}
+        </CardActions>
+        <CardActions>
+          <Button size="small" color="primary" component={Link} to={linkTo}>
               Set History
-            </Link>
           </Button>
         </CardActions>
       </Card>
