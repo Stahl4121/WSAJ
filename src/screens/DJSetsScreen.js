@@ -43,20 +43,6 @@ const styles = theme => ({
 });
 
 class DJSetsScreen extends React.Component {
-    constructor(props) {
-
-        super();
-        this.state = {
-            songs: {},
-            suggestions: {}
-        }
-
-        this.autofill = this.autofill.bind(this);
-    };
-
-    autofill(e) {
-
-    };
     render(props) {
         const { classes } = this.props;
 
