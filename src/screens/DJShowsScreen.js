@@ -5,7 +5,6 @@ import DJCard from '../components/DJCard';
 import DJShows from '../data/DJShows.json';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -13,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     },
     heroContent: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(8, 0, 0),
+        padding: theme.spacing(8, 0, 6),
     },
     heroButtons: {
         marginTop: theme.spacing(4),
