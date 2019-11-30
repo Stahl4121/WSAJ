@@ -17,7 +17,7 @@ class SongRequest extends React.Component {
   };
   render() {
     return(
-      <div>
+      <div alignItems={'center'}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
           Request a Song
         </Typography>

@@ -75,7 +75,7 @@ class DJSetsScreen extends React.Component {
         }
 
         return (
-            <div>
+            <div alignItems={'center'}>
                 {/* Hero unit */}
                 <div padding={'theme.spacing(8, 0, 6)'}>
                     <Container maxWidth="sm">
@@ -105,9 +105,7 @@ class DJSetsScreen extends React.Component {
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                     Set History
                 </Typography>   
-                <Container className={classes.cardGrid}
-                    paddingTop={'theme.spacing(8)'}
-                    paddingBottom={'theme.spacing(8)'} maxWidth="md">
+                <Container className={classes.cardGrid} maxWidth="md">
                     <Grid container spacing={4} >
                         {sets}
                     </Grid>
