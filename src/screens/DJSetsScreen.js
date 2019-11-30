@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import SongRequest from '../components/SongRequest.js';
 import DJSet from '../components/DJSet';
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import DJShows from '../data/DJShows.json';
-import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
     icon: {
@@ -43,7 +42,7 @@ const styles = theme => ({
 });
 
 class DJSetsScreen extends React.Component {
-    render(props) {
+    render() {
         const { classes } = this.props;
 
         var showName = this.props.match.params.name.split('-').join(' ');
@@ -86,7 +85,7 @@ class DJSetsScreen extends React.Component {
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
                             {showDescription}
                         </Typography>
-                        <div /*className={classes.heroButtons}*/ marginTop={'theme.spacing(4)'}>
+                        <div className={classes.heroButtons} marginTop={'theme.spacing(4)'}>
                             <Grid container spacing={2} justify="center">
                                 <Grid item>
                                     <Button variant="contained" color="primary">
@@ -106,7 +105,7 @@ class DJSetsScreen extends React.Component {
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                     Set History
                 </Typography>   
-                <Container /*className={classes.cardGrid}*/
+                <Container className={classes.cardGrid}
                     paddingTop={'theme.spacing(8)'}
                     paddingBottom={'theme.spacing(8)'} maxWidth="md">
                     <Grid container spacing={4} >
@@ -117,4 +116,4 @@ class DJSetsScreen extends React.Component {
         );
     }
 }
-export default (DJSetsScreen);
+export default withStyles(styles)(DJSetsScreen);
