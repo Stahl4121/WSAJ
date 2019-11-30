@@ -4,7 +4,6 @@ import SongRequest from '../components/SongRequest.js';
 import DJSet from '../components/DJSet';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import DJShows from '../data/DJShows.json';
 
@@ -44,7 +43,6 @@ const styles = theme => ({
 class DJSetsScreen extends React.Component {
     render() {
         const { classes } = this.props;
-
         var showName = this.props.match.params.name.split('-').join(' ');
         var shows = DJShows['Shows'];
         var sets = [];

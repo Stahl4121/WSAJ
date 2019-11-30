@@ -1,8 +1,41 @@
 import React from 'react';
+import { withStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 
+const styles = theme => ({
+  icon: {
+      marginRight: theme.spacing(2),
+  },
+  heroContent: {
+      backgroundColor: theme.palette.background.paper,
+      padding: theme.spacing(8, 0, 6),
+  },
+  heroButtons: {
+      marginTop: theme.spacing(4),
+  },
+  cardGrid: {
+      paddingTop: theme.spacing(8),
+      paddingBottom: theme.spacing(8),
+  },
+  card: {
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+  },
+  cardMedia: {
+      paddingTop: '56.25%', // 16:9
+      height: 250,
+  },
+  cardContent: {
+      flexGrow: 1,
+  },
+  footer: {
+      backgroundColor: theme.palette.background.paper,
+      padding: theme.spacing(6),
+  },
+});
 class SongRequest extends React.Component {
   constructor() {
     super();
@@ -17,8 +50,9 @@ class SongRequest extends React.Component {
 
   };
   render() {
+    const { classes } = this.props;
     return(
-      <div alignItems={'center'}>
+      <div className={classes.heroContent}>
       <Container maxWidth="sm">
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
           Request a Song
@@ -37,4 +71,4 @@ class SongRequest extends React.Component {
     );
   }
 }
-export default (SongRequest);
+export default withStyles(styles)(SongRequest);
