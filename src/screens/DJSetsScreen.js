@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import SongRequest from '../components/SongRequest.js';
 import DJSet from '../components/DJSet';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -115,30 +116,7 @@ class DJSetsScreen extends React.Component {
                         </div>
                     </Container>
                 </div>
-                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Request a Song
-                </Typography>
-                {/*<TextField
-                    align="center"
-                    justify="center"
-                    variant="outlined"
-                    margin="normal"
-                    label="Song Request"
-                    onChange={this.autofill}
-                />*/}
-                <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="lname"
-                />
-                </Grid>
-                </Grid>
+                <SongRequest/>
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                     Set History
                 </Typography>   
