@@ -71,9 +71,8 @@ renderInput.propTypes = {
 };
 
 function renderSuggestion(suggestionProps) {
-  const { suggestion, index, itemProps, highlightedIndex, selectedItem } = suggestionProps;
+  const { suggestion, index, itemProps, highlightedIndex} = suggestionProps;
   const isHighlighted = highlightedIndex === index;
-  const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1;
 
   return (
     <MenuItem
@@ -82,7 +81,7 @@ function renderSuggestion(suggestionProps) {
       selected={isHighlighted}
       component="div"
       style={{
-        fontWeight: isSelected ? 500 : 400,
+        //fontWeight: isSelected ? 500 : 400,
       }}
     >
       {suggestion.label}
@@ -112,7 +111,7 @@ function getSuggestions(value, { showEmpty = false } = {}) {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    height: 250,
+    //height: 250,
   },
   container: {
     flexGrow: 1,
@@ -150,7 +149,6 @@ export default function IntegrationDownshift() {
           highlightedIndex,
           inputValue,
           isOpen,
-          selectedItem,
         }) => {
           const { onBlur, onFocus, ...inputProps } = getInputProps({
             placeholder: 'Request a song',
@@ -166,7 +164,6 @@ export default function IntegrationDownshift() {
                 classes,
                 InputProps: { onBlur, onFocus },
                 inputProps,
-                variant:"outlined",
               })}
 
               <div {...getMenuProps()}>
@@ -178,7 +175,6 @@ export default function IntegrationDownshift() {
                         index,
                         itemProps: getItemProps({ item: suggestion.label }),
                         highlightedIndex,
-                        //selectedItem,
                       }),
                     )}
                   </Paper>
