@@ -12,13 +12,13 @@ const useStyles = makeStyles(theme => ({
     },
     heroContent: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(8, 0, 6),
+        padding: theme.spacing(8, 0, 0),
     },
     heroButtons: {
         marginTop: theme.spacing(4),
     },
     cardGrid: {
-        paddingTop: theme.spacing(8),
+        paddingTop: theme.spacing(6),
         paddingBottom: theme.spacing(8),
     },
     card: {

@@ -6,35 +6,12 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(6, 0, 6),
   },
   heroButtons: {
     marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-    height: 250,
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
   },
 });
 class SongRequest extends React.Component {
@@ -57,10 +34,10 @@ class SongRequest extends React.Component {
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
           <div className={classes.heroButtons}>
-            <Grid container spacing={2} /*justify="center"*/
-  direction="row"
-  justify="space-around"
-  alignItems="center">
+            <Grid container spacing={2}
+              direction="row"
+              justify="space-around"
+              alignItems="center">
               <Grid item xs={10}>
                 <TextField
                   variant="outlined"
@@ -70,7 +47,11 @@ class SongRequest extends React.Component {
                 />
               </Grid>
               <Grid item xs={2}>
-                <Button variant="contained" color="primary" fullWidth>
+                <Button 
+                  variant="contained"
+                  size="large" 
+                  color="primary" 
+                  fullWidth>
                   Submit
                   </Button>
               </Grid>
