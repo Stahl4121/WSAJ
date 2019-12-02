@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Example from '../components/example.js';
 
 const styles = theme => ({
   heroContent: {
@@ -39,12 +40,13 @@ class SongRequest extends React.Component {
               justify="space-around"
               alignItems="center">
               <Grid item xs={10}>
-                <TextField
+                {/*<TextField
                   variant="outlined"
                   fullWidth
                   label="Request a song"
                   onChange={this.autofill}
-                />
+                />*/}
+                <Example/>
               </Grid>
               <Grid item xs={2}>
                 <Button 

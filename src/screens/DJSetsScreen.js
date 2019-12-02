@@ -93,7 +93,7 @@ class DJSetsScreen extends React.Component {
                         </Typography>
                     </Container>
                 </div>
-                <SongRequest />
+                <SongRequest/>
                 <div className={classes.heroContent}>
                         <Typography
                             component="h1"
