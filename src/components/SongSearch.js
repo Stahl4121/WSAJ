@@ -3,6 +3,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import $ from 'jquery';
+
 var songs = [];
 
 class SongSearch extends React.Component {
@@ -17,7 +18,6 @@ class SongSearch extends React.Component {
         "x-rapidapi-key": "f33e47e69fmshe427476175d1511p18d30djsn436f42242136"
       }
     }
-    var suggestions = [];
     $.ajax(settings).done(function (response) {
       if (typeof response.data !== 'undefined') {
         var newSongs = [];
@@ -40,7 +40,7 @@ class SongSearch extends React.Component {
             label="Song Request"
             variant="outlined"
             fullWidth
-            onKeyPress={this.handleOnChange}/>
+            onKeyUpCapture={this.handleOnChange}/>
         )}
       />
     );
