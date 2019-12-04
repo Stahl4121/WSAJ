@@ -46,8 +46,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function DJCard(props) {
   const classes = useStyles();
-  var linkTo = "/shows/" + props.show["ShowName"].split(' ').join('-');
-
+  var name = props.show;
+  console.log('show ' + props.show)
+  var linkTo = "/shows/" + name.split(' ').join('-');
+  
   return (
     <Card className={classes.card}>
       <CardActionArea component={Link} to={linkTo}>
@@ -58,10 +60,10 @@ export default function DJCard(props) {
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.show["ShowName"]}
+            {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Hosted by {props.show["ShowHost"]}
+            Hosted by DJ DJ
           </Typography>
         </CardContent>
       </CardActionArea>

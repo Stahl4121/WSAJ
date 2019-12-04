@@ -5,6 +5,8 @@ import DJCard from '../components/DJCard';
 import DJShows from '../data/DJShows.json';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import firebase from "../firebase.js"
+
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -40,14 +42,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function DJShowsScreen() {
     const classes = useStyles();
-    var shows = DJShows["Shows"];
     var cards = [];
+    var db = firebase.firestore();
 
-    for (var i = 0; i < shows.length; i++) {
-        // note: we add a key prop here to allow react to uniquely identify each
-        // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-        cards.push(<Grid item /*key={card}*/ xs={12} sm={6} md={4}><DJCard show={shows[i]} /></Grid>);
-    }
+    db.collection("shows").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            var name = doc.data().name
+            console.log(name);
+            // doc.data() is never undefined for query doc snapshots
+            //console.log(doc.id, " => ", doc.data().genre + ' ' + doc.data().description + ' ' + doc.data().name);
+            cards.push(<Grid item /*key={card}*/ xs={12} sm={6} md={4}><DJCard show={name} /></Grid>);
+        });
+    });
     return (
         <div>
             {/* Hero unit */}
