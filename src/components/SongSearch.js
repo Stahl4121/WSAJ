@@ -2,11 +2,13 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import $ from 'jquery';
 
 var songs = [];
 
 class SongSearch extends React.Component {
+
   handleOnChange = event => {
     var settings = {
       "async": true,
@@ -25,15 +27,22 @@ class SongSearch extends React.Component {
           newSongs.push({ label: response.data[i].title + ' by ' + response.data[i].artist.name });
         }
         songs = newSongs;
+        console.log(songs);
       }
     });
+    console.log("Handle finished.");
   };
+
+
+
   render() {
     return (
       <Autocomplete
         id="combo-box-demo"
         options={songs}
-        getOptionLabel={option => option.title}
+        autoComplete
+        disableOpenOnFocus
+        getOptionLabel={option => option.label}
         //style={{ width: 300 }}
         renderInput={params => (
           <TextField {...params}
@@ -46,4 +55,5 @@ class SongSearch extends React.Component {
     );
   }
 }
+
 export default (SongSearch);
