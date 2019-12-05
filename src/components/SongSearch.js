@@ -54,7 +54,7 @@ class SongSearch extends React.Component {
         autoComplete
         disableOpenOnFocus
         getOptionLabel={option => option.label}
-        //style={{ width: 300 }}
+        style={{ top: "auto", bottom: "auto", height:"auto", postion: "absolute" }}
         renderInput={params => (
           <TextField {...params}
             label="Song Request"
