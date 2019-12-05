@@ -10,12 +10,15 @@ class SongSearch extends React.Component {
     super();
     this.state = {
       songs: [{}],
+      loading: false
     };
 
   };
 
   handleChange = (event) => {
-    
+
+    this.setState({ loading: true });
+
     var settings = {
       async: "true",
       crossDomain: "true",
@@ -34,10 +37,11 @@ class SongSearch extends React.Component {
         for (var i = 0; i < response.data.length; i++) {
           newSongs.push({ label: response.data[i].title + ' by ' + response.data[i].artist.name });
         }
-        
-        this.setState({ songs: newSongs });
+
+        this.setState({ songs: newSongs, loading: false });
       }
     });
+
   };
 
 
@@ -56,7 +60,18 @@ class SongSearch extends React.Component {
             label="Song Request"
             variant="outlined"
             fullWidth
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {this.state.loading ? <CircularProgress color="inherit" size={20} /> : null}
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }}
+
+          />
         )}
       />
     );
