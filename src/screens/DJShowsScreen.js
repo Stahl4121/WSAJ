@@ -44,24 +44,24 @@ class DJShowsScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            fields: {},
-            errors: {}
+            cards: [],
         }
         this.queryDB = this.queryDB.bind(this);
+        this.queryDB()
     };
 
     queryDB() {
         var cards = [];
         var db = firebase.firestore();
 
-        return db.collection("shows").get().then(function (querySnapshot) {
+        db.collection("shows").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var name = doc.data().name
                 cards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} /></Grid>);
                 console.log(name);
             });
             console.log(cards.length);
-            return cards;
+            this.setState({ cards: cards})
         });
     };
     render() {
@@ -70,7 +70,6 @@ class DJShowsScreen extends React.Component {
         console.log('promise ' + promise)
         return (
             <div>
-                {/* Hero unit */}
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
@@ -85,7 +84,7 @@ class DJShowsScreen extends React.Component {
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     <Grid container spacing={4} >
-                        {/*this.queryDB()*/} hi
+                        {this.state.cards}
                     </Grid>
                 </Container>
             </div>
