@@ -11,14 +11,19 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import MiriamsFace from '../img/headshot.jpg';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    paddingLeft: '4em',
+    paddingRight: '4em',
+    marginLeft: '2em',
+    marginRight: '2em',
+    marginTop: '2em',
+    maxWidth: '90%',
   },
   media: {
-    height: '100px',
+    height: '70px',
     paddingTop: '56.25%', // 16:9
   },
   expand: {
@@ -30,6 +35,12 @@ const useStyles = makeStyles(theme => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)',
+  },
+  button: {
+    paddingLeft: '4em',
+    paddingRight: '4em',
+    marginRight: '1em',
+    width: '30em',
   },
 }));
 
@@ -44,45 +55,35 @@ export default function ExecContactCard() {
   return (
     <Card className={classes.card}>
       <CardHeader
-        title="Name"
-        subheader="Exec Position"
-      />
-      <CardMedia
-        className={classes.media}
-        image={MiriamsFace}
-        title="headshot"
+        title="Show Name"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive woman runs the whole shebang.
+          Requested Timeslot: 
         </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Contact Info:</Typography>
-          <Typography paragraph>
+        <Typography variant="body2" color="textSecondary" component="p" id="requestedTimeslot">
+          Monday 7pm
+        </Typography>
+        <div>
+          <Typography variant="body2" color="textSecondary" component="p" id="studentName">
+            Student Name
+          </Typography>
+          <Typography variant="body2" color="textSecondary" id="phoneNumber">
             7577443516
           </Typography>
-          <Typography paragraph>
+          <Typography variant="body2" color="textSecondary" id="emailAddress">
             tanmr1@gcc.edu
           </Typography>
-          <Typography paragraph>
-            #608
-          </Typography>
-        </CardContent>
-      </Collapse>
+        </div>
+      </CardContent>
+      <CardActions disableSpacing>
+        <Button variant="outlined" color="primary" className={classes.button}>
+          Approve
+        </Button>
+        <Button variant="outlined" color="secondary" className={classes.button}>
+          Deny
+        </Button>
+      </CardActions>        
     </Card>
   );
 }
