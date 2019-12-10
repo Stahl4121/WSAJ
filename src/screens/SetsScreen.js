@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import DJShows from '../data/DJShows.json';
+import firebase from "../firebase.js";
+
 
 const styles = theme => ({
     icon: {
@@ -40,37 +42,64 @@ const styles = theme => ({
 });
 
 class SetsScreen extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            sets: [],
+            showName: '',
+            showHost: '',
+            description: '',
+        }
+    };
+
+    componentDidMount() {
+        var newSets = [];
+        var db = firebase.firestore();
+        db.collection("shows").get().collection("sets").get().then((querySnapshot) => {
+            querySnapshot.forEach(function (doc) {
+                var date = doc.data().date;
+                var songs = doc.data().songs;
+                console.log(songs);
+                console.log(date);
+                newSets.push(<Grid item xs={12} sm={6} md={4}><DJSet date={date} songs={songs} /></Grid>);
+            });
+            this.setState({ sets: newSets})
+        });
+    };
+
+    // render() {
+    //     const { classes } = this.props;
+    //     var showName = '';
+    //     var shows = DJShows['Shows'];
+    //     var sets = [];
+    //     var showSets = '';
+    //     var showHost = '';
+    //     var showDescription = '';
+    //     var showGenre = '';
+    //     var showTime = '';
+    //     for (var i = 0; i < shows.length; i++) {
+    //         // note: we add a key prop here to allow react to uniquely identify each
+    //         // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
+    //         console.log('show: ' + shows[i]['ShowName']);
+    //         if (shows[i]['ShowName'] === showName) {
+    //             showDescription = shows[i]['ShowDescription'];
+    //             showHost = shows[i]['ShowHost'];
+    //             showGenre = shows[i]['ShowGenre'];
+    //             showSets = shows[i]['SetHistory'];
+    //             console.log('set ' + showSets);
+    //             for (var j = 0; j < showSets.length; j++) {
+    //                 console.log('your set, my good sir: ' + showSets[j]);
+    //                 sets.push(
+    //                     <Grid item xs={12} sm={6} md={4}>
+    //                         <DJSet set={showSets[j]} />
+    //                     </Grid>
+    //                 );
+    //             }
+    //         }
+    //     }
+
     render() {
         const { classes } = this.props;
-        var showName = this.props.match.params.name.split('-').join(' ');
-        var shows = DJShows['Shows'];
-        var sets = [];
-        var showSets = '';
-        var showHost = '';
-        var showDescription = '';
-        var showGenre = '';
-        var showTime = '';
-        for (var i = 0; i < shows.length; i++) {
-            // note: we add a key prop here to allow react to uniquely identify each
-            // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-            console.log('show: ' + shows[i]['ShowName']);
-            if (shows[i]['ShowName'] === showName) {
-                showDescription = shows[i]['ShowDescription'];
-                showHost = shows[i]['ShowHost'];
-                showGenre = shows[i]['ShowGenre'];
-                showSets = shows[i]['SetHistory'];
-                console.log('set ' + showSets);
-                for (var j = 0; j < showSets.length; j++) {
-                    console.log('your set, my good sir: ' + showSets[j]);
-                    sets.push(
-                        <Grid item xs={12} sm={6} md={4}>
-                            <DJSet set={showSets[j]} />
-                        </Grid>
-                    );
-                }
-            }
-        }
-
         return (
             <div alignItems={'center'}>
                 {/* Hero unit */}
@@ -82,14 +111,14 @@ class SetsScreen extends React.Component {
                             align="center"
                             color="textPrimary"
                             gutterBottom>
-                            {showName}
+                            {this.state.date}
                         </Typography>
                         <Typography
                             variant="h5"
                             align="center"
                             color="textSecondary"
                             paragraph>
-                            {showDescription}
+                            {this.state.description}
                         </Typography>
                     </Container>
                 </div>
@@ -108,11 +137,11 @@ class SetsScreen extends React.Component {
                             align="center"
                             color="textSecondary"
                             paragraph>
-                            Here are the songs {showHost} has been playing lately.
+                            Here are the songs {this.state.showHost} has been playing lately.
                         </Typography>
                     <Container maxWidth="md" className={classes.cardGrid}>
                         <Grid container spacing={4} >
-                            {sets}
+                            {this.state.sets}
                         </Grid>
                     </Container>
                 </div>

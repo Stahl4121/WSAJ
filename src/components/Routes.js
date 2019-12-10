@@ -16,7 +16,7 @@ import AdminCurrentShowScreen from "../screens/AdminCurrentShowScreen.js";
 import AdminShowRequestScreen from "../screens/AdminShowRequestScreen.js";
 import ProfileScreen from "../screens/DJProfileScreen.js";
 import AdminExecContactScreen from "../screens/AdminExecContactScreen.js";
-
+import BetterAddSetScreen from "../screens/BetterAddSetScreen.js";
 
 const Routes = () => {
     return (
@@ -30,7 +30,7 @@ const Routes = () => {
             <Route exact path="/shows/:name" component={DJSetsScreen}/>
             <Route exact path="/dj/sets" component={SetsScreen}/>
             <Route exact path="/request-show" component={SubmitShowScreen}/>
-            <Route exact path="/dj/add-set" component={AddSetScreen}/>
+            <Route exact path="/dj/add-set" component={BetterAddSetScreen}/>
             <Route exact path="/dj/profile" component={ProfileScreen}/>
             <Route exact path="/admin/schedule" component={DNDCalendarScreen}/>
             <Route exact path="/admin/current-shows" component={AdminCurrentShowScreen}/>

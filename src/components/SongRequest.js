@@ -13,6 +13,10 @@ const styles = theme => ({
   heroButtons: {
     marginTop: theme.spacing(4),
   },
+  button: {
+    height: "3.6em",
+    width: "8em",
+  },
 });
 class SongRequest extends React.Component {
   constructor() {
@@ -47,7 +51,8 @@ class SongRequest extends React.Component {
                   variant="contained"
                   size="large" 
                   color="primary" 
-                  fullWidth>
+                  fullWidth
+                  className={classes.button}>
                   Submit
                   </Button>
               </Grid>

@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
 const useStyles = makeStyles(theme => ({
     icon: {
       marginRight: theme.spacing(2),
@@ -38,7 +39,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function DJSet(props) {
     const classes = useStyles();
-
     var date = props.date;
     var songs = props.songs;
     var songList = [];
