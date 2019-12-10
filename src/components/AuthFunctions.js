@@ -1,11 +1,11 @@
 import firebase from "../firebase.js";
 
-const isUser = () => {
-  var user = firebase.auth().currentUser;
-  if (user) {
-    return true;
+export default class AuthFunctions {
+  static isUser = () => {
+    var user = firebase.auth().currentUser;
+    if (user) {
+      return true;
+    }
+    return false;
   }
-  return false;
 }
-
-export default { isUser };

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import firebase from "../firebase.js";
 import { Link } from 'react-router-dom';
-import { isUser } from '../components/AuthFunctions.js';
+import Auth from '../components/AuthFunctions.js';
 import { copyFileSync } from 'fs';
 
 const styles = theme => ({
@@ -77,11 +77,11 @@ class DJSetsScreen extends React.Component {
                             var songs = subDoc.data().songs;
                             sets.push(
                                 <Grid item xs={12} sm={6} md={4}>
-                                    <DJSet date={date} songs={songs}/>
+                                    <DJSet date={date} songs={songs} />
                                 </Grid>
                             );
                         });
-                        this.setState({sets: sets})
+                        this.setState({ sets: sets })
                     });
                 }
 
@@ -97,6 +97,7 @@ class DJSetsScreen extends React.Component {
     };
 
     render() {
+        console.log(Auth.isUser())
         const { classes } = this.props;
         var linkTo = '/shows/' + this.props.match.params.name + '/add-set';
         return (
@@ -122,17 +123,23 @@ class DJSetsScreen extends React.Component {
                 </div>
                 <SongRequest />
                 <div className={classes.heroContent}>
-                    <Typography
-                        component="h1"
-                        variant="h2"
-                        align="center"
-                        color="textPrimary"
-                        gutterBottom>
-                        Set History
-                    </Typography>
-                    <Button component={Link} to={linkTo}>
-                        Add Set
-                    </Button>
+                        <Typography
+                            component="h1"
+                            variant="h2"
+                            align="center"
+                            color="textPrimary"
+                            gutterBottom>
+                            Set History
+                        </Typography>
+                        <div justifyContent="center" className={classes.cardGrid}>
+                            <Button 
+                                alignContent="center"
+                                component={Link}
+                                to={linkTo}
+                                display={Auth.isUser() ? '' : 'none'} >
+                                Add Set
+                            </Button>
+                        </div>
                     <Typography
                         variant="h5"
                         align="center"
