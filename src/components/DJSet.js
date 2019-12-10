@@ -39,8 +39,8 @@ const useStyles = makeStyles(theme => ({
 export default function DJSet(props) {
     const classes = useStyles();
 
-    var date = Object.keys(props.set);
-    var songs = props.set[date];
+    var date = props.date;
+    var songs = props.songs;
     var songList = [];
     for (var i = 0; i < songs.length; i++) {
         songList.push(<Typography variant="body2" color="textSecondary" component="p">{songs[i]}</Typography>);

@@ -45,7 +45,6 @@ class DJShowsScreen extends React.Component {
         this.state = {
             cards: [],
         }
-        //this.componentDidMount.bind(this);
     };
 
     componentDidMount() {
