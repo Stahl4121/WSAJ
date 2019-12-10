@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import DJCard from '../components/DJCard';
-import DJShows from '../data/DJShows.json';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import firebase from "../firebase.js"
@@ -46,31 +45,27 @@ class DJShowsScreen extends React.Component {
         this.state = {
             cards: [],
         }
-        this.queryDB = this.queryDB.bind(this);
-        this.queryDB()
     };
 
-    queryDB() {
-        var cards = [];
+    queryDB = (event) => {
+        var newCards = [];
         var db = firebase.firestore();
 
         db.collection("shows").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var name = doc.data().name
-                cards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} /></Grid>);
-                console.log(name);
+                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} /></Grid>);
             });
-            console.log(cards.length);
-            this.setState({ cards: cards})
+            this.setState({ cards: newCards})
         });
     };
+
     render() {
         const { classes } = this.props;
-        var promise = this.queryDB();
-        console.log('promise ' + promise)
         return (
             <div>
-                <div className={classes.heroContent}>
+                <div className={classes.heroContent}
+                onLoad={this.queryDB}>
                     <Container maxWidth="sm">
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                             WSAJ Shows
