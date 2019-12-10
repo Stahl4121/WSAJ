@@ -1,4 +1,3 @@
-//from a sandbox tutuorial
 import React from "react";
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
@@ -10,7 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Grid from "@material-ui/core/Grid";
 import MUILink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-
+import firebase from "../firebase.js"
 
 const styles = theme => ({
   root: {
@@ -40,8 +39,18 @@ class SignUpScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      fields: {},
-      errors: {}
+      fields: {
+        email: "",
+        password: "",
+        emailConfirm: "",
+        passwordConfirm: "",
+      },
+      errors: {
+        email: "",
+        password: "",
+        emailConfirm: "",
+        passwordConfirm: "",
+      }
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -74,14 +83,15 @@ class SignUpScreen extends React.Component {
     }
   }
 
-  validateAll(){
+  validateAll() {
     this.validateEmail();
     this.validatePassword();
     this.confirmMatching("email");
     this.confirmMatching("password");
 
     for (const [value] of Object.entries(this.state.errors)) {
-      if (!value || value !== ""){
+      var val = this.state.errors[value];
+      if (val !== "") {
         return false;
       }
     }
@@ -89,25 +99,33 @@ class SignUpScreen extends React.Component {
   }
 
   signUp(e) {
-    e.preventDefault();
     if (this.validateAll()) {
-      //TODO: User Authentication 
-
-      //Clear Form
-      let fields = {};
-      fields["email"] = "";
-      fields["password"] = "";
-      this.setState({ fields: fields });
+      //TODO: User Authentication
+      firebase.auth().createUserWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"]).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("Error: " + errorMessage);
+      });
+      this.props.history.push("/");
+    }
+    else {
+      e.preventDefault();
     }
 
+    //Clear Form
+    let fields = {};
+    fields["email"] = "";
+    fields["password"] = "";
+    this.setState({ fields: fields });
   }
 
-  confirmMatching(fieldName){
+  confirmMatching(fieldName) {
     let errors = this.state.errors;
     let result = this.state.fields[fieldName].localeCompare(this.state.fields[fieldName + "Confirm"]);
     let errorMsg = "";
 
-    if (result !== 0){
+    if (result !== 0) {
       let sentenceCase = fieldName.charAt(0).toUpperCase() + fieldName.slice(1);
       errorMsg = "*" + sentenceCase + "s do not match.";
     }
@@ -197,7 +215,7 @@ class SignUpScreen extends React.Component {
           <Typography component="h1" variant="h5" className={classes.header}>
             DJ Account Request
           </Typography>
-          <form className={classes.form} onSubmit={this.signUp}>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -274,6 +292,9 @@ class SignUpScreen extends React.Component {
               helperText={this.state.errors["passwordConfirm"]}
             />
             <Button className={classes.submit}
+              component={Link}
+              to="/"
+              onClick={(e) => this.signUp(e)}
               type="submit"
               fullWidth
               variant="contained"
@@ -284,14 +305,14 @@ class SignUpScreen extends React.Component {
             <Grid container>
               <Grid item xs>
                 <Link to='/forgot' className={classes.links}>
-                  <MUILink variant="body2" component = {'span'}>
+                  <MUILink variant="body2" component={'span'}>
                     Forgot password?
                 </MUILink>
                 </Link>
               </Grid>
               <Grid item>
                 <Link to='/login' className={classes.links}>
-                  <MUILink variant="body2" component = {'span'}>
+                  <MUILink variant="body2" component={'span'}>
                     Already have an account? Sign In
                 </MUILink>
                 </Link>
