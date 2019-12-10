@@ -10,7 +10,6 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MiriamsFace from '../img/headshot.jpg';
 
 const useStyles = makeStyles(theme => ({
@@ -77,9 +76,6 @@ export default function ExecContactCard() {
           </Typography>
           <Typography paragraph>
             tanmr1@gcc.edu
-          </Typography>
-          <Typography paragraph>
-            #608
           </Typography>
         </CardContent>
       </Collapse>

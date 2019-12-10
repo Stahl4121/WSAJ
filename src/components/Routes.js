@@ -14,6 +14,9 @@ import NotFound from './NotFound.js'
 import AdminCurrentShowScreen from "../screens/AdminCurrentShowScreen.js";
 import AdminShowRequestScreen from "../screens/AdminShowRequestScreen.js";
 import ProfileScreen from "../screens/DJProfileScreen.js";
+import AdminExecContactScreen from "../screens/AdminExecContactScreen.js";
+
+
 const Routes = () => {
     return (
         <Switch>
@@ -30,6 +33,7 @@ const Routes = () => {
             <Route exact path="/admin/schedule" component={DNDCalendarScreen}/>
             <Route exact path="/admin/current-shows" component={AdminCurrentShowScreen}/>
             <Route exact path="/admin/show-requests" component={AdminShowRequestScreen}/>
+            <Route exact path="/admin/contact" component={AdminExecContactScreen}/>
             <Route component={NotFound}/>
         </Switch>
     )
