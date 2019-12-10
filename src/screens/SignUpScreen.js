@@ -107,7 +107,6 @@ class SignUpScreen extends React.Component {
         var errorMessage = error.message;
         console.log("Error: " + errorMessage);
       });
-      this.props.history.push("/");
     }
     else {
       e.preventDefault();
