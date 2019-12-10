@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import TextField from "@material-ui/core/TextField";
-
+import firebase from "../firebase.js";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 4, 3)
   },
   tBox: {
     "& > *": {
@@ -74,17 +74,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CurrentShowCard() {
+export default function CurrentShowCard(dj_name) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
+
+  var docData = getDJ(dj_name);
+  var name = dj_name;
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleYes = () => {
-    deleteDJ();
+    deleteDJ(dj_name);
     setOpen(false);
   };
 
@@ -186,17 +189,17 @@ export default function CurrentShowCard() {
             <div className={classes.paper}>
               <CardHeader title="WARNING" />
               <Typography id="simple-modal-description">
-                This action can't be undone! Type the DJ's name to remove
-                him/her.
+                Are you sure? This action can't be undone!
               </Typography>
-              <form className={classes.tBox} noValidate autoComplete="off">
-                <TextField
-                  id="djTextField"
-                  label="DJ Name"
-                  variant="outlined"
-                  size="small"
-                />
-              </form>
+              <Button
+                variant="outlined"
+                color="secondary"
+                type="submit"
+                className={classes.button}
+                onClick={handleYes}
+              >
+                YES
+              </Button>
               <Button
                 variant="outlined"
                 color="primary"
@@ -204,14 +207,6 @@ export default function CurrentShowCard() {
                 onClick={handleClose}
               >
                 NO
-              </Button>
-              <Button
-                variant="outlined"
-                color="secondary"
-                className={classes.button}
-                onClick={handleYes}
-              >
-                YES
               </Button>
             </div>
           </Fade>
@@ -222,6 +217,28 @@ export default function CurrentShowCard() {
   );
 }
 
-function deleteDJ() {
-  // TODO: Delete DJ from database using value from textField
+function getDJ(dj_name){
+  var db = firebase.database();
+  var docRef = db.collection("DJ_Shows").doc(dj_name);
+
+  docRef.get().then(function(doc) {
+      if (doc.exists) {
+          return doc.data();
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+      }
+  }).catch(function(error) {
+      console.log("Error getting document:", error);
+  });
+}
+
+function deleteDJ(dj_name) {
+  var db = firebase.database();
+
+  db.collection("DJ_Shows").doc(dj_name).delete().then(function() {
+    console.log("Document successfully deleted!");
+  }).catch(function(error) {
+      console.error("Error removing document: ", error);
+  });
 }

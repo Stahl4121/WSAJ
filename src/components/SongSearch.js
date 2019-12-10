@@ -70,7 +70,6 @@ class SongSearch extends React.Component {
                 </React.Fragment>
               ),
             }}
-
           />
         )}
       />
