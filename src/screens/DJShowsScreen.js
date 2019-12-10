@@ -74,9 +74,7 @@ class DJShowsScreen extends React.Component {
                             WSAJ Shows
                     </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            We copied this site:{"\n"}
-                            https://material-ui.com/getting-started/templates/album/{"\n"}
-                            almost exactly to create this cardview. Click a show to check it out!
+                            Click a show to check it out!
                     </Typography>
                     </Container>
                 </div>

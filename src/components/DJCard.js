@@ -64,7 +64,7 @@ export default function DJCard(props) {
             {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Hosted by DJ DJ
+            Hosted by {dj}
           </Typography>
         </CardContent>
       </CardActionArea>
