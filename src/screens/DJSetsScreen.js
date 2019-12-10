@@ -40,7 +40,7 @@ const styles = theme => ({
 });
 
 class DJSetsScreen extends React.Component {
-    constructor() {
+   /* constructor() {
         super();
         this.state = {
             showName: this.props.match.params.name.split('-').join(' '),
@@ -68,7 +68,7 @@ class DJSetsScreen extends React.Component {
             });
             this.setState({ cards: newCards})
         });
-    };
+    };*/
     render() {
         const { classes } = this.props;
         var showName = this.props.match.params.name.split('-').join(' ');
