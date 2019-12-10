@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MiriamsFace from '../img/headshot.jpg';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -48,7 +49,7 @@ export default function ExecContactCard() {
       />
       <CardMedia
         className={classes.media}
-        image="../img/headshot.jpg"
+        image={MiriamsFace}
         title="headshot"
       />
       <CardContent>
