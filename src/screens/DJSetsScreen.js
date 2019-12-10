@@ -5,7 +5,7 @@ import DJSet from '../components/DJSet';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import DJShows from '../data/DJShows.json';
+import firebase from "../firebase.js";
 
 const styles = theme => ({
     icon: {
@@ -40,14 +40,16 @@ const styles = theme => ({
 });
 
 class DJSetsScreen extends React.Component {
-   /* constructor() {
+    constructor(props) {
+        var name = props.match.params.name.split('-').join(' ')
+        console.log(name);
         super();
         this.state = {
-            showName: this.props.match.params.name.split('-').join(' '),
+            showName: name,
             show: '',
-            sets: [{}],
-            showHost: '',
-            showDescription: '',
+            sets: [],
+            dj: '',
+            description: '',
             showGenre: '',
             showTime: '',
         }
@@ -55,51 +57,31 @@ class DJSetsScreen extends React.Component {
     };
 
     componentDidMount() {
-        var newCards = [];
         var db = firebase.firestore();
-        
+        var name = this.state.showName
+        console.log(name);
+        console.log('hi')
+        var djName = '';
+        var des = '';
         db.collection("shows").get().then((querySnapshot) => {
-            querySnapshot.forEach(function (doc) {
-                var name = doc.data().showName;
-                var dj = doc.data().dj;
-                console.log(name)
-                console.log(dj)
-                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} djName={dj} /></Grid>);
+            querySnapshot.forEach(function(doc) {
+                console.log('ok hi');
+                if (doc.data().showName === name) {
+                    djName = doc.data().dj;
+                    des = doc.data().description;
+                }
             });
-            this.setState({ cards: newCards})
+            this.setState(
+                { 
+                    dj: djName,
+                    description: des,
+                }
+            )  
         });
-    };*/
+    };
+
     render() {
         const { classes } = this.props;
-        var showName = this.props.match.params.name.split('-').join(' ');
-        var shows = DJShows['Shows'];
-        var sets = [];
-        var showSets = '';
-        var showHost = '';
-        var showDescription = '';
-        var showGenre = '';
-        var showTime = '';
-        for (var i = 0; i < shows.length; i++) {
-            // note: we add a key prop here to allow react to uniquely identify each
-            // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-            console.log('show: ' + shows[i]['ShowName']);
-            if (shows[i]['ShowName'] === showName) {
-                showDescription = shows[i]['ShowDescription'];
-                showHost = shows[i]['ShowHost'];
-                showGenre = shows[i]['ShowGenre'];
-                showSets = shows[i]['SetHistory'];
-                console.log('set ' + showSets);
-                for (var j = 0; j < showSets.length; j++) {
-                    console.log('your set, my good sir: ' + showSets[j]);
-                    sets.push(
-                        <Grid item xs={12} sm={6} md={4}>
-                            <DJSet set={showSets[j]} />
-                        </Grid>
-                    );
-                }
-            }
-        }
-
         return (
             <div alignItems={'center'}>
                 {/* Hero unit */}
@@ -111,14 +93,14 @@ class DJSetsScreen extends React.Component {
                             align="center"
                             color="textPrimary"
                             gutterBottom>
-                            {showName}
+                            {this.state.showName}
                         </Typography>
                         <Typography
                             variant="h5"
                             align="center"
                             color="textSecondary"
                             paragraph>
-                            {showDescription}
+                            {this.state.description}
                         </Typography>
                     </Container>
                 </div>
@@ -137,11 +119,11 @@ class DJSetsScreen extends React.Component {
                             align="center"
                             color="textSecondary"
                             paragraph>
-                            Here are the songs {showHost} has been playing lately.
+                            Here are the songs {this.state.dj} has been playing lately.
                         </Typography>
                     <Container maxWidth="md" className={classes.cardGrid}>
                         <Grid container spacing={4} >
-                            {sets}
+                            {this.state.sets}
                         </Grid>
                     </Container>
                 </div>
