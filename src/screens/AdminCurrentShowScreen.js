@@ -56,11 +56,11 @@ class AdminCurrentShowScreen extends React.Component {
             querySnapshot.forEach(function (doc) {
                 var showName = doc.data().showName
                 var timeslot = doc.data().timeSlot
-                var djName = doc.data().djNames
+                var djName = doc.data().dj
                 var phoneNum = doc.data().phoneNumber
                 var email = doc.data().emailAddress
-                var requestDate = doc.data()
-                var acceptanceDate = doc.data()
+                var requestDate = doc.data().requestDate
+                var acceptanceDate = doc.data().confirmDate
                 newCards.push(<Grid item xs={12} sm={6} md={4}><CurrentShowCard 
                     showName={showName} 
                     timeslot={timeslot} 
