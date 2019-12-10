@@ -11,19 +11,25 @@ import DJSetsScreen from '../screens/DJSetsScreen.js';
 import SubmitShowScreen from '../screens/SubmitShowScreen.js';
 import AddSetScreen from '../screens/AddSetScreen.js';
 import NotFound from './NotFound.js'
-
+import AdminCurrentShowScreen from "../screens/AdminCurrentShowScreen.js";
+import AdminShowRequestScreen from "../screens/AdminShowRequestScreen.js";
+import ProfileScreen from "../screens/DJProfileScreen.js";
 const Routes = () => {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/shows" component={DJShows} />
-            <Route exact path="/schedule" component={DNDCalendarScreen} />
+            <Route exact path="/schedule" component={Schedule} />
             <Route exact path="/contact" component={ContactsPage} />
             <Route exact path="/login" component={LoginScreen} />
             <Route exact path="/signup" component={SignUpScreen} />
             <Route exact path="/shows/:name" component={DJSetsScreen}/>
             <Route exact path="/request-show" component={SubmitShowScreen}/>
             <Route exact path="/add-set" component={AddSetScreen}/>
+            <Route exact path="/dj/profile" component={ProfileScreen}/>
+            <Route exact path="/admin/schedule" component={DNDCalendarScreen}/>
+            <Route exact path="/admin/current-shows" component={AdminCurrentShowScreen}/>
+            <Route exact path="/admin/show-requests" component={AdminShowRequestScreen}/>
             <Route component={NotFound}/>
         </Switch>
     )
