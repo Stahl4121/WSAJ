@@ -4,8 +4,12 @@ import SongRequest from '../components/SongRequest.js';
 import DJSet from '../components/DJSet';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import firebase from "../firebase.js";
+import { Link } from 'react-router-dom';
+import Auth from '../components/AuthFunctions.js';
+import { copyFileSync } from 'fs';
 
 const styles = theme => ({
     icon: {
@@ -73,11 +77,11 @@ class DJSetsScreen extends React.Component {
                             var songs = subDoc.data().songs;
                             sets.push(
                                 <Grid item xs={12} sm={6} md={4}>
-                                    <DJSet date={date} songs={songs}/>
+                                    <DJSet date={date} songs={songs} />
                                 </Grid>
                             );
                         });
-                        this.setState({sets: sets})
+                        this.setState({ sets: sets })
                     });
                 }
 
@@ -90,18 +94,12 @@ class DJSetsScreen extends React.Component {
                 }
             )
         });
-
-        // dbRef = db.collection("shows").collection("sets");
-        // dbRef.get().then((querySnapshot) => {
-        //     querySnapshot.forEach((doc) => {
-        //         console.log(doc.data())
-        //     });
-        // });
-
     };
 
     render() {
+        console.log(Auth.isUser())
         const { classes } = this.props;
+        var linkTo = '/shows/' + this.props.match.params.name + '/add-set';
         return (
             <div alignItems={'center'}>
                 <div className={classes.heroContent}>
@@ -139,9 +137,21 @@ class DJSetsScreen extends React.Component {
                         color="textSecondary"
                         paragraph>
                         Here are the songs {this.state.dj} has been playing lately.
-                        </Typography>
+                    </Typography>
                     <Container maxWidth="md" className={classes.cardGrid}>
                         <Grid container spacing={4} >
+                        <Grid item xs={12} sm={6} md={4}>
+                        <Button
+                        align="center"
+                        component={Link}
+                        to={linkTo}
+                        variant="contained"
+                        size="large" 
+                        color="primary" 
+                        display={Auth.isUser() ? '' : 'none'} >
+                        Add Set
+                    </Button>
+                                </Grid>
                             {this.state.sets}
                         </Grid>
                     </Container>

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Image from '../img/home91-1.png';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,7 +22,36 @@ const useStyles = makeStyles(theme => ({
   },
   paperholder: {
     opacity: '0.85',
-  }
+  },
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 8),
+  },
+  heroButtons: {
+    marginTop: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(6),
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+    height: 250,
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
+  },
 }));
 
 export default function PaperSheet() {
@@ -29,16 +59,28 @@ export default function PaperSheet() {
 
   return (
     <div className={classes.root}>
-        <Paper className={classes.paperholder}>
-          <div className={classes.announcement}>
-            <Typography variant="h5" component="h3">
-                Announcements
+      <Paper className={classes.paperholder}>
+        <div className={classes.heroContent}>
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom>
+              Announcements
             </Typography>
-            <Typography component="p">
-                Check out the other tabs:)
+            <Typography
+              variant="h5"
+              align="center"
+              color="textSecondary"
+              paragraph>
+              Check out the other tabs:)
             </Typography>
-          </div>
-        </Paper>
+          </Container>
+        </div>
+      </Paper>
+
     </div>
   );
 }
