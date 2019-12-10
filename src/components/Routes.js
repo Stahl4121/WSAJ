@@ -11,6 +11,8 @@ import DJSetsScreen from '../screens/DJSetsScreen.js';
 import SubmitShowScreen from '../screens/SubmitShowScreen.js';
 import AddSetScreen from '../screens/AddSetScreen.js';
 import NotFound from './NotFound.js'
+import DJProfileScreen from "../screens/DJProfileScreen.js";
+import AdminCalendarScreen from "../screens/AdminCalendarScreen";
 
 const Routes = () => {
     return (
@@ -24,6 +26,8 @@ const Routes = () => {
             <Route exact path="/shows/:name" component={DJSetsScreen}/>
             <Route exact path="/request-show" component={SubmitShowScreen}/>
             <Route exact path="/add-set" component={AddSetScreen}/>
+            <Route exact path="/dj/profile" component={DJProfileScreen}/>
+            <Route exact path="/admin/schedule" component={AdminCalendarScreen}/>
             <Route component={NotFound}/>
         </Switch>
     )

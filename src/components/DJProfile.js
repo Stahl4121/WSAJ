@@ -34,7 +34,11 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    marginLeft: '4em',
+    marginRight: '4em',
+    marginTop: '2em',
+    marginBottom: '2em',
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -94,6 +98,7 @@ export default function DJProfile({songList = "unknown", nameOfShow ="showName"}
               <TextField
                 id="show-name"
                 label="Show Name"
+                fullWidth={true}
                 className={classes.textField}
                 margin="normal"
                 variant="outlined"
@@ -107,6 +112,7 @@ export default function DJProfile({songList = "unknown", nameOfShow ="showName"}
                 label="DJ Hosts"
                 className={classes.textField}
                 margin="normal"
+                fullWidth={true}
                 variant="outlined"
                 value={djHosts}
                 onInput={ e=>setDJHosts(e.target.value)}
@@ -117,6 +123,7 @@ export default function DJProfile({songList = "unknown", nameOfShow ="showName"}
                 className={classes.textField}
                 margin="normal"
                 variant="outlined"
+                fullWidth={true}
                 value={genre}
                 onInput={ e=>setGenre(e.target.value)}
               />
@@ -125,6 +132,7 @@ export default function DJProfile({songList = "unknown", nameOfShow ="showName"}
                 label="Description"
                 className={classes.textField}
                 multiline
+                fullWidth={true}
                 rowsMax="10"
                 margin="normal"
                 variant="outlined"
