@@ -4,8 +4,12 @@ import SongRequest from '../components/SongRequest.js';
 import DJSet from '../components/DJSet';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import firebase from "../firebase.js";
+import { Link } from 'react-router-dom';
+import { isUser } from '../components/AuthFunctions.js';
+import { copyFileSync } from 'fs';
 
 const styles = theme => ({
     icon: {
@@ -90,18 +94,11 @@ class DJSetsScreen extends React.Component {
                 }
             )
         });
-
-        // dbRef = db.collection("shows").collection("sets");
-        // dbRef.get().then((querySnapshot) => {
-        //     querySnapshot.forEach((doc) => {
-        //         console.log(doc.data())
-        //     });
-        // });
-
     };
 
     render() {
         const { classes } = this.props;
+        var linkTo = '/shows/' + this.props.match.params.name + '/add-set';
         return (
             <div alignItems={'center'}>
                 <div className={classes.heroContent}>
@@ -132,14 +129,17 @@ class DJSetsScreen extends React.Component {
                         color="textPrimary"
                         gutterBottom>
                         Set History
-                        </Typography>
+                    </Typography>
+                    <Button component={Link} to={linkTo}>
+                        Add Set
+                    </Button>
                     <Typography
                         variant="h5"
                         align="center"
                         color="textSecondary"
                         paragraph>
                         Here are the songs {this.state.dj} has been playing lately.
-                        </Typography>
+                    </Typography>
                     <Container maxWidth="md" className={classes.cardGrid}>
                         <Grid container spacing={4} >
                             {this.state.sets}

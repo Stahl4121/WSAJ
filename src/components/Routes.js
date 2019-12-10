@@ -28,6 +28,7 @@ const Routes = () => {
             <Route exact path="/login" component={LoginScreen} />
             <Route exact path="/signup" component={SignUpScreen} />
             <Route exact path="/shows/:name" component={DJSetsScreen}/>
+            <Route exact path="/shows/:name/add-set" component={AddSetScreen}/>
             <Route exact path="/dj/set-history" component={SetsScreen}/>
             <Route exact path="/request-show" component={SubmitShowScreen}/>
             <Route exact path="/dj/add-set" component={AddSetScreen}/>
