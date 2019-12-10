@@ -54,6 +54,7 @@ class DJShowsScreen extends React.Component {
         db.collection("shows").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var name = doc.data().name
+                console.log(this.name)
                 newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} /></Grid>);
             });
             this.setState({ cards: newCards})
@@ -63,9 +64,8 @@ class DJShowsScreen extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <div>
-                <div className={classes.heroContent}
-                onLoad={this.queryDB}>
+            <div onLoad={this.queryDB}>
+                <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                             WSAJ Shows
