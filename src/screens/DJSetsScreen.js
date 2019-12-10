@@ -53,7 +53,6 @@ class DJSetsScreen extends React.Component {
             showGenre: '',
             showTime: '',
         }
-        //this.componentDidMount.bind(this);
     };
 
     componentDidMount() {
@@ -61,20 +60,44 @@ class DJSetsScreen extends React.Component {
         var name = this.state.showName
         var djName = '';
         var des = '';
-        db.collection("shows").get().then((querySnapshot) => {
-            querySnapshot.forEach(function(doc) {
+        var sets = [];
+        var dbRef = db.collection("shows");
+        dbRef.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
                 if (doc.data().showName === name) {
                     djName = doc.data().dj;
                     des = doc.data().description;
+                    db.collection('shows/' + doc.id + '/sets').get().then((subCollectionSnapshot) => {
+                        subCollectionSnapshot.forEach((subDoc) => {
+                            var date = subDoc.id;
+                            var songs = subDoc.data().songs;
+                            sets.push(
+                                <Grid item xs={12} sm={6} md={4}>
+                                    <DJSet date={date} songs={songs}/>
+                                </Grid>
+                            );
+                        });
+                        this.setState({sets: sets})
+                    });
                 }
+
             });
+
             this.setState(
-                { 
+                {
                     dj: djName,
                     description: des,
                 }
-            )  
+            )
         });
+
+        // dbRef = db.collection("shows").collection("sets");
+        // dbRef.get().then((querySnapshot) => {
+        //     querySnapshot.forEach((doc) => {
+        //         console.log(doc.data())
+        //     });
+        // });
+
     };
 
     render() {
@@ -100,22 +123,22 @@ class DJSetsScreen extends React.Component {
                         </Typography>
                     </Container>
                 </div>
-                <SongRequest/>
+                <SongRequest />
                 <div className={classes.heroContent}>
-                        <Typography
-                            component="h1"
-                            variant="h2"
-                            align="center"
-                            color="textPrimary"
-                            gutterBottom>
-                            Set History
+                    <Typography
+                        component="h1"
+                        variant="h2"
+                        align="center"
+                        color="textPrimary"
+                        gutterBottom>
+                        Set History
                         </Typography>
-                        <Typography
-                            variant="h5"
-                            align="center"
-                            color="textSecondary"
-                            paragraph>
-                            Here are the songs {this.state.dj} has been playing lately.
+                    <Typography
+                        variant="h5"
+                        align="center"
+                        color="textSecondary"
+                        paragraph>
+                        Here are the songs {this.state.dj} has been playing lately.
                         </Typography>
                     <Container maxWidth="md" className={classes.cardGrid}>
                         <Grid container spacing={4} >
