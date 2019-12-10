@@ -60,7 +60,7 @@ class DJShowsScreen extends React.Component {
                 console.log(dj)
                 newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} dj={dj} /></Grid>);
             });
-            //this.setState({ cards: newCards})
+            this.setState({ cards: newCards})
         });
     };
 
