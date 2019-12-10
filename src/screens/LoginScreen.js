@@ -60,22 +60,23 @@ class LoginScreen extends React.Component {
   }
 
   signIn(e) {
-    e.preventDefault();
     if (this.validateEmail()) {
-      //TODO: User Authentication 
-      firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"]).catch(function(error) {
+      firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"]).catch(function (error) {
         // Handle Errors 
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log("ERROR CODE: " + errorCode + "MSG: " + errorMessage);
       });
-
-      //Clear Form
-      let fields = {};
-      fields["email"] = "";
-      fields["password"] = "";
-      this.setState({ fields: fields });
     }
+    else {
+      e.preventDefault();
+    }
+
+    //Clear Form
+    let fields = {};
+    fields["email"] = "";
+    fields["password"] = "";
+    this.setState({ fields: fields });
 
   }
 
@@ -115,7 +116,7 @@ class LoginScreen extends React.Component {
           <Typography component="h1" variant="h5" className={classes.header}>
             Sign In
           </Typography>
-          <form className={classes.form} onSubmit={this.signIn}>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -135,6 +136,7 @@ class LoginScreen extends React.Component {
               margin="normal"
               required
               fullWidth
+              onChange={this.handleChange}
               name="password"
               label="Password"
               type="password"
@@ -142,6 +144,9 @@ class LoginScreen extends React.Component {
               autoComplete="current-password"
             />
             <Button className={classes.submit}
+              component={Link}
+              to="/"
+              onClick={(e) => this.signIn(e)}
               type="submit"
               fullWidth
               variant="contained"
@@ -152,14 +157,14 @@ class LoginScreen extends React.Component {
             <Grid container>
               <Grid item xs>
                 <Link to='/forgot' className={classes.links}>
-                  <MUILink variant="body2" component = {'span'}>
+                  <MUILink variant="body2" component={'span'}>
                     Forgot password?
                 </MUILink>
                 </Link>
               </Grid>
               <Grid item>
                 <Link to='/signup' className={classes.links}>
-                  <MUILink variant="body2" component = {'span'}>
+                  <MUILink variant="body2" component={'span'}>
                     Don't have an account? Sign up
                 </MUILink>
                 </Link>
