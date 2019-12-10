@@ -6,9 +6,9 @@ import DJNavBar from './components/DJNavBar.js';
 import AdminNavBar from './components/AdminNavBar.js';
 
 function App() {
-  var visitor = false;
+  var visitor = true;
   var dj = false;
-  
+
   if(visitor) {
     return (
       <NavBar/>
