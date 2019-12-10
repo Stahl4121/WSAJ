@@ -40,6 +40,35 @@ const styles = theme => ({
 });
 
 class DJSetsScreen extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            showName: this.props.match.params.name.split('-').join(' '),
+            show: '',
+            sets: [{}],
+            showHost: '',
+            showDescription: '',
+            showGenre: '',
+            showTime: '',
+        }
+        //this.componentDidMount.bind(this);
+    };
+
+    componentDidMount() {
+        var newCards = [];
+        var db = firebase.firestore();
+        
+        db.collection("shows").get().then((querySnapshot) => {
+            querySnapshot.forEach(function (doc) {
+                var name = doc.data().showName;
+                var dj = doc.data().dj;
+                console.log(name)
+                console.log(dj)
+                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} djName={dj} /></Grid>);
+            });
+            this.setState({ cards: newCards})
+        });
+    };
     render() {
         const { classes } = this.props;
         var showName = this.props.match.params.name.split('-').join(' ');
