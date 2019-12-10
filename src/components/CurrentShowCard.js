@@ -1,4 +1,5 @@
 import React from "react";
+import firebase from "../firebase.js";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -74,20 +75,25 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CurrentShowCard(dj_name) {
+export default function CurrentShowCard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
 
-  var docData = getDJ(dj_name);
-  var name = dj_name;
+  var showName = props.showName;
+  var timeslot = props.timeslot;
+  var djName = props.djNames;
+  var phoneNum = props.phoneNum
+  var email = props.email;
+  var requestDate = props.requestDate;
+  var acceptanceDate = props.acceptanceDate;
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleYes = () => {
-    deleteDJ(dj_name);
+    deleteDJ(djName);
     setOpen(false);
   };
 
@@ -101,7 +107,7 @@ export default function CurrentShowCard(dj_name) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader title="Show Name" />
+      <CardHeader title={showName} />
       <CardContent>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
@@ -114,7 +120,7 @@ export default function CurrentShowCard(dj_name) {
               component="p"
               id="requestedTimeslot"
             >
-              Monday 7pm
+              {timeslot}
             </Typography>
             <div>
               <Typography
@@ -123,21 +129,21 @@ export default function CurrentShowCard(dj_name) {
                 component="p"
                 id="studentName"
               >
-                Student Name
+                {djName}
               </Typography>
               <Typography
                 variant="body2"
                 color="textSecondary"
                 id="phoneNumber"
               >
-                7577443516
+                {phoneNum}
               </Typography>
               <Typography
                 variant="body2"
                 color="textSecondary"
                 id="emailAddress"
               >
-                tanmr1@gcc.edu
+                {email}
               </Typography>
             </div>
           </Grid>
@@ -150,7 +156,7 @@ export default function CurrentShowCard(dj_name) {
               color="textSecondary"
               id="dateOfRequest"
             >
-              9 December 2019
+              {requestDate}
             </Typography>
             <Typography variant="body2" color="textSecondary">
               Date of Acceptance:
@@ -160,7 +166,7 @@ export default function CurrentShowCard(dj_name) {
               color="textSecondary"
               id="dateOfAcceptance"
             >
-              10 December 2019
+              {acceptanceDate}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -217,26 +223,10 @@ export default function CurrentShowCard(dj_name) {
   );
 }
 
-function getDJ(dj_name){
-  var db = firebase.database();
-  var docRef = db.collection("DJ_Shows").doc(dj_name);
-
-  docRef.get().then(function(doc) {
-      if (doc.exists) {
-          return doc.data();
-      } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-      }
-  }).catch(function(error) {
-      console.log("Error getting document:", error);
-  });
-}
-
-function deleteDJ(dj_name) {
+function deleteDJ(djName) {
   var db = firebase.database();
 
-  db.collection("DJ_Shows").doc(dj_name).delete().then(function() {
+  db.collection("shows").doc(djName).delete().then(function() {
     console.log("Document successfully deleted!");
   }).catch(function(error) {
       console.error("Error removing document: ", error);
