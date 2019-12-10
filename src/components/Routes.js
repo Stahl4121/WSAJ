@@ -8,6 +8,7 @@ import ContactsPage from '../screens/ContactScreen.js';
 import LoginScreen from '../screens/LoginScreen.js';
 import SignUpScreen from '../screens/SignUpScreen.js';
 import DJSetsScreen from '../screens/DJSetsScreen.js';
+import SetsScreen from '../screens/SetsScreen.js';
 import SubmitShowScreen from '../screens/SubmitShowScreen.js';
 import AddSetScreen from '../screens/AddSetScreen.js';
 import NotFound from './NotFound.js'
@@ -26,9 +27,10 @@ const Routes = () => {
             <Route exact path="/contact" component={ContactsPage} />
             <Route exact path="/login" component={LoginScreen} />
             <Route exact path="/signup" component={SignUpScreen} />
-            <Route exact path="/shows/:name" component={DJSetsScreen}/>
+            <Route exact path="/shows/:name" component={SetsScreen}/>
+            <Route exact path="/dj/set-history" component={DJSetsScreen}/>
             <Route exact path="/request-show" component={SubmitShowScreen}/>
-            <Route exact path="/add-set" component={AddSetScreen}/>
+            <Route exact path="/dj/add-set" component={AddSetScreen}/>
             <Route exact path="/dj/profile" component={ProfileScreen}/>
             <Route exact path="/admin/schedule" component={DNDCalendarScreen}/>
             <Route exact path="/admin/current-shows" component={AdminCurrentShowScreen}/>

@@ -31,9 +31,13 @@ const styles = theme => ({
 });
 
 class AdminContactCard extends React.Component {
-    constructor() {
+    constructor(props) {
       super();
       this.state = {
+        execName: props.execName,
+        phoneNumber: props.phoneNumber,
+        emailAddress: props.emailAddress,
+        description: props.description,
         fields: {},
         errors: {}
       }
@@ -129,6 +133,7 @@ class AdminContactCard extends React.Component {
                     name="execName"
                     label="Exec Name"
                     autoFocus
+                    {this.state.execName}
                     onChange={this.handleChange}
                     error={!this.state.errors["execName"] ? false : this.state.errors["execName"] !== ""}
                     helperText={this.state.errors["execName"]}
@@ -144,6 +149,7 @@ class AdminContactCard extends React.Component {
                     name="description"
                     label="Description"
                     autoFocus
+                    {this.state.description}
                     onChange={this.handleChange}
                     error={!this.state.errors["description"] ? false : this.state.errors["description"] !== ""}
                     helperText={this.state.errors["description"]}
@@ -159,6 +165,7 @@ class AdminContactCard extends React.Component {
                     name="phoneNumber"
                     label="Phone Number"
                     autoFocus
+                    {this.state.phoneNumber}
                     onChange={this.handleChange}
                     error={!this.state.errors["phoneNumber"] ? false : this.state.errors["phoneNumber"] !== ""}
                     helperText={this.state.errors["phoneNumber"]}
@@ -174,6 +181,7 @@ class AdminContactCard extends React.Component {
                     name="emailAddress"
                     label="Email Address"
                     autoFocus
+                    {this.state.emailAddress}
                     onChange={this.handleChange}
                     error={!this.state.errors["emailAddress"] ? false : this.state.errors["emailAddress"] !== ""}
                     helperText={this.state.errors["emailAddress"]}
