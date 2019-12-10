@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from '@material-ui/core/Paper';
-
+import firebase from "../firebase.js"
 
 const styles = theme => ({
   root: {
@@ -102,9 +102,22 @@ class SignUpScreen extends React.Component {
 
   signUp(e) {
     e.preventDefault();
-    if (this.validateAll()) {
-      //TODO: User Authentication 
 
+    if (this.validateAll()) {
+      // Add a new document in collection "shows"
+      var db = firebase.firestore();
+      db.collection("shows").doc(this.state.fields["showName"]).set({
+        showName: this.state.fields["showName"],
+        dj: this.state.fields["djNames"],
+        description: this.state.fields["description"],
+        genre: this.state.fields["genre"],
+      })
+      .then(function() {
+        console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
       //Clear Form
       let fields = {};
       fields["showName"] = "";
@@ -137,6 +150,14 @@ class SignUpScreen extends React.Component {
 
   render() {
     const { classes } = this.props;
+    var db = firebase.firestore();
+    var showName = '';
+    var djNames = '';
+    var description = '';
+    var genre = '';
+    var timeSlot = '';
+    var songRequests = '';
+
 
     return (
       <Container component="main" maxWidth="md">

@@ -54,11 +54,11 @@ class DJShowsScreen extends React.Component {
         
         db.collection("shows").get().then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
-                var name = doc.data().name
-                var dj = doc.data().djNames
+                var name = doc.data().showName;
+                var dj = doc.data().dj;
                 console.log(name)
                 console.log(dj)
-                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} dj={dj} /></Grid>);
+                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} djName={dj} /></Grid>);
             });
             this.setState({ cards: newCards})
         });
@@ -74,9 +74,7 @@ class DJShowsScreen extends React.Component {
                             WSAJ Shows
                     </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            We copied this site:{"\n"}
-                            https://material-ui.com/getting-started/templates/album/{"\n"}
-                            almost exactly to create this cardview. Click a show to check it out!
+                            Click a show to check it out!
                     </Typography>
                     </Container>
                 </div>
