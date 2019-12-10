@@ -77,6 +77,8 @@ class SignUpScreen extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.validateAll = this.validateAll.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.cancel = this.cancel.bind(this);
+    this.clearSongs = this.clearSongs.bind(this);
   };
 
   handleChange(e) {
