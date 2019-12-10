@@ -66,7 +66,7 @@ class SongSearch extends React.Component {
               endAdornment: (
                 <React.Fragment>
                   {this.state.loading ? <CircularProgress color="inherit" size={20} /> : null}
-                  {params.InputProps.endAdornment}
+                  {/*params.InputProps.endAdornment*/}
                 </React.Fragment>
               ),
             }}

@@ -59,13 +59,10 @@ class DJSetsScreen extends React.Component {
     componentDidMount() {
         var db = firebase.firestore();
         var name = this.state.showName
-        console.log(name);
-        console.log('hi')
         var djName = '';
         var des = '';
         db.collection("shows").get().then((querySnapshot) => {
             querySnapshot.forEach(function(doc) {
-                console.log('ok hi');
                 if (doc.data().showName === name) {
                     djName = doc.data().dj;
                     des = doc.data().description;
@@ -84,7 +81,6 @@ class DJSetsScreen extends React.Component {
         const { classes } = this.props;
         return (
             <div alignItems={'center'}>
-                {/* Hero unit */}
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography
