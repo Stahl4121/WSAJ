@@ -123,23 +123,14 @@ class DJSetsScreen extends React.Component {
                 </div>
                 <SongRequest />
                 <div className={classes.heroContent}>
-                        <Typography
-                            component="h1"
-                            variant="h2"
-                            align="center"
-                            color="textPrimary"
-                            gutterBottom>
-                            Set History
+                    <Typography
+                        component="h1"
+                        variant="h2"
+                        align="center"
+                        color="textPrimary"
+                        gutterBottom>
+                        Set History
                         </Typography>
-                        <div justifyContent="center" className={classes.cardGrid}>
-                            <Button 
-                                alignContent="center"
-                                component={Link}
-                                to={linkTo}
-                                display={Auth.isUser() ? '' : 'none'} >
-                                Add Set
-                            </Button>
-                        </div>
                     <Typography
                         variant="h5"
                         align="center"
@@ -149,6 +140,18 @@ class DJSetsScreen extends React.Component {
                     </Typography>
                     <Container maxWidth="md" className={classes.cardGrid}>
                         <Grid container spacing={4} >
+                        <Grid item xs={12} sm={6} md={4}>
+                        <Button
+                        align="center"
+                        component={Link}
+                        to={linkTo}
+                        variant="contained"
+                        size="large" 
+                        color="primary" 
+                        display={Auth.isUser() ? '' : 'none'} >
+                        Add Set
+                    </Button>
+                                </Grid>
                             {this.state.sets}
                         </Grid>
                     </Container>
