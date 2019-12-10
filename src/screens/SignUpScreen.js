@@ -107,6 +107,29 @@ class SignUpScreen extends React.Component {
         var errorMessage = error.message;
         console.log("Error: " + errorMessage);
       });
+
+      //create dj
+      var db = firebase.firestore();
+      db.collection("shows").doc(this.state.fields["djNames"]).set({
+        confirmDate: '',
+        description: '',
+        dj: this.state.fields["djNames"],
+        emailAddress: this.state.fields["email"],
+        genre: "Country",
+        password: this.state.fields["password"],
+        phoneNumber: 0, 
+        requestDate: '',
+        showName: this.state.fields["showName"],
+        songRequests: [],
+        status: 'current',
+        timeSlot: '', 
+      })
+      .then(function() {
+          console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
     }
     else {
       e.preventDefault();
