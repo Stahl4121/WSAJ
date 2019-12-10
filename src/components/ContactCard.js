@@ -1,18 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MiriamsFace from '../img/headshot.jpg';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   card: {
     maxWidth: 345,
   },
@@ -30,21 +25,30 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-}));
+});
 
-export default function ExecContactCard() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+class ContactCard extends React.Component {  
+  constructor(props) {
+    super();
+    this.state = {
+      execPosition: props.execPosition,
+      execName: props.execName,
+      phoneNumber: props.phoneNumber,
+      emailAddress: props.emailAddress,
+      description: props.description,
+      fields: {},
+      errors: {}
+    }
   };
 
-  return (
+  render() {
+    const { classes } = this.props;
+
+    return (
     <Card className={classes.card}>
       <CardHeader
-        title="Name"
-        subheader="Exec Position"
+        title={this.state.execPosition}
+        subheader={this.state.execName}
       />
       <CardMedia
         className={classes.media}
@@ -52,33 +56,21 @@ export default function ExecContactCard() {
         title="headshot"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive woman runs the whole shebang.
+        <Typography color="textSecondary" component="p">
+          {this.state.description}
+        </Typography>
+      
+        <Typography>Contact Info:</Typography>
+        <Typography>
+          {this.state.phoneNumber}
+        </Typography>
+        <Typography>
+          {this.state.emailAddress}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Contact Info:</Typography>
-          <Typography paragraph>
-            7577443516
-          </Typography>
-          <Typography paragraph>
-            tanmr1@gcc.edu
-          </Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
+  }
 }
+
+export default withStyles(styles)(ContactCard);
