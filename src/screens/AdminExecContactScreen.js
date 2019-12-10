@@ -54,6 +54,7 @@ class AdminExecContactScreen extends React.Component {
         
         db.collection("execContacts").get().then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
+                var execPosition = doc.data().execPosition;
                 var execName = doc.data().execName;
                 var phoneNumber = doc.data().phoneNumber;
                 var emailAddress = doc.data().emailAddress;
@@ -62,6 +63,7 @@ class AdminExecContactScreen extends React.Component {
                 console.log(phoneNumber)
                 newCards.push(<Grid item xs={12} sm={6} md={4}>
                                 <AdminContactCard 
+                                    execPosition={execPosition}
                                     execName={execName} 
                                     phoneNumber={phoneNumber} 
                                     emailAddress={emailAddress} 
@@ -80,10 +82,10 @@ class AdminExecContactScreen extends React.Component {
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                            WSAJ Shows
+                            Executive Contacts
                     </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            Click a show to check it out!
+                            Please reach out to us if you have any questions!
                     </Typography>
                     </Container>
                 </div>

@@ -34,6 +34,7 @@ class AdminContactCard extends React.Component {
     constructor(props) {
       super();
       this.state = {
+        execPosition: props.execPosition,
         execName: props.execName,
         phoneNumber: props.phoneNumber,
         emailAddress: props.emailAddress,
@@ -72,7 +73,8 @@ class AdminContactCard extends React.Component {
         if (this.validateAll()) {
             // Add a new document in collection "shows"
             var db = firebase.firestore();
-            db.collection("execContacts").doc(this.state.fields["execName"]).set({
+            db.collection("execContacts").doc(this.state.fields["execPosition"]).set({
+                execPosition: this.state.fields["execPosition"],
                 execName: this.state.fields["execName"],
                 phoneNumber: this.state.fields["phoneNumber"],
                 emailAddress: this.state.fields["emailAddress"],
@@ -86,6 +88,7 @@ class AdminContactCard extends React.Component {
             });
             //Clear Form
             let fields = {};
+            fields["execPosition"] = "";
             fields["execName"] = "";
             fields["phoneNumber"] = "";
             fields["emailAddress"] = "";
@@ -101,6 +104,7 @@ class AdminContactCard extends React.Component {
         //Clear Form
         //DONT save CHANGES
         let fields = {};
+        fields["execPosition"] = "";
         fields["execName"] = "";
         fields["phoneNumber"] = "";
         fields["emailAddress"] = "";
@@ -114,8 +118,7 @@ class AdminContactCard extends React.Component {
       return (
         <Card className={classes.card}>
         <CardHeader
-            title="Name"
-            subheader="Exec Position"
+            title={this.state.execPosition}
         />
         <CardMedia
             className={classes.media}
@@ -132,6 +135,7 @@ class AdminContactCard extends React.Component {
                     id="exec-name"
                     name="execName"
                     label="Exec Name"
+                    defaultValue={this.state.execName}
                     autoFocus
                     onChange={this.handleChange}
                     error={!this.state.errors["execName"] ? false : this.state.errors["execName"] !== ""}
@@ -147,6 +151,7 @@ class AdminContactCard extends React.Component {
                     id="description"
                     name="description"
                     label="Description"
+                    defaultValue={this.state.description}
                     autoFocus
                     onChange={this.handleChange}
                     error={!this.state.errors["description"] ? false : this.state.errors["description"] !== ""}
@@ -162,6 +167,7 @@ class AdminContactCard extends React.Component {
                     id="phone-number"
                     name="phoneNumber"
                     label="Phone Number"
+                    defaultValue={this.state.phoneNumber}
                     autoFocus
                     onChange={this.handleChange}
                     error={!this.state.errors["phoneNumber"] ? false : this.state.errors["phoneNumber"] !== ""}
@@ -177,6 +183,7 @@ class AdminContactCard extends React.Component {
                     id="email-address"
                     name="emailAddress"
                     label="Email Address"
+                    defaultValue={this.state.emailAddress}
                     autoFocus
                     onChange={this.handleChange}
                     error={!this.state.errors["emailAddress"] ? false : this.state.errors["emailAddress"] !== ""}
