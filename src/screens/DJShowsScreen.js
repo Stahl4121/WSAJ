@@ -54,11 +54,11 @@ class DJShowsScreen extends React.Component {
         
         db.collection("shows").get().then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
-                var name = doc.data().name
-                var dj = doc.data().djNames
+                var name = doc.data().showName;
+                var dj = doc.data().dj;
                 console.log(name)
                 console.log(dj)
-                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} dj={dj} /></Grid>);
+                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} djName={dj} /></Grid>);
             });
             this.setState({ cards: newCards})
         });

@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 export default function DJCard(props) {
   const classes = useStyles();
   var name = props.show;
-  var dj = props.dj;
+  var dj = props.djName;
   console.log('show ' + props.show)
   var linkTo = "/shows/" + name.split(' ').join('-');
   
