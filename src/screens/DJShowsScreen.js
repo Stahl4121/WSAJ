@@ -52,7 +52,7 @@ class DJShowsScreen extends React.Component {
         var newCards = [];
         var db = firebase.firestore();
         
-        db.collection("shows").get().then(function (querySnapshot) {
+        db.collection("shows").get().then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
                 var name = doc.data().name
                 var dj = doc.data().djNames
