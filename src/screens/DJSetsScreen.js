@@ -8,8 +8,9 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import firebase from "../firebase.js";
 import { Link } from 'react-router-dom';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import Auth from '../components/AuthFunctions.js';
-import { copyFileSync } from 'fs';
 
 const styles = theme => ({
     icon: {
@@ -139,19 +140,22 @@ class DJSetsScreen extends React.Component {
                         Here are the songs {this.state.dj} has been playing lately.
                     </Typography>
                     <Container maxWidth="md" className={classes.cardGrid}>
-                        <Grid container spacing={4} >
-                        <Grid item xs={12} sm={6} md={4}>
-                        <Button
-                        align="center"
-                        component={Link}
-                        to={linkTo}
-                        variant="contained"
-                        size="large" 
-                        color="primary" 
-                        display={Auth.isUser() ? '' : 'none'} >
-                        Add Set
-                    </Button>
-                                </Grid>
+                        <Grid container
+                            direction="row"
+                            alignItems="center" 
+                            spacing={4} >
+                            <Grid item xs={12} sm={6} md={4}>
+                                <Fab color="primary" aria-label="add"
+                                    component={Link}
+                                    to={linkTo}
+                                    size="large"
+                                    display={Auth.isUser() ? '' : 'none'} >
+                                    <AddIcon />
+                                </Fab>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    Add Set
+                                </Typography>
+                            </Grid>
                             {this.state.sets}
                         </Grid>
                     </Container>
