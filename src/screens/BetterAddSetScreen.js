@@ -78,6 +78,7 @@ class BetterAddSetScreen extends React.Component {
   constructor() {
     super();
     this.state = {
+      songs: [],
       fields: {},
       errors: {}
     }
@@ -238,6 +239,25 @@ class BetterAddSetScreen extends React.Component {
                 <Typography component="h1" variant="h5" className={classes.songHeader}>
                   Songs
                 </Typography>
+                <Grid container spacing={2}
+                  direction="row"
+                  justify="space-around"
+                  alignItems="center">
+                  <Grid item xs={10}>
+                    <SongSearch/>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Button 
+                      variant="contained"
+                      size="large" 
+                      color="primary" 
+                      fullWidth
+                      className={classes.button}
+                      onClick={this.addSong}>
+                      Add Song
+                      </Button>
+                  </Grid>
+                </Grid>
                 <Paper className={classes.songBox}>
                   <div className={classes.announcement}>
                     <Typography component="p">
@@ -245,7 +265,6 @@ class BetterAddSetScreen extends React.Component {
                     </Typography>
                   </div>
                 </Paper>
-                <SongRequest />
               </Grid>
             </Grid>
           </form>
