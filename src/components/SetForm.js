@@ -16,13 +16,16 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    /*display: "flex",
+    flexWrap: "wrap"*/
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200
+  },
+  submit: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   picker: {
     marginLeft: theme.spacing(1),
@@ -30,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     width: 200
   },
   menu: {
-    width: 200
+    /*width: 200*/
   },
   formControl: {
     margin: theme.spacing(1)
@@ -81,6 +84,7 @@ export default function SetForm() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          fullWidth
           value={setName}
           onInput={ e=>setSetName(e.target.value)}
         />
@@ -95,7 +99,7 @@ export default function SetForm() {
             format="d"
             value={selectedDay}
             onChange={handleDayChange}
-          />
+          />         
           <KeyboardTimePicker
             className={classes.picker}
             margin="normal"
@@ -114,6 +118,7 @@ export default function SetForm() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          fullWidth
           value={genres}
           onInput={ e=>setGenres(e.target.value)}
         />
@@ -123,6 +128,7 @@ export default function SetForm() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          fullWidth
           value={tags}
           onInput={ e=>setTags(e.target.value)}
         />
@@ -132,6 +138,7 @@ export default function SetForm() {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          fullWidth
           value={songs}
           onInput={ e=>setSongs(e.target.value)}
         />
@@ -139,6 +146,7 @@ export default function SetForm() {
           className={classes.submit}
           type="submit"
           fullWidth
+          large
           variant="contained"
           color="primary"
         >
