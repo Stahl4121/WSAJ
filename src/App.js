@@ -6,24 +6,23 @@ import DJNavBar from './components/DJNavBar.js';
 import AdminNavBar from './components/AdminNavBar.js';
 
 function App() {
-  var visitor = true;
-  var dj = false;
+  var user = "admin";
 
-  if(visitor) {
+  if (user == "admin") {
     return (
-      <NavBar/>
+      <AdminNavBar />
     )
   }
-  else if(dj) {
+  else if (user == "dj") {
     return (
-      <DJNavBar/>
+      <DJNavBar />
     )
-  } 
+  }
   else {
     return (
-      <AdminNavBar/>
+      <NavBar />
     )
   }
-  
+
 }
 export default App;
