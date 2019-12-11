@@ -170,6 +170,9 @@ class BetterAddSetScreen extends React.Component {
     return (
       <Container component="main" maxWidth="md">
         <div className={classes.root}>
+          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            Add Set
+          </Typography>
           <form className={classes.form} onSubmit={this.signUp}>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
