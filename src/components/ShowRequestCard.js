@@ -1,6 +1,10 @@
 import React from 'react';
+import firebase from "../firebase.js";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Fade from "@material-ui/core/Fade";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -43,10 +47,34 @@ const useStyles = makeStyles(theme => ({
   dates: {
     textAlign: 'right',
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "none",
+  },
+  cardActions: {
+    display: "flex",
+    alignItems: "end",
+    justifyContent: "end",
+    border: "none",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+  },
+  tBox: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: 275
+    }
+  }
 }));
 
 export default function ShowRequestCard(props) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
 
   var name = props.name;
@@ -56,8 +84,41 @@ export default function ShowRequestCard(props) {
   var phone = props.phone;
   var date = props.date;
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  function deleteDJ() {
+    var db = firebase.firestore();
+    db.collection("shows").doc(props.dj).delete().then(function () {
+      console.log("Document successfully deleted!");
+    }).catch(function (error) {
+      console.error("Error removing document: ", error);
+    });
+  };
+
+  function approveDJ() {
+    var db = firebase.firestore();
+    db.collection('shows').doc(props.dj).set({
+        status: 'current'
+    }, { merge: true }).then(function () {
+      console.log("Document successfully updated!");
+    }).catch(function (error) {
+      console.error("Error updating document: ", error);
+    });
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleYes = () => {
+    deleteDJ();
+    setOpen(false);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleApprove = () => {
+    approveDJ();
   };
 
   return (
@@ -81,13 +142,50 @@ export default function ShowRequestCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button variant="outlined" color="secondary" className={classes.button}>
+        <Button variant="outlined" color="secondary" onClick={handleApprove} className={classes.button}>
           Approve
         </Button>
-        <Button variant="outlined" color="primary" className={classes.button}>
+        <Button variant="outlined" color="primary" onClick={handleOpen} className={classes.button}>
           Deny
         </Button>
       </CardActions>
+      <CardContent className={classes.cardContent}>
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={open}
+          className={classes.modal}
+          onClose={handleClose}
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <CardHeader title="WARNING" />
+              <Typography id="simple-modal-description">
+                Are you sure? This action can't be undone!
+              </Typography>
+              <Button
+                variant="outlined"
+                color="primary"
+                type="submit"
+                className={classes.button}
+                onClick={handleYes}>
+                YES
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                className={classes.button}
+                onClick={handleClose}>
+                NO
+              </Button>
+            </div>
+          </Fade>
+        </Modal>
+      </CardContent>
     </Card>
   );
 }
