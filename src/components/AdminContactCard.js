@@ -39,7 +39,7 @@ class AdminContactCard extends React.Component {
         phoneNumber: props.phoneNumber,
         emailAddress: props.emailAddress,
         description: props.description,
-        picture: props.picture,
+        //picture: props.picture,
         fields: {},
         errors: {}
       }
@@ -80,7 +80,7 @@ class AdminContactCard extends React.Component {
                 phoneNumber: this.state.fields["phoneNumber"],
                 emailAddress: this.state.fields["emailAddress"],
                 description: this.state.fields["description"],
-                picture: this.state.fields["picture"],
+                //picture: this.state.fields["picture"],
             })
             .then(function() {
                 console.log("Document successfully written!");
@@ -95,7 +95,7 @@ class AdminContactCard extends React.Component {
             fields["phoneNumber"] = "";
             fields["emailAddress"] = "";
             fields["description"] = "";
-            fields["picture"] = "",
+            //fields["picture"] = "",
             this.setState({ fields: fields });
         }
 
@@ -112,7 +112,7 @@ class AdminContactCard extends React.Component {
         fields["phoneNumber"] = "";
         fields["emailAddress"] = "";
         fields["description"] = "";
-        fields["picture"] = "";
+        //fields["picture"] = "";
         this.setState({ fields: fields });
     }
   
@@ -124,11 +124,11 @@ class AdminContactCard extends React.Component {
         <CardHeader
             title={this.state.execPosition}
         />
-        <CardMedia
+        {/* <CardMedia
             className={classes.media}
             image={this.state.picture}
             title="headshot"
-        />
+        /> */}
         <CardContent>
             <Typography variant="h4">
                 <TextField

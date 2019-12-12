@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from '@material-ui/core/Paper';
 import firebase from "../firebase.js"
 import SongRequest from "../components/SongRequest.js";
-
+import SongSearch from "../components/SongSearch.js";
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(8),
