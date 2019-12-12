@@ -98,7 +98,12 @@ class DNDCalendarScreen extends React.Component {
   onSelectEvent(pEvent) {
    const r = window.confirm("Would you like to remove this event?")
    if(r === true){
-     
+    var db = firebase.firestore();
+    db.collection("events").doc(pEvent.title).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
      this.setState((prevState, props) => {
        const events = [...prevState.events]
        const idx = events.indexOf(pEvent)
