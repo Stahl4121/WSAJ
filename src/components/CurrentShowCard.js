@@ -108,6 +108,15 @@ export default function CurrentShowCard(props) {
   var requestDate = props.requestDate;
   var acceptanceDate = props.acceptanceDate;
 
+  function deleteDJ() {
+    var db = firebase.firestore();
+    db.collection("shows").doc(props.djName).delete().then(function () {
+      console.log("Document successfully deleted!");
+    }).catch(function (error) {
+      console.error("Error removing document: ", error);
+    });
+  }
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -220,12 +229,4 @@ export default function CurrentShowCard(props) {
   );
 }
 
-function deleteDJ(djName) {
-  var db = firebase.firestore();
 
-  db.collection("shows").doc(djName).delete().then(function () {
-    console.log("Document successfully deleted!");
-  }).catch(function (error) {
-    console.error("Error removing document: ", error);
-  });
-}
