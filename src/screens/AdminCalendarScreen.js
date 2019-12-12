@@ -9,7 +9,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
 
-
+// from the react-big-calendar and the intl-justice-mission github examples and issues
+// with some changes of our own
 class DNDCalendarScreen extends React.Component {
   constructor() {
     super();
@@ -21,19 +22,19 @@ class DNDCalendarScreen extends React.Component {
           id: 0,
           start: new Date(),
           end: new Date(moment().add(1, "h")),
-          title: "First Event"
+          title: "MRM Music"
         },
         {
           id: 1,
           start: new Date(),
           end: new Date(moment().add(1, "h")),
-          title: "Ice Cream Time"
+          title: "Ice Cream Show"
         },
         {
           id: 2,
           start: new Date(),
           end: new Date(moment().add(1, "h")),
-          title: "Snack Time"
+          title: "Lyric Delights Hour"
         },
       ],
     }
@@ -80,6 +81,19 @@ class DNDCalendarScreen extends React.Component {
       })
   }
 
+  onSelectEvent(pEvent) {
+   const r = window.confirm("Would you like to remove this event?")
+   if(r === true){
+     
+     this.setState((prevState, props) => {
+       const events = [...prevState.events]
+       const idx = events.indexOf(pEvent)
+       events.splice(idx, 1);
+       return { events };
+     });
+   }
+ }
+
   resizeEvent = ({ event, start, end }) => {
     const { events } = this.state
 
@@ -110,7 +124,7 @@ class DNDCalendarScreen extends React.Component {
           onEventDrop={this.moveEvent}
           resizable
           onEventResize={this.resizeEvent}
-          onSelectEvent={event => alert(event.title)}
+          onSelectEvent = {event => this.onSelectEvent(event)}
           onSelectSlot={this.newEvent}
           onDragStart={console.log}
           style={{ height: "100vh" }}

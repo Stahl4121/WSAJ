@@ -16,19 +16,19 @@ class CalendarScreen extends React.Component {
           id: 0,
           start: new Date(),
           end: new Date(moment().add(1, "h")),
-          title: "First Event"
+          title: "MRM Music"
         },
         {
           id: 1,
           start: new Date(),
           end: new Date(moment().add(1, "h")),
-          title: "Ice Cream Time"
+          title: "Ice Cream Show"
         },
         {
           id: 2,
           start: new Date(),
           end: new Date(moment().add(1, "h")),
-          title: "Snack Time"
+          title: "Lyric Delights Hour"
         },
       ],
     }
