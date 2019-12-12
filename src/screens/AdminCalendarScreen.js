@@ -17,26 +17,7 @@ class DNDCalendarScreen extends React.Component {
     this.state = {
       fields: {},
       errors: {},
-      events: [
-        {
-          id: 0,
-          start: new Date(),
-          end: new Date(moment().add(1, "h")),
-          title: "MRM Music"
-        },
-        {
-          id: 1,
-          start: new Date(),
-          end: new Date(moment().add(1, "h")),
-          title: "Ice Cream Show"
-        },
-        {
-          id: 2,
-          start: new Date(),
-          end: new Date(moment().add(1, "h")),
-          title: "Lyric Delights Hour"
-        },
-      ],
+      events: [],
     }
     this.moveEvent = this.moveEvent.bind(this);
     //this.newEvent = this.newEvent.bind(this);
