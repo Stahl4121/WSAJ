@@ -10,6 +10,8 @@ import Grid from "@material-ui/core/Grid";
 import MUILink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import firebase from "../firebase.js"
+import { withRouter } from "react-router-dom";
+
 
 const styles = theme => ({
   root: {
@@ -29,16 +31,26 @@ const styles = theme => ({
     margin: theme.spacing(3, 0, 2),
   },
   links: {
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
+  errorMsg: {
+    color: 'red',
+    marginTop: theme.spacing(1),
+  }
 });
 
 class LoginScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      fields: {},
-      errors: {}
+      fields: {
+        email: "",
+        password: "",
+      },
+      errors: {
+        email: "",
+        login: "",
+      }
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -61,23 +73,24 @@ class LoginScreen extends React.Component {
 
   signIn(e) {
     if (this.validateEmail()) {
-      firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"]).catch(function (error) {
+      let errors = this.state.errors;
+      errors['login'] = "";
+      this.setState({ errors: errors });
+
+      firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"]).catch((error) => {
         // Handle Errors 
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log("ERROR CODE: " + errorCode + "MSG: " + errorMessage);
+
+        let errors = this.state.errors;
+        errors['login'] = errorMessage;
+        this.setState({ errors: errors });
       });
-    }
-    else {
-      e.preventDefault();
-    }
 
-    //Clear Form
-    let fields = {};
-    fields["email"] = "";
-    fields["password"] = "";
-    this.setState({ fields: fields });
-
+      if(this.state.errors['login'] === ""){
+        this.props.history.push('/');
+      }
+    }
   }
 
   validateEmail() {
@@ -116,7 +129,10 @@ class LoginScreen extends React.Component {
           <Typography component="h1" variant="h5" className={classes.header}>
             Sign In
           </Typography>
-          <form className={classes.form}>
+          <Typography component="h6" className={classes.errorMsg} >
+            {this.state.errors["login"]}
+          </Typography>
+          <div className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -144,8 +160,6 @@ class LoginScreen extends React.Component {
               autoComplete="current-password"
             />
             <Button className={classes.submit}
-              component={Link}
-              to="/"
               onClick={(e) => this.signIn(e)}
               type="submit"
               fullWidth
@@ -170,11 +184,11 @@ class LoginScreen extends React.Component {
                 </Link>
               </Grid>
             </Grid>
-          </form>
+          </div>
         </div>
       </Container>
     );
   }
 }
 
-export default withStyles(styles)(LoginScreen);
+export default withRouter(withStyles(styles)(LoginScreen));
