@@ -54,9 +54,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function PaperSheet() {
+export default function PaperSheet(props) {
   const classes = useStyles();
-
+  var title=props.title;
+  var date=props.date;
+  var announcement=props.announcement;
   return (
     <div className={classes.root}>
       <Paper className={classes.paperholder}>
@@ -68,14 +70,21 @@ export default function PaperSheet() {
               align="center"
               color="textPrimary"
               gutterBottom>
-              Announcements
+              {title}
             </Typography>
             <Typography
               variant="h5"
               align="center"
               color="textSecondary"
               paragraph>
-              Check out the other tabs:)
+              {date}
+            </Typography>
+            <Typography
+              variant="h5"
+              align="center"
+              color="textSecondary"
+              paragraph>
+              {announcement}
             </Typography>
           </Container>
         </div>
