@@ -65,6 +65,21 @@ class DNDCalendarScreen extends React.Component {
     // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
   }
 
+  newEvent = ({ start, end }) => {
+    const title = window.prompt('New Event name')
+    if (title)
+      this.setState({
+        events: [
+          ...this.state.events,
+          {
+            start,
+            end,
+            title,
+          },
+        ],
+      })
+  }
+
   resizeEvent = ({ event, start, end }) => {
     const { events } = this.state
 
@@ -87,6 +102,7 @@ class DNDCalendarScreen extends React.Component {
     return (
       <div className="dnd">
         <DnDCalendar
+          selectable
           defaultDate={new Date()}
           defaultView="month"
           events={this.state.events}
@@ -94,6 +110,7 @@ class DNDCalendarScreen extends React.Component {
           onEventDrop={this.moveEvent}
           resizable
           onEventResize={this.resizeEvent}
+          onSelectEvent={event => alert(event.title)}
           onSelectSlot={this.newEvent}
           onDragStart={console.log}
           style={{ height: "100vh" }}
