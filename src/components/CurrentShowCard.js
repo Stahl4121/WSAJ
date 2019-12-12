@@ -207,7 +207,7 @@ export default function CurrentShowCard(props) {
               </Typography>
               <Button
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 type="submit"
                 className={classes.button}
                 onClick={handleYes}>
@@ -215,7 +215,7 @@ export default function CurrentShowCard(props) {
               </Button>
               <Button
                 variant="outlined"
-                color="primary"
+                color="secondary"
                 className={classes.button}
                 onClick={handleClose}>
                 NO
