@@ -61,14 +61,17 @@ class AdminCurrentShowScreen extends React.Component {
                 var email = doc.data().emailAddress
                 var requestDate = doc.data().requestDate
                 var acceptanceDate = doc.data().confirmDate
-                newCards.push(<Grid item xs={12} sm={6} md={4}><CurrentShowCard 
-                    showName={showName} 
-                    timeslot={timeslot} 
-                    djName={djName} 
-                    phoneNum={phoneNum} 
-                    email={email} 
-                    requestDate={requestDate} 
-                    acceptanceDate={acceptanceDate} /></Grid>);
+                var status = doc.data().status
+                if(status==='current') {
+                    newCards.push(<Grid item xs={12} sm={6} md={4}><CurrentShowCard 
+                        showName={showName} 
+                        timeslot={timeslot} 
+                        djName={djName} 
+                        phoneNum={phoneNum} 
+                        email={email} 
+                        requestDate={requestDate} 
+                        acceptanceDate={acceptanceDate} /></Grid>);
+                }
             });
             this.setState({ cards: newCards})
         });

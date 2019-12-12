@@ -6,21 +6,15 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import MiriamsFace from '../img/headshot.jpg';
 import CardHeader from '@material-ui/core/CardHeader';
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    paddingLeft: "4em",
-    paddingRight: "4em",
-    marginLeft: "2em",
-    marginRight: "2em",
-    marginTop: "2em",
-    maxWidth: "90%"
-  },
   media: {
     height: "70px",
     paddingTop: "56.25%" // 16:9
@@ -32,6 +26,36 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.shortest
     })
   },
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+  },
+  heroButtons: {
+    marginTop: theme.spacing(4),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+    height: 250,
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
+  },
   expandOpen: {
     transform: "rotate(180deg)"
   },
@@ -39,7 +63,6 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: "4em",
     paddingRight: "4em",
     marginRight: "1em",
-    width: "10em"
   },
   root: {
     flexGrow: 1
@@ -50,11 +73,17 @@ const useStyles = makeStyles(theme => ({
   modal: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    border: "none",
+  },
+  cardActions: {
+    display: "flex",
+    alignItems: "end",
+    justifyContent: "end",
+    border: "none",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   },
@@ -79,6 +108,15 @@ export default function CurrentShowCard(props) {
   var requestDate = props.requestDate;
   var acceptanceDate = props.acceptanceDate;
 
+  function deleteDJ() {
+    var db = firebase.firestore();
+    db.collection("shows").doc(props.djName).delete().then(function () {
+      console.log("Document successfully deleted!");
+    }).catch(function (error) {
+      console.error("Error removing document: ", error);
+    });
+  }
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -98,79 +136,58 @@ export default function CurrentShowCard(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader title={showName} />
-      <CardContent>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Timeslot:
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              id="requestedTimeslot"
-            >
-              {timeslot}
-            </Typography>
-            <div>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                id="studentName"
-              >
-                {djName}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                id="phoneNumber"
-              >
-                {phoneNum}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                id="emailAddress"
-              >
-                {email}
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} className={classes.dates}>
-            <Typography variant="body2" color="textSecondary">
-              Date of Request:
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              id="dateOfRequest"
-            >
-              {requestDate}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              Date of Acceptance:
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              id="dateOfAcceptance"
-            >
-              {acceptanceDate}
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-              onClick={handleOpen}
-            >
-              Remove
-            </Button>
-          </Grid>
-        </Grid>
+      <CardMedia
+          className={classes.cardMedia}
+          image={MiriamsFace}
+          title="Show Image"
+        />
+      <CardContent className={classes.cardContent}>
+        <Typography gutterBottom variant="h5" component="h2">
+          {showName}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Timeslot: {timeslot}
+        </Typography>
+        <div>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            id="studentName">
+            {djName}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            id="phoneNumber">
+            {phoneNum}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            id="emailAddress">
+            {email}
+          </Typography>
+        </div>
+        <Typography variant="body2" color="textSecondary">
+          Date of Request:  {requestDate}
+        </Typography>
+        <Typography variant="body2" color="textSecondary">
+          Date of Acceptance: {acceptanceDate}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button
+          fullWidth
+          large
+          variant="outlined"
+          color="primary"
+          className={classes.button}
+          onClick={handleOpen}>
+          Remove
+        </Button>
+       </CardActions>
+      <CardContent className={classes.cardContent}>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -190,19 +207,17 @@ export default function CurrentShowCard(props) {
               </Typography>
               <Button
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 type="submit"
                 className={classes.button}
-                onClick={handleYes}
-              >
+                onClick={handleYes}>
                 YES
               </Button>
               <Button
                 variant="outlined"
-                color="primary"
+                color="secondary"
                 className={classes.button}
-                onClick={handleClose}
-              >
+                onClick={handleClose}>
                 NO
               </Button>
             </div>
@@ -210,16 +225,8 @@ export default function CurrentShowCard(props) {
         </Modal>
       </CardContent>
       <CardActions disableSpacing />
-    </Card>
+    </Card >
   );
 }
 
-function deleteDJ(djName) {
-  var db = firebase.database();
 
-  db.collection("shows").doc(djName).delete().then(function() {
-    console.log("Document successfully deleted!");
-  }).catch(function(error) {
-      console.error("Error removing document: ", error);
-  });
-}
