@@ -36,7 +36,6 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: '4em',
     paddingRight: '4em',
     marginRight: '1em',
-    width: '10em',
   },
   root: {
     flexGrow: 1,
@@ -46,9 +45,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ShowRequestCard() {
+export default function ShowRequestCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  var name = props.name;
+  var time = props.time;
+  var dj = props.dj;
+  var email = props.email;
+  var phone = props.phone;
+  var date = props.date;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -56,51 +62,32 @@ export default function ShowRequestCard() {
 
   return (
     <Card className={classes.card}>
-      <CardHeader
-        title="Show Name"
-      />
+      <CardHeader title={name} />
       <CardContent>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Requested Timeslot: 
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p" id="requestedTimeslot">
-              Monday 7pm
-            </Typography>
-            <div>
-              <Typography variant="body2" color="textSecondary" component="p" id="studentName">
-                Student Name
-              </Typography>
-              <Typography variant="body2" color="textSecondary" id="phoneNumber">
-                7577443516
-              </Typography>
-              <Typography variant="body2" color="textSecondary" id="emailAddress">
-                tanmr1@gcc.edu
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} className={classes.dates}>
-              <Typography variant="body2" color="textSecondary">
-                  Date of Request:
-              </Typography>
-              <Typography variant="body2" color="textSecondary" id="dateOfRequest">
-                  9 December 2019
-              </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Button variant="outlined" color="primary" className={classes.button}>
-              Approve
-            </Button>
-            <Button variant="outlined" color="secondary" className={classes.button}>
-              Deny
-            </Button>
-          </Grid>
-        </Grid>
+        <Typography variant="body2" color="textSecondary" component="p">
+          DJ: {dj}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Requested Timeslot: {time}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p" id="requestedTimeslot">
+          Date of Request: {date}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Email: {email}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p" id="requestedTimeslot">
+          Phone Number: {phone}
+        </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        
-      </CardActions>        
+        <Button variant="outlined" color="secondary" className={classes.button}>
+          Approve
+        </Button>
+        <Button variant="outlined" color="primary" className={classes.button}>
+          Deny
+        </Button>
+      </CardActions>
     </Card>
   );
 }
