@@ -51,7 +51,7 @@ class AdminShowRequestScreen extends React.Component {
         var newCards = [];
         var db = firebase.firestore();
         
-        db.collection("shows").get().onSnapshot((querySnapshot) => {
+        db.collection("shows").get().then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
                 if (doc.data().status==='requested') {
                     var name = doc.data().showName;
