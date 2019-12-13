@@ -102,7 +102,6 @@ class BetterAddSetScreen extends React.Component {
     this.validateAll = this.validateAll.bind(this);
     this.signUp = this.signUp.bind(this);
     this.cancel = this.cancel.bind(this);
-    this.clearSongs = this.clearSongs.bind(this);
   };
 
   handleAutoChange = (event, values) => {
@@ -237,17 +236,15 @@ class BetterAddSetScreen extends React.Component {
     fields["description"] = "";
     fields["songs"] = "";
     this.setState({ fields: fields });
+    this.setState({songsAddedComponent: []});
   }
+  
   submit = (e) => {
     var db = firebase.firestore();
     db.collection("shows").doc(this.state.name).collection("sets").doc(this.state.date.toString()).set(
       { songs: this.state.songsAdded }
-    )
-  }
-  clearSongs(e) {
-    ////////////////////////////////////
-    // CLEAR DATABASE  SONG REQUESTS ///
-    ////////////////////////////////////
+    ).then(() => {this.setState({songsAddedComponent: []})});
+    
   }
 
   render() {
