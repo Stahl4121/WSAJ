@@ -110,11 +110,12 @@ export default function CurrentShowCard(props) {
 
   function deleteDJ() {
     var db = firebase.firestore();
-    db.collection("shows").doc(props.djName).delete().then(function () {
+    db.collection("shows").doc(props.showName).delete().then(function () {
       console.log("Document successfully deleted!");
     }).catch(function (error) {
       console.error("Error removing document: ", error);
     });
+    //location.reload(); 
   }
 
   const handleOpen = () => {

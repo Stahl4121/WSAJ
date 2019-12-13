@@ -110,7 +110,7 @@ class SignUpScreen extends React.Component {
 
       //create dj
       var db = firebase.firestore();
-      db.collection("shows").doc(this.state.fields["djNames"]).set({
+      db.collection("shows").doc(this.state.fields["showName"]).set({
         confirmDate: '',
         description: '',
         dj: this.state.fields["djNames"],
