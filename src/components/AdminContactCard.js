@@ -29,11 +29,6 @@ const styles = theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  button: {
-    marginLeft: '5px',
-    marginRight: '10px',
-    marginBottom: '10px',
-  }
 });
 
 
@@ -187,9 +182,11 @@ class AdminContactCard extends React.Component {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
+          <div style = {{marginRight: '5px'}}>
           <Button variant="outlined" color="secondary" onClick={this.saveChanges} className={classes.button}>
             Save
               </Button>
+              </div>
           <Button variant="outlined" color="primary" onClick={this.cancelChanges} className={classes.button}>
             Cancel
               </Button>
