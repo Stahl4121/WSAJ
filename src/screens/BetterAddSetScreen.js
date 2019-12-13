@@ -95,9 +95,9 @@ class BetterAddSetScreen extends React.Component {
   componentDidMount() {
     var db = firebase.firestore();
 
-    //Set state auth based on user
+    //Get showname from logged in user email address
     if (this.props.user) {
-      //If user exists in the adminAccounts table
+      //If user exists in the shows table
       db.collection("shows").where("emailAddress", "==", this.props.user.email).get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
@@ -107,11 +107,11 @@ class BetterAddSetScreen extends React.Component {
           });
         })
         .catch(function (error) {
-          console.log("Error verifying admin status: ", error);
+          console.log("Error finding show name: ", error);
         });
     }
     else{
-      console.log('this is bad');
+      console.log('No user logged in.');
     }
   }
 
