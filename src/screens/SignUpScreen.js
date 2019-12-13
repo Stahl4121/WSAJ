@@ -132,7 +132,7 @@ class SignUpScreen extends React.Component {
         emailAddress: this.state.fields["email"],
         genre: this.state.fields["genre"],
         password: this.state.fields["password"],
-        phoneNumber: this.state.fields["phoneNumber"], 
+        phoneNumber: this.state.fields["phoneNumber"],
         requestDate: Date().toString(),
         showName: this.state.fields["showName"],
         timeSlot: this.state.fields["timeSlot"],
@@ -155,7 +155,7 @@ class SignUpScreen extends React.Component {
     let fields = {};
     fields["email"] = "";
     fields["password"] = "";
-    
+
     this.setState({ fields: fields });
   }
 
@@ -284,6 +284,17 @@ class SignUpScreen extends React.Component {
                 helperText={this.state.errors["showName"]}
               />
               <TextField
+                margin="normal"
+                variant="outlined"
+                required
+                fullWidth
+                id="student-name"
+                label="Student Name(s)"
+                onChange={this.handleChange}
+                error={!this.state.errors["studentNames"] ? false : this.state.errors["studentNames"] !== ""}
+                helperText={this.state.errors["studentNames"]}
+              />
+              <TextField
                 variant="outlined"
                 margin="normal"
                 required
@@ -294,6 +305,55 @@ class SignUpScreen extends React.Component {
                 onChange={this.handleChange}
                 error={!this.state.errors["djNames"] ? false : this.state.errors["djNames"] !== ""}
                 helperText={this.state.errors["djNames"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="genre"
+                name="genre"
+                label="Genre(s)"
+                onChange={this.handleChange}
+                error={!this.state.errors["genre"] ? false : this.state.errors["genre"] !== ""}
+                helperText={this.state.errors["genre"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="timeSlot"
+                name="timeSlot"
+                label="Time Slot (Day of Week and Hour of Day)"
+                onChange={this.handleChange}
+                error={!this.state.errors["timeSlot"] ? false : this.state.errors["timeSlot"] !== ""}
+                helperText={this.state.errors["timeSlot"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                multiline
+                id="description"
+                name="description"
+                label="Description"
+                onChange={this.handleChange}
+                error={!this.state.errors["description"] ? false : this.state.errors["description"] !== ""}
+                helperText={this.state.errors["description"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="phoneNumber"
+                name="phoneNumber"
+                label="Phone Number (XXX)XXX-XXXX"
+                onChange={this.handleChange}
+                error={!this.state.errors["phoneNumber"] ? false : this.state.errors["phoneNumber"] !== ""}
+                helperText={this.state.errors["phoneNumber"]}
               />
               <TextField
                 variant="outlined"
