@@ -44,6 +44,9 @@ class ContactScreen extends React.Component {
         super();
         this.state = {
             cards: [],
+            pictures: {
+                President: {PICTURE},
+            }
         }
         //this.componentDidMount.bind(this);
     };
@@ -53,7 +56,7 @@ class ContactScreen extends React.Component {
         var db = firebase.firestore();
         
         db.collection("execContacts").get().then((querySnapshot) => {
-            querySnapshot.forEach(function (doc) {
+            querySnapshot.forEach((doc) => {
                 var execPosition = doc.data().execPosition;
                 var execName = doc.data().execName;
                 var phoneNumber = doc.data().phoneNumber;
@@ -68,6 +71,7 @@ class ContactScreen extends React.Component {
                                     phoneNumber={phoneNumber} 
                                     emailAddress={emailAddress} 
                                     description={description}
+                                    picture = {this.state.pictures[execPosition]}
                                 />
                               </Grid>);
             });

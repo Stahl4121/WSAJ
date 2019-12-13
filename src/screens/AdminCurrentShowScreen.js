@@ -70,7 +70,8 @@ class AdminCurrentShowScreen extends React.Component {
                         phoneNum={phoneNum} 
                         email={email} 
                         requestDate={requestDate} 
-                        acceptanceDate={acceptanceDate} /></Grid>);
+                        acceptanceDate={acceptanceDate}
+                        status={status} /></Grid>);
                 }
             });
             this.setState({ cards: newCards})
