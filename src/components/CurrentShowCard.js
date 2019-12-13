@@ -4,13 +4,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import CardActionArea from '@material-ui/core/CardActionArea';
+import { Link } from 'react-router-dom';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import MiriamsFace from '../img/headshot.jpg';
 import CardHeader from '@material-ui/core/CardHeader';
 
@@ -108,6 +109,8 @@ export default function CurrentShowCard(props) {
   var requestDate = props.requestDate;
   var acceptanceDate = props.acceptanceDate;
 
+  var linkTo = "/admin/current-shows/" + showName.split(' ').join('-');
+
   function deleteDJ() {
     var db = firebase.firestore();
     db.collection("shows").doc(props.showName).delete().then(function () {
@@ -137,95 +140,97 @@ export default function CurrentShowCard(props) {
 
   return (
     <Card className={classes.card}>
-      <CardMedia
+      <CardActionArea component={Link} to={linkTo}>
+        <CardMedia
           className={classes.cardMedia}
           image={MiriamsFace}
           title="Show Image"
         />
-      <CardContent className={classes.cardContent}>
-        <Typography gutterBottom variant="h5" component="h2">
-          {showName}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Timeslot: {timeslot}
-        </Typography>
-        <div>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            id="studentName">
-            {djName}
+        <CardContent className={classes.cardContent}>
+          <Typography gutterBottom variant="h5" component="h2">
+            {showName}
           </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            id="phoneNumber">
-            {phoneNum}
+          <Typography variant="body2" color="textSecondary" component="p">
+            Timeslot: {timeslot}
           </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            id="emailAddress">
-            {email}
+          <div>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              id="studentName">
+              {djName}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              id="phoneNumber">
+              {phoneNum}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              id="emailAddress">
+              {email}
+            </Typography>
+          </div>
+          <Typography variant="body2" color="textSecondary">
+            Date of Request:  {requestDate}
           </Typography>
-        </div>
-        <Typography variant="body2" color="textSecondary">
-          Date of Request:  {requestDate}
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          Date of Acceptance: {acceptanceDate}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button
-          fullWidth
-          large
-          variant="outlined"
-          color="primary"
-          className={classes.button}
-          onClick={handleOpen}>
-          Remove
+          <Typography variant="body2" color="textSecondary">
+            Date of Acceptance: {acceptanceDate}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            fullWidth
+            large
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            onClick={handleOpen}>
+            Remove
         </Button>
-       </CardActions>
-      <CardContent className={classes.cardContent}>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={open}
-          className={classes.modal}
-          onClose={handleClose}
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500
-          }}
-        >
-          <Fade in={open}>
-            <div className={classes.paper}>
-              <CardHeader title="WARNING" />
-              <Typography id="simple-modal-description">
-                Are you sure? This action can't be undone!
+        </CardActions>
+        <CardContent className={classes.cardContent}>
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={open}
+            className={classes.modal}
+            onClose={handleClose}
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <CardHeader title="WARNING" />
+                <Typography id="simple-modal-description">
+                  Are you sure? This action can't be undone!
               </Typography>
-              <Button
-                variant="outlined"
-                color="primary"
-                type="submit"
-                className={classes.button}
-                onClick={handleYes}>
-                YES
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  type="submit"
+                  className={classes.button}
+                  onClick={handleYes}>
+                  YES
               </Button>
-              <Button
-                variant="outlined"
-                color="secondary"
-                className={classes.button}
-                onClick={handleClose}>
-                NO
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className={classes.button}
+                  onClick={handleClose}>
+                  NO
               </Button>
-            </div>
-          </Fade>
-        </Modal>
-      </CardContent>
-      <CardActions disableSpacing />
+              </div>
+            </Fade>
+          </Modal>
+        </CardContent>
+        <CardActions disableSpacing />
+      </CardActionArea>
     </Card >
   );
 }

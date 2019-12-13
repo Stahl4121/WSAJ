@@ -35,6 +35,7 @@ const Routes = () => {
             <Route exact path="/dj/profile" component={ProfileScreen}/>
             <Route exact path="/admin/schedule" component={DNDCalendarScreen}/>
             <Route exact path="/admin/current-shows" component={AdminCurrentShowScreen}/>
+            <Route exact path="/admin/current-shows/:name" component={DJSetsScreen}/>
             <Route exact path="/admin/show-requests" component={AdminShowRequestScreen}/>
             <Route exact path="/admin/contact" component={AdminExecContactScreen}/>
             <Route component={NotFound}/>
