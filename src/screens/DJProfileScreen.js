@@ -92,7 +92,7 @@ class SignUpScreen extends React.Component {
         var songRequests = doc.data().songRequests;
         console.log(songRequests);
         for (var i = 0; i < songRequests.length; i++) {
-          songs += songRequests[i] + '\n';
+          songs += songRequests[i];
         }
       });
       // }
