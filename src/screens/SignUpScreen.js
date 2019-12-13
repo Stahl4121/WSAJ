@@ -117,19 +117,19 @@ class SignUpScreen extends React.Component {
         emailAddress: this.state.fields["email"],
         genre: "Country",
         password: this.state.fields["password"],
-        phoneNumber: 0, 
+        phoneNumber: 0,
         requestDate: '',
         showName: this.state.fields["showName"],
         songRequests: [],
         status: 'current',
-        timeSlot: '', 
+        timeSlot: '',
       })
-      .then(function() {
+        .then(function () {
           console.log("Document successfully written!");
-      })
-      .catch(function(error) {
+        })
+        .catch(function (error) {
           console.error("Error writing document: ", error);
-      });
+        });
     }
     else {
       e.preventDefault();
@@ -228,122 +228,138 @@ class SignUpScreen extends React.Component {
   render() {
     const { classes } = this.props;
 
-    return (
-      <Container component="main" maxWidth="xs">
-        <div className={classes.root}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5" className={classes.header}>
-            DJ Account Request
+    if (this.props.auth !== "") {
+      return (
+        <Container component="main" maxWidth="xs">
+          <div className={classes.root}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5" className={classes.header}>
+              You're already signed in!
           </Typography>
-          <form className={classes.form}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="show-name"
-              name="showName"
-              label="Show Name"
-              autoFocus
-              onChange={this.handleChange}
-              error={!this.state.errors["showName"] ? false : this.state.errors["showName"] !== ""}
-              helperText={this.state.errors["showName"]}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="dj-names"
-              name="djNames"
-              label="DJ Name(s)"
-              onChange={this.handleChange}
-              error={!this.state.errors["djNames"] ? false : this.state.errors["djNames"] !== ""}
-              helperText={this.state.errors["djNames"]}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              name="email"
-              label="Email Address"
-              onChange={this.handleChange}
-              error={!this.state.errors["email"] ? false : this.state.errors["email"] !== ""}
-              helperText={this.state.errors["email"]}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="emailConfirm"
-              name="emailConfirm"
-              label="Confirm Email Address"
-              onChange={this.handleChange}
-              error={!this.state.errors["emailConfirm"] ? false : this.state.errors["emailConfirm"] !== ""}
-              helperText={this.state.errors["emailConfirm"]}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              onChange={this.handleChange}
-              error={!this.state.errors["password"] ? false : this.state.errors["password"] !== ""}
-              helperText={this.state.errors["password"]}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="passwordConfirm"
-              label="Confirm Password"
-              type="password"
-              id="passwordConfirm"
-              onChange={this.handleChange}
-              error={!this.state.errors["passwordConfirm"] ? false : this.state.errors["passwordConfirm"] !== ""}
-              helperText={this.state.errors["passwordConfirm"]}
-            />
-            <Button className={classes.submit}
-              component={Link}
-              to="/"
-              onClick={(e) => this.signUp(e)}
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-            >
-              Request Account
+          </div>
+        </Container>
+      )
+    }
+    else {
+      return (
+        <Container component="main" maxWidth="xs">
+          <div className={classes.root}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5" className={classes.header}>
+              DJ Account Request
+          </Typography>
+            <form className={classes.form}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="show-name"
+                name="showName"
+                label="Show Name"
+                autoFocus
+                onChange={this.handleChange}
+                error={!this.state.errors["showName"] ? false : this.state.errors["showName"] !== ""}
+                helperText={this.state.errors["showName"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="dj-names"
+                name="djNames"
+                label="DJ Name(s)"
+                onChange={this.handleChange}
+                error={!this.state.errors["djNames"] ? false : this.state.errors["djNames"] !== ""}
+                helperText={this.state.errors["djNames"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                name="email"
+                label="Email Address"
+                onChange={this.handleChange}
+                error={!this.state.errors["email"] ? false : this.state.errors["email"] !== ""}
+                helperText={this.state.errors["email"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="emailConfirm"
+                name="emailConfirm"
+                label="Confirm Email Address"
+                onChange={this.handleChange}
+                error={!this.state.errors["emailConfirm"] ? false : this.state.errors["emailConfirm"] !== ""}
+                helperText={this.state.errors["emailConfirm"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                onChange={this.handleChange}
+                error={!this.state.errors["password"] ? false : this.state.errors["password"] !== ""}
+                helperText={this.state.errors["password"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="passwordConfirm"
+                label="Confirm Password"
+                type="password"
+                id="passwordConfirm"
+                onChange={this.handleChange}
+                error={!this.state.errors["passwordConfirm"] ? false : this.state.errors["passwordConfirm"] !== ""}
+                helperText={this.state.errors["passwordConfirm"]}
+              />
+              <Button className={classes.submit}
+                component={Link}
+                to="/"
+                onClick={(e) => this.signUp(e)}
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Request Account
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to='/forgot' className={classes.links}>
-                  <MUILink variant="body2" component={'span'}>
-                    Forgot password?
+              <Grid container>
+                <Grid item xs>
+                  <Link to='/forgot' className={classes.links}>
+                    <MUILink variant="body2" component={'span'}>
+                      Forgot password?
                 </MUILink>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to='/login' className={classes.links}>
-                  <MUILink variant="body2" component={'span'}>
-                    Already have an account? Sign In
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link to='/login' className={classes.links}>
+                    <MUILink variant="body2" component={'span'}>
+                      Already have an account? Sign In
                 </MUILink>
-                </Link>
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        </div>
-      </Container>
-    );
+            </form>
+          </div>
+        </Container>
+      );
+    }
   }
 }
 

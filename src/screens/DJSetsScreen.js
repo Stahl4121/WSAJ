@@ -10,7 +10,6 @@ import firebase from "../firebase.js";
 import { Link } from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import Auth from '../components/AuthFunctions.js';
 
 const styles = theme => ({
     icon: {
@@ -98,7 +97,6 @@ class DJSetsScreen extends React.Component {
     };
 
     render() {
-        console.log(Auth.isUser())
         const { classes } = this.props;
         var linkTo = '/shows/' + this.props.match.params.name + '/add-set';
         return (
@@ -142,14 +140,14 @@ class DJSetsScreen extends React.Component {
                     <Container maxWidth="md" className={classes.cardGrid}>
                         <Grid container
                             direction="row"
-                            alignItems="center" 
+                            alignItems="center"
                             spacing={4} >
                             <Grid item xs={12} sm={6} md={4}>
                                 <Fab color="primary" aria-label="add"
                                     component={Link}
                                     to={linkTo}
                                     size="large"
-                                    display={Auth.isUser() ? '' : 'none'} >
+                                >
                                     <AddIcon />
                                 </Fab>
                                 <Typography variant="body2" color="textSecondary" component="p">

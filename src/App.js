@@ -1,32 +1,50 @@
 import React from "react";
 import 'typeface-roboto';
 import './App.css';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
+import theme from './theme';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from "./components/Routes.js"
 import NavBar from './components/NavBar.js';
 import DJNavBar from './components/DJNavBar.js';
 import AdminNavBar from './components/AdminNavBar.js';
-import AuthFunctions from './components/AuthFunctions.js';
+import firebase from "./firebase.js"
 
-function App() {
-  var user = AuthFunctions.isUser();
-  if (user){
-    console.log("USER NAVBAR TRUE")
+class App extends React.Component {
+  state = {
+    auth: null,
+    user: null,
+    navbar: <NavBar />,
+  };
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      var auth = "";
+
+      //Set state auth based on user
+      if (user) {
+        auth = "dj";
+      }
+
+      var navbar = <NavBar />;
+      navbar = auth === "admin" ? <AdminNavBar /> : navbar;
+      navbar = auth === "dj" ? <DJNavBar /> : navbar;
+
+      this.setState({ navbar: navbar, user: user, auth: auth});
+    });
   }
 
-  if (user == "admin") {
+  render() {
     return (
-      <AdminNavBar />
-    )
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {this.state.navbar}
+          <Routes auth={this.state.auth} />
+        </ThemeProvider>
+      </BrowserRouter>
+    );
   }
-  else if (user == "dj") {
-    return (
-      <DJNavBar />
-    )
-  }
-  else {
-    return (
-      <NavBar />
-    )
-  }
-
 }
+
 export default App;
