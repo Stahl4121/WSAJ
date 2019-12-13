@@ -6,14 +6,25 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import $ from 'jquery';
 
 class SongSearch extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       songs: [{}],
+      songString: "",
       loading: false
     };
 
+    this.updateRequest = this.updateRequest.bind(this);
+
   };
+
+  updateRequest() {
+		this.props.getSong(this.state);
+  }
+
+  handleAutoChange = (event, values) => {
+    this.setState({songString: values}, this.updateRequest);
+  }
 
   handleChange = (event) => {
 
@@ -54,12 +65,14 @@ class SongSearch extends React.Component {
         autoComplete
         disableOpenOnFocus
         getOptionLabel={option => option.label}
+        onChange={this.handleAutoChange}
         style={{ top: "auto", bottom: "auto", height:"auto", postion: "absolute" }}
         renderInput={params => (
           <TextField {...params}
             label="Song Request"
             variant="outlined"
             fullWidth
+            //value={this.state.songString}
             onChange={this.handleChange}
             InputProps={{
               ...params.InputProps,
