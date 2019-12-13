@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   tabs: {
   },
   tab: {
-    width: '100%',
+    //width: '100%',
 
   },
   loginTab: {
