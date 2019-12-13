@@ -82,7 +82,7 @@ class DJShowsScreen extends React.Component {
 
     render() {
         const { classes } = this.props;
-        var linkTo = "/add-annoucement";
+        var linkTo = "/admin/add-announcement";
         return (
             <div className={classes.root}>  
                 <Toolbar>
