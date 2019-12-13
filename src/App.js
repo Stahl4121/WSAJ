@@ -38,7 +38,10 @@ class App extends React.Component {
           });
         
         //Logged in but not admin, therefore dj
-        if(this.state.auth !== "dj"){
+        if(this.state.auth !== "admin"){
+
+
+          
           this.setState({ navbar: <DJNavBar />, user: user, auth: "dj"});
         }
       }
