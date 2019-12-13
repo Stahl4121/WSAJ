@@ -10,10 +10,11 @@ const useStyles = makeStyles(theme => ({
   },
   paperholder: {
     opacity: '0.85',
+    borderRadius: '115px',
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 8),
+    padding: theme.spacing(8, 2, 8),
   },
   card: {
     height: '30%',
