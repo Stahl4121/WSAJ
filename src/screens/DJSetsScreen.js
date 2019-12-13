@@ -142,7 +142,7 @@ class DJSetsScreen extends React.Component {
                             direction="row"
                             alignItems="center"
                             spacing={4} >
-                            <Grid item xs={12} sm={6} md={4}>
+                            {/*<Grid item xs={12} sm={6} md={4}>
                                 <Fab color="primary" aria-label="add"
                                     component={Link}
                                     to={linkTo}
@@ -153,7 +153,7 @@ class DJSetsScreen extends React.Component {
                                 <Typography variant="body2" color="textSecondary" component="p">
                                     Add Set
                                 </Typography>
-                            </Grid>
+                            </Grid>*/}
                             {this.state.sets}
                         </Grid>
                     </Container>

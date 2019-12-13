@@ -131,7 +131,6 @@ class SignUpScreen extends React.Component {
         dj: this.state.fields["djNames"],
         emailAddress: this.state.fields["email"],
         genre: this.state.fields["genre"],
-        password: this.state.fields["password"],
         phoneNumber: this.state.fields["phoneNumber"],
         requestDate: Date().toString(),
         showName: this.state.fields["showName"],

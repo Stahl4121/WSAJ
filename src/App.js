@@ -17,7 +17,7 @@ class App extends React.Component {
     navbar: <NavBar />,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       var auth = "";
       var db = firebase.firestore();
@@ -54,7 +54,7 @@ class App extends React.Component {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {this.state.navbar}
-          <Routes auth={this.state.auth} />
+          <Routes user = {this.state.user} auth={this.state.auth} />
         </ThemeProvider>
       </BrowserRouter>
     );
