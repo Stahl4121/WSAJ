@@ -82,7 +82,7 @@ class DJShowsScreen extends React.Component {
 
     render() {
         const { classes } = this.props;
-        var linkTo = "/add-annoucement";
+        var linkTo = "/admin/add-announcement";
         return (
             <div className={classes.root}>  
                 <Toolbar>
@@ -90,8 +90,7 @@ class DJShowsScreen extends React.Component {
                     <Button
                         variant="contained"
                         color="primary"
-                        component={Link} 
-                        to={linkTo}
+                        
                         className={classes.button}
                         startIcon={<AddIcon fontSize="large" />}
                     >
