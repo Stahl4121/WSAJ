@@ -80,6 +80,7 @@ class BetterAddSetScreen extends React.Component {
   constructor(props) {
     super();
     this.state = {
+      date: new Date(),
       name: '',
       songTextField: '',
       songsAdded: [],
@@ -88,7 +89,7 @@ class BetterAddSetScreen extends React.Component {
       fields: {},
       errors: {},
       tags: [],
-    }
+      }
 
 
     this.handleChange = this.handleChange.bind(this);
@@ -151,6 +152,7 @@ class BetterAddSetScreen extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.state.date);
     var db = firebase.firestore();
 
     //Get showname from logged in user email address
@@ -232,7 +234,7 @@ class BetterAddSetScreen extends React.Component {
   }
   submit = (e) => {
     var db = firebase.firestore();
-    db.collection("shows").doc(this.state.name).collection("sets").add(
+    db.collection("shows").doc(this.state.name).collection("sets").doc(this.state.date.toString()).set(
       { songs: this.state.songsAdded }
     )
   }
