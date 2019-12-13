@@ -1,31 +1,4 @@
 import React from "react";
-//import AnnouncementForm from '../components/AnnouncementForm.js';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6, 0, 6),
-  },
-}));
-
-export default function AddSetScreen() {
-  const classes = useStyles();
-  return (
-    <div className={classes.heroContent}>
-      <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-        Add Announcement
-      </Typography>
-      <Container maxWidth="sm">
-        {/*<AnnouncementForm />*/}
-      </Container>
-    </div>
-  );
-}
-
-import React from "react";
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
@@ -107,7 +80,7 @@ class AddAnnouncementScreen extends React.Component {
     var db = firebase.firestore();
     db.collection("announcements").doc(this.state.fields["date"]).set({
       announcement: this.state.fields["announcement"],
-      date: this.state.fields["timeSlot"],
+      date: this.state.fields["date"],
       title: this.state.fields["title"],
     })
       .then(function () {
@@ -140,13 +113,13 @@ class AddAnnouncementScreen extends React.Component {
               margin="normal"
               required
               fullWidth
-              id="announcement"
-              name="announcement"
-              label="Announcement"
-              autoFocus
+              multiline
+              id="date"
+              name="date"
+              label="Date (MM.DD.YYYY)"
               onChange={this.handleChange}
-              error={!this.state.errors["announcement"] ? false : this.state.errors["announcement"] !== ""}
-              helperText={this.state.errors["announcement"]}
+              error={!this.state.errors["date"] ? false : this.state.errors["date"] !== ""}
+              helperText={this.state.errors["date"]}
             />
             <TextField
               variant="outlined"
@@ -165,13 +138,13 @@ class AddAnnouncementScreen extends React.Component {
               margin="normal"
               required
               fullWidth
-              multiline
-              id="date"
-              name="date"
-              label="Date (MM.DD.YYYY)"
+              id="announcement"
+              name="announcement"
+              label="Announcement"
+              autoFocus
               onChange={this.handleChange}
-              error={!this.state.errors["date"] ? false : this.state.errors["date"] !== ""}
-              helperText={this.state.errors["date"]}
+              error={!this.state.errors["announcement"] ? false : this.state.errors["announcement"] !== ""}
+              helperText={this.state.errors["announcement"]}
             />
             <Button className={classes.submit}
               onClick={this.addAnnouncement}
