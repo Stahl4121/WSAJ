@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
@@ -31,6 +31,10 @@ const styles = theme => ({
   links: {
     textDecoration: 'none'
   },
+  errorMsg: {
+    color: 'red',
+    marginTop: theme.spacing(1),
+  }
 });
 
 
@@ -65,6 +69,7 @@ class SignUpScreen extends React.Component {
         genre: "",
         description: "",
         phoneNumber: "",
+        login: "",
       }
     }
 
@@ -115,47 +120,48 @@ class SignUpScreen extends React.Component {
 
   signUp(e) {
     if (this.validateAll()) {
-      //TODO: User Authentication
-      firebase.auth().createUserWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"]).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log("Error: " + errorMessage);
-      });
+      let errors = this.state.errors;
+      errors['login'] = "";
+      this.setState({ errors: errors });
 
-      //create dj
-      var db = firebase.firestore();
-      db.collection("shows").doc(this.state.fields["showName"]).set({
-        confirmDate: '',
-        description: this.state.fields["description"],
-        dj: this.state.fields["djNames"],
-        emailAddress: this.state.fields["email"],
-        genre: this.state.fields["genre"],
-        phoneNumber: this.state.fields["phoneNumber"],
-        requestDate: Date().toString(),
-        showName: this.state.fields["showName"],
-        timeSlot: this.state.fields["timeSlot"],
-        songRequests: [],
-        studentNames: this.state.fields["studentNames"],
-        status: 'requested',
-      })
-        .then(function () {
-          console.log("Document successfully written!");
+      firebase.auth().createUserWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"])
+        .then(() => {
+
+          //create dj
+          var db = firebase.firestore();
+          db.collection("shows").doc(this.state.fields["showName"]).set({
+            confirmDate: '',
+            description: this.state.fields["description"],
+            dj: this.state.fields["djNames"],
+            emailAddress: this.state.fields["email"],
+            genre: this.state.fields["genre"],
+            phoneNumber: this.state.fields["phoneNumber"],
+            requestDate: Date().toString(),
+            showName: this.state.fields["showName"],
+            timeSlot: this.state.fields["timeSlot"],
+            songRequests: [],
+            studentNames: this.state.fields["studentNames"],
+            status: 'requested',
+          })
+            .then(function () {
+              console.log("Document successfully written!");
+            })
+            .catch(function (error) {
+              console.error("Error writing document: ", error);
+            });
+
+          this.props.history.push('/');
         })
         .catch(function (error) {
-          console.error("Error writing document: ", error);
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+
+          let errors = this.state.errors;
+          errors['login'] = errorMessage;
+          this.setState({ errors: errors });
         });
     }
-    else {
-      e.preventDefault();
-    }
-
-    //Clear Form
-    let fields = {};
-    fields["email"] = "";
-    fields["password"] = "";
-
-    this.setState({ fields: fields });
   }
 
   confirmMatching(fieldName) {
@@ -241,6 +247,15 @@ class SignUpScreen extends React.Component {
     return (errorMsg === "" ? true : false);
   }
 
+  logout = () => {
+    firebase.auth().signOut().then(() => {
+      // Sign-out successful.
+      this.props.history.push('/login');
+    }).catch((error) => {
+      // An error happened
+    });
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -254,6 +269,14 @@ class SignUpScreen extends React.Component {
             <Typography component="h1" variant="h5" className={classes.header}>
               You're already signed in!
           </Typography>
+            <Button className={classes.submit}
+              onClick={(e) => this.logout(e)}
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Sign Out
+            </Button>
           </div>
         </Container>
       )
@@ -268,6 +291,9 @@ class SignUpScreen extends React.Component {
             <Typography component="h1" variant="h5" className={classes.header}>
               DJ Account Request
           </Typography>
+            <Typography component="h6" className={classes.errorMsg} >
+              {this.state.errors["login"]}
+            </Typography>
             <form className={classes.form}>
               <TextField
                 variant="outlined"
@@ -405,10 +431,7 @@ class SignUpScreen extends React.Component {
                 helperText={this.state.errors["passwordConfirm"]}
               />
               <Button className={classes.submit}
-                component={Link}
-                to="/"
                 onClick={(e) => this.signUp(e)}
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
@@ -439,4 +462,4 @@ class SignUpScreen extends React.Component {
   }
 }
 
-export default withStyles(styles)(SignUpScreen);
+export default withRouter(withStyles(styles)(SignUpScreen));
