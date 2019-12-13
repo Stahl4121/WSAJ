@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from '@material-ui/core/IconButton';
+import { Link } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -46,8 +47,6 @@ class DJShowsScreen extends React.Component {
 
     componentDidMount() {
                
-        
-
         firebase.auth().onAuthStateChanged((user) => {
             var newCards = [];
             var auth = "";
@@ -83,6 +82,7 @@ class DJShowsScreen extends React.Component {
 
     render() {
         const { classes } = this.props;
+        var linkTo = "/add-annoucement";
         return (
             <div className={classes.root}>  
                 <Toolbar>
@@ -90,7 +90,8 @@ class DJShowsScreen extends React.Component {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={addAnnouncment}
+                        component={Link} 
+                        to={linkTo}
                         className={classes.button}
                         startIcon={<AddIcon fontSize="large" />}
                     >
