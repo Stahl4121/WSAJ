@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import firebase from "../firebase.js"
 
-
 const styles = theme => ({
     icon: {
         marginRight: theme.spacing(2),
@@ -53,14 +52,13 @@ class AdminExecContactScreen extends React.Component {
         var db = firebase.firestore();
         
         db.collection("execContacts").get().then((querySnapshot) => {
-            querySnapshot.forEach(function (doc) {
+            querySnapshot.forEach((doc) => {
                 var execPosition = doc.data().execPosition;
                 console.log("these are the execPositions: ", execPosition);
                 var execName = doc.data().execName;
                 var phoneNumber = doc.data().phoneNumber;
                 var emailAddress = doc.data().emailAddress;
                 var description = doc.data().description;
-                //var picture = doc.data().picture;
                 console.log(execName)
                 console.log(phoneNumber)
                 newCards.push(<Grid item xs={12} sm={6} md={4}>
@@ -70,7 +68,6 @@ class AdminExecContactScreen extends React.Component {
                                     phoneNumber={phoneNumber} 
                                     emailAddress={emailAddress} 
                                     description={description}
-                                    //picture={picture}
                                 />
                               </Grid>);
             });

@@ -104,13 +104,13 @@ class BetterAddSetScreen extends React.Component {
   addSong = () => {
     var songsList = this.state.songsAdded;
     var songs = this.state.songsAddedComponent;
-    console.log(this.state.songTextField);
-    console.log(this.state.fields["song"])
-    console.log(this.state.songsAdded);
-    songsList.push(this.state.fields['song']);
+    var newSong = this.state.songTextField['label'];
+    console.log('songsList ' + songsList +' songs '+ songs +' newSong '+ newSong);
+
+    songsList.push(newSong);
     songs.push(
       <Typography variant="body1" id="songList">
-        {this.state.fields['song']}
+        {newSong}
       </Typography>
     );
     this.setState({songsAddedComponent: songs, songsAdded: songsList});
@@ -280,7 +280,7 @@ class BetterAddSetScreen extends React.Component {
                   name="description"
                   label="Description"
                   autoFocus
-                  onChange={this.handleChange}
+                  onChange={this.addSong}
                   error={!this.state.errors["description"] ? false : this.state.errors["description"] !== ""}
                   helperText={this.state.errors["description"]}
                 />
