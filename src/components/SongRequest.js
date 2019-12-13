@@ -45,16 +45,29 @@ class SongRequest extends React.Component {
   }
 
   handleClick(){
-    console.log(this.state.songRequest);
+    console.log(this.state.songRequest['label']);
     console.log(this.props.showName);
     var db = firebase.firestore();
+    var songRequests = [];
+    db.collection("shows").doc(this.props.showName).get().then((doc) => {
+        if (doc.exists) {
+            songRequests = doc.data().songRequests
+            console.log(songRequests);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        console.log(songRequests);
 
-    var showRef = db.collection('shows').doc(this.props.showName);
-    // Atomically add a new region to the "regions" array field.
-    var arrUnion = showRef.update({
-      songRequests: this.state.songRequests
+        songRequests.push(this.state.songRequest['label']);
+        console.log(songRequests);
+    
+        db.collection('shows').doc(this.props.showName).update({
+          songRequests: songRequests
+        });
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
     });
-
   }
 
   autofill(e) {
