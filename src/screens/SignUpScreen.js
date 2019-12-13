@@ -138,7 +138,7 @@ class SignUpScreen extends React.Component {
         timeSlot: this.state.fields["timeSlot"],
         songRequests: [],
         studentNames: this.state.fields["studentNames"],
-        status: 'current',
+        status: 'requested',
       })
       .then(function() {
           console.log("Document successfully written!");
