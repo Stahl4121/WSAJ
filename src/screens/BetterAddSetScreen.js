@@ -98,14 +98,14 @@ class BetterAddSetScreen extends React.Component {
   };
 
   handleAutoChange = (event, values) => {
-    this.setState({songTextField: values});
+    this.setState({ songTextField: values });
   }
 
   addSong = () => {
     var songsList = this.state.songsAdded;
     var songs = this.state.songsAddedComponent;
     var newSong = this.state.songTextField['label'];
-    console.log('songsList ' + songsList +' songs '+ songs +' newSong '+ newSong);
+    console.log('songsList ' + songsList + ' songs ' + songs + ' newSong ' + newSong);
 
     songsList.push(newSong);
     songs.push(
@@ -113,11 +113,11 @@ class BetterAddSetScreen extends React.Component {
         {newSong}
       </Typography>
     );
-    this.setState({songsAddedComponent: songs, songsAdded: songsList});
+    this.setState({ songsAddedComponent: songs, songsAdded: songsList });
   };
 
   handleInputChange = (event) => {
-     var settings = {
+    var settings = {
       async: "true",
       crossDomain: "true",
       url: "https://deezerdevs-deezer.p.rapidapi.com/search?q=" + event.target.value,
@@ -216,7 +216,7 @@ class BetterAddSetScreen extends React.Component {
     }
 
   }
-  
+
   cancel(e) {
     e.preventDefault();
 
@@ -229,7 +229,12 @@ class BetterAddSetScreen extends React.Component {
     fields["songs"] = "";
     this.setState({ fields: fields });
   }
-
+  submit = (e) => {
+    var db = firebase.firestore();
+    db.collection("shows").doc(this.state.name).collection("sets").add(
+      {songs: this.state.songsAdded}
+    )
+  }
   clearSongs(e) {
     ////////////////////////////////////
     // CLEAR DATABASE  SONG REQUESTS ///
@@ -248,130 +253,74 @@ class BetterAddSetScreen extends React.Component {
 
 
     return (
-      <Container component="main" maxWidth="md">
+      <Container component="main" maxWidth="xs">
         <div className={classes.root}>
-          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+          <Typography component="h1" variant="h5" className={classes.header}>
             Add Set
           </Typography>
-          <form className={classes.form} onSubmit={this.signUp}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <Typography component="h1" variant="h5" className={classes.header}>
-                  DJ Profile
-                </Typography>
-                <TextField
+          <div className={classes.form}>
+
+            <Autocomplete
+              id="combo-box-demo"
+              options={this.state.songs}
+              autoComplete
+              disableOpenOnFocus
+              getOptionLabel={option => option.label}
+              onChange={this.handleAutoChange}
+              style={{ top: "auto", bottom: "auto", height: "auto", postion: "absolute" }}
+              renderInput={params => (
+                <TextField {...params}
+                  label="Song"
                   variant="outlined"
-                  margin="normal"
-                  required
                   fullWidth
-                  id="set-name"
-                  name="setName"
-                  label="Set Name"
-                  onChange={this.handleChange}
-                  error={!this.state.errors["setName"] ? false : this.state.errors["setName"] !== ""}
-                  helperText={this.state.errors["setName"]}
+                  name="song"
+                  onChange={this.handleInputChange}
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <React.Fragment>
+                        {this.state.loading ? <CircularProgress color="inherit" size={20} /> : null}
+                        {/*params.InputProps.endAdornment*/}
+                      </React.Fragment>
+                    ),
+                  }}
                 />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="description"
-                  name="description"
-                  label="Description"
-                  autoFocus
-                  onChange={this.addSong}
-                  error={!this.state.errors["description"] ? false : this.state.errors["description"] !== ""}
-                  helperText={this.state.errors["description"]}
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="tags"
-                  name="tags"
-                  label="Tags"
-                  autoFocus
-                  onChange={this.handleChange}
-                  error={!this.state.errors["tags"] ? false : this.state.errors["tags"] !== ""}
-                  helperText={this.state.errors["tags"]}
-                />
-                <Button className={classes.submit}
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  onClick={this.submit}
-                >
-                  Save
-                </Button>
-                <Button className={classes.submit}
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={this.cancel}
-                >
-                  Cancel
-                </Button>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography component="h1" variant="h5" className={classes.songHeader}>
-                  Songs
-                </Typography>
-                <Grid container spacing={2}
-                  direction="row"
-                  justify="space-around"
-                  alignItems="center">
-                  <Grid item xs={10}>
-                    <Autocomplete
-                      id="combo-box-demo"
-                      options={this.state.songs}
-                      autoComplete
-                      disableOpenOnFocus
-                      getOptionLabel={option => option.label}
-                      onChange={this.handleAutoChange}
-                      style={{ top: "auto", bottom: "auto", height: "auto", postion: "absolute" }}
-                      renderInput={params => (
-                        <TextField {...params}
-                          label="Song"
-                          variant="outlined"
-                          fullWidth
-                          name="song"
-                          onChange={this.handleInputChange}
-                          InputProps={{
-                            ...params.InputProps,
-                            endAdornment: (
-                              <React.Fragment>
-                                {this.state.loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                {/*params.InputProps.endAdornment*/}
-                              </React.Fragment>
-                            ),
-                          }}
-                        />
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={2}>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      color="primary"
-                      fullWidth
-                      className={classes.button}
-                      onClick={this.addSong}>
-                      Add Song
+              )}
+            />
+
+            <Button
+              className={classes.submit}
+              variant="contained"
+              size="large"
+              color="primary"
+              fullWidth
+              onClick={this.addSong}>
+              Add Song
                       </Button>
-                  </Grid>
-                </Grid>
-                <Grid item xs={10}>
-                  <Paper className={classes.songs}>
-                    {this.state.songsAddedComponent}
-                  </Paper>
-                </Grid>
-              </Grid>
-            </Grid>
-          </form>
+
+            <Paper className={classes.songs}>
+              {this.state.songsAddedComponent}
+            </Paper>
+
+            <Button className={classes.submit}
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              onClick={this.submit}
+            >
+              Save
+                </Button>
+            <Button className={classes.submit}
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={this.cancel}
+            >
+              Cancel
+                </Button>
+
+          </div>
         </div>
       </Container>
     );
