@@ -6,6 +6,16 @@ import Image from '../img/home91-1.png';
 
 
 const styles = theme => ({
+    root: {
+        padding: theme.spacing(3, 2),
+        color: 'white',
+        backgroundImage: `url(${Image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        minHeight: '100vh',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+      },
     heroContent: {
         backgroundColor: theme.palette.background.paper,
     },
@@ -42,7 +52,7 @@ class DJShowsScreen extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <div>            
+            <div className={classes.root}>            
                 {this.state.papers} 
             </div>
         );
