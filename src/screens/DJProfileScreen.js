@@ -70,14 +70,33 @@ class SignUpScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      fields: {},
-      errors: {},
+      fields: {email: "",
+      studentNames: "",
+      djNames: "",
+      timeSlot: "",
+      showName: "",
+      genre: "",
+      description: "",
+      phoneNumber: "",
+
+    },
+    errors: {
+      studentNames: "",
+      djNames: "",
+      timeSlot: "",
+      showName: "",
+      genre: "",
+      description: "",
+      phoneNumber: "",
+      login: "",
+    },
+    showName: "",
       songRequests: [],
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.validateAll = this.validateAll.bind(this);
-    this.signUp = this.signUp.bind(this);
+    this.changeInfo = this.changeInfo.bind(this);
     this.cancel = this.cancel.bind(this);
     this.clearSongs = this.clearSongs.bind(this);
   };
@@ -90,6 +109,7 @@ class SignUpScreen extends React.Component {
       querySnapshot.forEach((doc) => {
         if (doc.data().emailAddress === this.props.user.email) {
           var songRequests = doc.data().songRequests;
+          this.state.showName = doc.data().showName;
           console.log(songRequests);
           for (var i = 0; i < songRequests.length; i++) {
             songs.push (
@@ -124,13 +144,13 @@ class SignUpScreen extends React.Component {
     return true;
   }
 
-  signUp(e) {
+  changeInfo(e) {
     e.preventDefault();
 
     if (this.validateAll()) {
       // Add a new document in collection "shows"
       var db = firebase.firestore();
-      db.collection("shows").doc(this.state.fields["showName"]).set({
+      db.collection("shows").doc(this.state.showName).update({
         showName: this.state.fields["showName"],
         dj: this.state.fields["djNames"],
         description: this.state.fields["description"],
@@ -167,9 +187,24 @@ class SignUpScreen extends React.Component {
   }
 
   clearSongs(e) {
-    ////////////////////////////////////
-    // CLEAR DATABASE  SONG REQUESTS ///
-    ////////////////////////////////////
+    console.log(this.state.showName);
+    var db = firebase.firestore();
+    var songRequests = [];
+    db.collection("shows").doc(this.state.showName).get().then((doc) => {
+        if (doc.exists) {
+            console.log(songRequests);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+        console.log(songRequests);
+    
+        db.collection('shows').doc(this.state.showName).update({
+          songRequests: songRequests
+        });
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
   }
 
   render() {
@@ -186,7 +221,7 @@ class SignUpScreen extends React.Component {
     return (
       <Container component="main" maxWidth="md">
         <div className={classes.root}>
-          <form className={classes.form} onSubmit={this.signUp}>
+          <form className={classes.form} onSubmit={this.changeInfo}>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <Typography component="h1" variant="h5" className={classes.header}>
