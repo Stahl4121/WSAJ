@@ -71,7 +71,8 @@ class SignUpScreen extends React.Component {
     super();
     this.state = {
       fields: {},
-      errors: {}
+      errors: {},
+      songRequests: '',
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -80,6 +81,25 @@ class SignUpScreen extends React.Component {
     this.cancel = this.cancel.bind(this);
     this.clearSongs = this.clearSongs.bind(this);
   };
+  componentDidMount() {
+    const { classes } = this.props;
+    var songs = [];
+    var db = firebase.firestore();
+    var dbRef = db.collection("shows");
+    dbRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        //if (doc.data().showName === name) {
+        var songRequests = doc.data().songRequests;
+        console.log(songRequests);
+        for (var i = 0; i < songRequests.length; i++) {
+          songs += songRequests[i] + '\n';
+        }
+      });
+      // }
+      this.setState({ songRequests: songs })
+    });
+    
+  }
 
   handleChange(e) {
     let fields = this.state.fields;
@@ -90,10 +110,10 @@ class SignUpScreen extends React.Component {
     });
   }
 
-  validateAll(){
-    
+  validateAll() {
+
     for (const [value] of Object.entries(this.state.errors)) {
-      if (!value || value !== ""){
+      if (!value || value !== "") {
         return false;
       }
     }
@@ -112,12 +132,12 @@ class SignUpScreen extends React.Component {
         description: this.state.fields["description"],
         genre: this.state.fields["genre"],
       })
-      .then(function() {
-        console.log("Document successfully written!");
-      })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
-      });
+        .then(function () {
+          console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+          console.error("Error writing document: ", error);
+        });
       //Clear Form
       let fields = {};
       fields["showName"] = "";
@@ -131,7 +151,7 @@ class SignUpScreen extends React.Component {
 
   cancel(e) {
     e.preventDefault();
-    
+
     //Clear Form
     //DONT save CHANGES
     let fields = {};
@@ -165,8 +185,8 @@ class SignUpScreen extends React.Component {
           <form className={classes.form} onSubmit={this.signUp}>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
-              <Typography component="h1" variant="h5" className={classes.header}>
-                DJ Profile
+                <Typography component="h1" variant="h5" className={classes.header}>
+                  DJ Profile
               </Typography>
                 <TextField
                   variant="outlined"
@@ -238,11 +258,11 @@ class SignUpScreen extends React.Component {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography component="h1" variant="h5" className={classes.header}>
-                    Song Requests
+                  Song Requests
                 </Typography>
                 <Paper className={classes.songs}>
                   <Typography variant="body1" id="songList">
-                    Songs (get from database)
+                    {this.state.songRequests}
                   </Typography>
                 </Paper>
                 <Button className={classes.submit}
