@@ -8,53 +8,97 @@ import Routes from "./components/Routes.js"
 import NavBar from './components/NavBar.js';
 import DJNavBar from './components/DJNavBar.js';
 import AdminNavBar from './components/AdminNavBar.js';
+import MiniMenu from './components/MiniMenu.js';
+import DJMiniMenu from './components/DJMiniMenu.js';
+import AdminMiniMenu from './components/AdminMiniMenu.js';
 import firebase from "./firebase.js"
 
 class App extends React.Component {
   state = {
     auth: null,
     user: null,
-    navbar: <NavBar />,
+    navbar: "",
   };
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       var db = firebase.firestore();
+      var regularSizeScreen = false;
 
-      //Set state auth based on user
-      if (user) {
-        this.setState({ navbar: <NavBar />, user: user, auth: "badDJ"});
-        console.log("AUTHED A USER " + user.email);
-        //If user exists in the adminAccounts table
-        db.collection("adminAccounts").where("email", "==", user.email).get()
+
+      if(regularSizeScreen) {
+        
+        if (user) {
+          this.setState({ navbar: <NavBar />, user: user, auth: "badDJ"});
+          console.log("AUTHED A USER " + user.email);
+          //If user exists in the adminAccounts table
+          db.collection("adminAccounts").where("email", "==", user.email).get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                if(doc){
+                  this.setState({ navbar: <AdminNavBar />, user: user, auth: "admin"});
+                  console.log("AUTHED AN ADMIN " + user.email);
+                }
+              });
+            })
+            .catch(function (error) {
+              console.log("Error verifying admin status: ", error);
+            });
+  
+            //If dj exists in the shows table with current status
+          db.collection("shows").where("emailAddress", "==", user.email).where("status", "==", "current").get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               if(doc){
-                this.setState({ navbar: <AdminNavBar />, user: user, auth: "admin"});
-                console.log("AUTHED AN ADMIN " + user.email);
+                this.setState({ navbar: <DJNavBar />, user: user, auth: "dj"});
               }
             });
           })
           .catch(function (error) {
-            console.log("Error verifying admin status: ", error);
+            console.log("Error verifying dj status: ", error);
           });
-
-          //If dj exists in the shows table with current status
-        db.collection("shows").where("emailAddress", "==", user.email).where("status", "==", "current").get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            if(doc){
-              this.setState({ navbar: <DJNavBar />, user: user, auth: "dj"});
-            }
+        }
+        else{
+          this.setState({ navbar: <NavBar />, user: user, auth: ""});
+        }
+      } 
+      else {
+        if (user) {
+          this.setState({ navbar: <MiniMenu />, user: user, auth: "badDJ"});
+          console.log("AUTHED A USER " + user.email);
+          //If user exists in the adminAccounts table
+          db.collection("adminAccounts").where("email", "==", user.email).get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                if(doc){
+                  this.setState({ navbar: <AdminMiniMenu />, user: user, auth: "admin"});
+                  console.log("AUTHED AN ADMIN " + user.email);
+                }
+              });
+            })
+            .catch(function (error) {
+              console.log("Error verifying admin status: ", error);
+            });
+  
+            //If dj exists in the shows table with current status
+          db.collection("shows").where("emailAddress", "==", user.email).where("status", "==", "current").get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              if(doc){
+                this.setState({ navbar: <DJMiniMenu />, user: user, auth: "dj"});
+              }
+            });
+          })
+          .catch(function (error) {
+            console.log("Error verifying dj status: ", error);
           });
-        })
-        .catch(function (error) {
-          console.log("Error verifying dj status: ", error);
-        });
+        }
+        else{
+          this.setState({ navbar: <NavBar />, user: user, auth: ""});
+        }
       }
-      else{
-        this.setState({ navbar: <NavBar />, user: user, auth: ""});
-      }
+      //Set state auth based on user
+    
     });
   }
 
