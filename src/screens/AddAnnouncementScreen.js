@@ -1,5 +1,5 @@
 import React from "react";
-import AnnouncementForm from '../components/AnnouncementForm.js';
+//import AnnouncementForm from '../components/AnnouncementForm.js';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +19,7 @@ export default function AddSetScreen() {
         Add Announcement
       </Typography>
       <Container maxWidth="sm">
-        <AnnouncementForm />
+        {/*<AnnouncementForm />*/}
       </Container>
     </div>
   );

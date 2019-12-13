@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import SongSearch from './SongSearch.js';
+import firebase from "../firebase.js";
 
 const styles = theme => ({
   heroContent: {
@@ -19,8 +20,8 @@ const styles = theme => ({
   },
 });
 class SongRequest extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       songs: {},
       songRequest: "",
@@ -28,6 +29,7 @@ class SongRequest extends React.Component {
     }
     this.autofill = this.autofill.bind(this);
     this.getSong = this.getSong.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   };
   
   getSong(_State){
@@ -37,13 +39,22 @@ class SongRequest extends React.Component {
 				songRequest: songString
 			},
 			() => {
-				console.log(this.state.songRequest);
+				//console.log(this.state.songRequest);
 			}
     );
   }
 
-  submitRequest = (event) => {
-    console.log("I've been clicked!");
+  handleClick(){
+    console.log(this.state.songRequest);
+    console.log(this.props.showName);
+    var db = firebase.firestore();
+
+    var showRef = db.collection('shows').doc(this.props.showName);
+    // Atomically add a new region to the "regions" array field.
+    var arrUnion = showRef.update({
+      songRequests: this.state.songRequests
+    });
+
   }
 
   autofill(e) {
@@ -72,7 +83,7 @@ class SongRequest extends React.Component {
                   size="large" 
                   color="primary" 
                   fullWidth
-                  onclick={this.submitRequest}
+                  onClick={this.handleClick}
                   className={classes.button}>
                   Submit
                   </Button>
