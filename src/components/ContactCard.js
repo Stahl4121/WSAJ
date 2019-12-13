@@ -5,7 +5,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import MiriamsFace from '../img/headshot.jpg';
 
 const styles = theme => ({
   card: {
@@ -27,7 +26,14 @@ const styles = theme => ({
   },
 });
 
-class ContactCard extends React.Component {  
+const pictures = {
+  President: require('../img/miriam.jpg'),
+  "Song Master": require('../img/nate.jpg'),
+  "Vice President": require('../img/sarah.jpg'),
+  "Public Relations": require('../img/logan.jpg'),
+};
+
+class ContactCard extends React.Component {
   constructor(props) {
     super();
     this.state = {
@@ -45,32 +51,32 @@ class ContactCard extends React.Component {
     const { classes } = this.props;
 
     return (
-    <Card className={classes.card}>
-      <CardHeader
-        title={this.state.execPosition}
-        subheader={this.state.execName}
-      />
-      <CardMedia
-        className={classes.media}
-        image={MiriamsFace}
-        title="headshot"
-      />
-      <CardContent>
-        <Typography>
-          <p>
-          {this.state.description}
-          </p>
-        </Typography>
-        <Typography color="textSecondary" component="p">Contact Info:</Typography>
-        <Typography>
-          {this.state.phoneNumber}
-        </Typography>
-        <Typography>
-          {this.state.emailAddress}
-        </Typography>
-      </CardContent>
-    </Card>
-  );
+      <Card className={classes.card}>
+        <CardHeader
+          title={this.state.execPosition}
+          subheader={this.state.execName}
+        />
+        <CardMedia
+          className={classes.media}
+          image={pictures[this.state.execPosition]}
+          title="headshot"
+        />
+        <CardContent>
+          <Typography>
+            <p>
+              {this.state.description}
+            </p>
+          </Typography>
+          <Typography color="textSecondary" component="p">Contact Info:</Typography>
+          <Typography>
+            {this.state.phoneNumber}
+          </Typography>
+          <Typography>
+            {this.state.emailAddress}
+          </Typography>
+        </CardContent>
+      </Card>
+    );
   }
 }
 

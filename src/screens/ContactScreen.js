@@ -44,9 +44,6 @@ class ContactScreen extends React.Component {
         super();
         this.state = {
             cards: [],
-            pictures: {
-                President: {},
-            }
         }
         //this.componentDidMount.bind(this);
     };
@@ -71,7 +68,6 @@ class ContactScreen extends React.Component {
                                     phoneNumber={phoneNumber} 
                                     emailAddress={emailAddress} 
                                     description={description}
-                                    picture = {this.state.pictures[execPosition]}
                                 />
                               </Grid>);
             });
