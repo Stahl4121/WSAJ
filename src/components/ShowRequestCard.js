@@ -138,9 +138,7 @@ export default function ShowRequestCard(props) {
         <Typography variant="body2" color="textSecondary" component="p">
           Requested Timeslot: {time}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p" id="requestedTimeslot">
-          Date of Request: {date}
-        </Typography>
+        
         <Typography variant="body2" color="textSecondary" component="p">
           Email: {email}
         </Typography>

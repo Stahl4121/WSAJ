@@ -177,12 +177,7 @@ export default function CurrentShowCard(props) {
               {email}
             </Typography>
           </div>
-          <Typography variant="body2" color="textSecondary">
-            Date of Request:  {requestDate}
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Date of Acceptance: {acceptanceDate}
-          </Typography>
+          
         </CardContent>
         </CardActionArea>
 
