@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import firebase from "../firebase.js"
+import MiriamsFace from '../img/headshot.jpg';
 
 
 const styles = theme => ({
@@ -45,7 +46,7 @@ class ContactScreen extends React.Component {
         this.state = {
             cards: [],
             pictures: {
-                President: {PICTURE},
+                President: {MiriamsFace},
             }
         }
         //this.componentDidMount.bind(this);
