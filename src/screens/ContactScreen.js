@@ -45,7 +45,7 @@ class ContactScreen extends React.Component {
         this.state = {
             cards: [],
             pictures: {
-                President: {PICTURE},
+                President: {},
             }
         }
         //this.componentDidMount.bind(this);
