@@ -96,6 +96,12 @@ class BetterAddSetScreen extends React.Component {
     this.clearSongs = this.clearSongs.bind(this);
   };
 
+  handleAutoChange = (event, values) => {
+    var joined = this.state.songsAdded.concat(values);
+    this.setState({songsAdded: values});
+    console.log(this.state.songsAdded);
+  }
+
   addSong = () => {
     var songsList = this.state.songsAdded;
     var songs = this.state.songsAddedComponent;
@@ -324,6 +330,7 @@ class BetterAddSetScreen extends React.Component {
                       autoComplete
                       disableOpenOnFocus
                       getOptionLabel={option => option.label}
+                      onChange={this.handleAutoChange}
                       style={{ top: "auto", bottom: "auto", height: "auto", postion: "absolute" }}
                       renderInput={params => (
                         <TextField {...params}
