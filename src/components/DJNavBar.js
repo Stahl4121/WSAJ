@@ -38,7 +38,6 @@ export default function DJNavBar() {
           <Tab className={classes.tab} label="Calendar" to='/schedule' component={Link} />
           <Tab className={classes.tab} label="Contact" to='/contact' component={Link} />
           <Tab className={classes.tab} label="Profile" to='/dj/profile' component={Link} />
-          <Tab className={classes.tab} label="Sets" to='/dj/sets' component={Link} />
           <Tab className={classes.tab} label="Add Set" to='/dj/add-set' component={Link} />
           <ProfileTabMenu classes = {classes}/>      
         </Tabs>
