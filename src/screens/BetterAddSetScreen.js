@@ -78,11 +78,12 @@ class BetterAddSetScreen extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      name: props.match.params.name.split('-').join(' '),
+      name: '',
       songs: [],
       fields: {},
       errors: {}
     }
+
 
     this.handleChange = this.handleChange.bind(this);
     this.validateAll = this.validateAll.bind(this);
@@ -90,6 +91,29 @@ class BetterAddSetScreen extends React.Component {
     this.cancel = this.cancel.bind(this);
     this.clearSongs = this.clearSongs.bind(this);
   };
+
+  componentDidMount() {
+    var db = firebase.firestore();
+
+    //Set state auth based on user
+    if (this.props.user) {
+      //If user exists in the adminAccounts table
+      db.collection("shows").where("emailAddress", "==", this.props.user.email).get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            if(doc){
+              this.setState({name: doc.data().showName})
+            }
+          });
+        })
+        .catch(function (error) {
+          console.log("Error verifying admin status: ", error);
+        });
+    }
+    else{
+      console.log('this is bad');
+    }
+  }
 
   handleChange(e) {
     let fields = this.state.fields;
@@ -117,7 +141,7 @@ class BetterAddSetScreen extends React.Component {
       // Add a new document in collection "shows"
       var db = firebase.firestore();
       db.collection('shows').doc(this.state.name.split('-').join(' ')).collection('sets').add({
-        songs: ["Bloodbuzz Ohio by The National", "Lightyears by The National"] /*this.state.fields["songs"]*/,
+        songs: this.state.songs,
       })
       .then(function() {
         console.log("Document successfully written!");

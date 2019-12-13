@@ -36,7 +36,9 @@ class Routes extends React.Component {
                 <Route exact path="/shows/:name" component={DJSetsScreen} />
                 <Route exact path="/dj/set-history" component={SetsScreen} />
                 <PrivateRoute exact path="/shows/:name/add-set"  type="dj" auth={this.props.auth} component={BetterAddSetScreen} />
-                <PrivateRoute exact path="/dj/add-set" component={AddSetScreen} type="dj" auth={this.props.auth} />
+                <PrivateRoute exact path="/dj/add-set"  type="dj" auth={this.props.auth} 
+                    render={(props) => <BetterAddSetScreen {...props} user={this.props.user} />}
+                    />
                 <PrivateRoute exact path="/dj/profile" component={ProfileScreen} type="dj" auth={this.props.auth} />
                 <PrivateRoute exact path="/admin/schedule" component={DNDCalendarScreen} type="admin" auth={this.props.auth} />
                 <PrivateRoute exact path="/admin/current-shows" component={AdminCurrentShowScreen} type="admin" auth={this.props.auth} />
