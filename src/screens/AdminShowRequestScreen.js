@@ -61,7 +61,8 @@ class AdminShowRequestScreen extends React.Component {
                     var phone = doc.data().phoneNumber;
                     var time = doc.data().timeSlot;
                     var date = doc.data().requestDate;
-                    newCards.push(<ShowRequestCard name={name} dj={dj} email={email} date={date} description={description} time={time} phone={phone} />);
+                    var status = doc.data().status;
+                    newCards.push(<ShowRequestCard name={name} dj={dj} email={email} date={date} description={description} time={time} phone={phone} status={status} />);
                 }
             });
             this.setState({ cards: newCards})

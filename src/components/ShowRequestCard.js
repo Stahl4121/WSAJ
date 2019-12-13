@@ -83,6 +83,7 @@ export default function ShowRequestCard(props) {
   var email = props.email;
   var phone = props.phone;
   var date = props.date;
+  var status = props.status;
 
   function deleteDJ() {
     var db = firebase.firestore();
@@ -127,6 +128,7 @@ export default function ShowRequestCard(props) {
   };
 
   return (
+    <div style = {{display: (props.status === "requested" ? "inline" : "none")}}>
     <Card className={classes.card}>
       <CardHeader title={name} />
       <CardContent>
@@ -192,5 +194,6 @@ export default function ShowRequestCard(props) {
         </Modal>
       </CardContent>
     </Card>
+    </div>
   );
 }
