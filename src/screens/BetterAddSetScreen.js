@@ -39,7 +39,14 @@ const styles = theme => ({
 class BetterAddSetScreen extends React.Component {
   constructor(props) {
     super();
+    var d = new Date();
+    d = d.toString().split(' ');
+    var date = '';
+    for(var i = 0; i < 3; i++) {
+      date+=d[i] + ' ';
+    }
     this.state = {
+      date: date,
       name: '',
       songTextField: '',
       songsAdded: [],
@@ -48,14 +55,13 @@ class BetterAddSetScreen extends React.Component {
       fields: {},
       errors: {},
       tags: [],
-    }
+      }
 
 
     this.handleChange = this.handleChange.bind(this);
     this.validateAll = this.validateAll.bind(this);
     this.signUp = this.signUp.bind(this);
     this.cancel = this.cancel.bind(this);
-    this.clearSongs = this.clearSongs.bind(this);
   };
 
   handleAutoChange = (event, values) => {
@@ -111,6 +117,7 @@ class BetterAddSetScreen extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.state.date);
     var db = firebase.firestore();
 
     //Get showname from logged in user email address
@@ -189,18 +196,16 @@ class BetterAddSetScreen extends React.Component {
     fields["description"] = "";
     fields["songs"] = "";
     this.setState({ fields: fields });
+    this.setState({songsAddedComponent: []});
   }
+  
   submit = (e) => {
     var db = firebase.firestore();
-    db.collection("shows").doc(this.state.name).collection("sets").add(
+    db.collection("shows").doc(this.state.name).collection("sets").doc(this.state.date.toString()).set(
       { songs: this.state.songsAdded }
-    )
-    this.props.history.push("/shows/" + this.state.name.split(" ").join("-"));
-  }
-  clearSongs(e) {
-    ////////////////////////////////////
-    // CLEAR DATABASE  SONG REQUESTS ///
-    ////////////////////////////////////
+    ).then(() => {
+      this.props.history.push("/shows/" + this.state.name.split(" ").join("-"));
+  });
   }
 
   render() {
