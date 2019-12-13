@@ -55,9 +55,10 @@ class DJShowsScreen extends React.Component {
             querySnapshot.forEach(function (doc) {
                 var name = doc.data().showName;
                 var dj = doc.data().dj;
+                var execPosition = doc.data().execPosition;
                 console.log(name)
                 console.log(dj)
-                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard show={name} djName={dj} /></Grid>);
+                newCards.push(<Grid item xs={12} sm={6} md={4}><DJCard name={name} djName={dj} execPosition={execPosition}/></Grid>);
             });
             this.setState({ cards: newCards})
         });
