@@ -24,23 +24,23 @@ class DNDCalendarScreen extends React.Component {
   };
 
   componentDidMount() {
-        var newEvents = [];
-        var db = firebase.firestore();
-        db.collection("events").get().then((querySnapshot) => {
-            querySnapshot.forEach(function (doc) {
-                var name = doc.data().name;
-                var startStr = doc.data().start;
-                var endStr = doc.data().end;
-                var start = new Date(startStr);
-                var end = new Date(endStr);               
-                console.log({"start": start, "end": end, "title": name});
-                //console.log(start);
-                newEvents.push({"start": start, "end": end, "title": name});
-            });
-            this.setState({ events: newEvents})
-            console.log(this.state.events);
-        });
-    };
+    var newEvents = [];
+    var db = firebase.firestore();
+    db.collection("events").get().then((querySnapshot) => {
+      querySnapshot.forEach(function (doc) {
+        var name = doc.data().name;
+        var startStr = doc.data().start;
+        var endStr = doc.data().end;
+        var start = new Date(startStr);
+        var end = new Date(endStr);
+        console.log({ "start": start, "end": end, "title": name });
+        //console.log(start);
+        newEvents.push({ "start": start, "end": end, "title": name });
+      });
+      this.setState({ events: newEvents })
+      console.log(this.state.events);
+    });
+  };
 
   moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
     const { events } = this.state
@@ -68,7 +68,7 @@ class DNDCalendarScreen extends React.Component {
 
   newEvent = ({ start, end }) => {
     const title = window.prompt('New Event name')
-    if (title)
+    if (title) {
       this.setState({
         events: [
           ...this.state.events,
@@ -83,35 +83,36 @@ class DNDCalendarScreen extends React.Component {
       console.log(end.toString());
       var db = firebase.firestore();
       db.collection("events").doc(title).set({
-          name: title,
-          end: end.toString(),
-          start: start.toString()
+        name: title,
+        end: end.toString(),
+        start: start.toString()
       })
-      .then(function() {
+        .then(function () {
           console.log("Document successfully written!");
-      })
-      .catch(function(error) {
+        })
+        .catch(function (error) {
           console.error("Error writing document: ", error);
-      });
+        });
+    }
   }
 
   onSelectEvent(pEvent) {
-   const r = window.confirm("Would you like to remove this event?")
-   if(r === true){
-    var db = firebase.firestore();
-    db.collection("events").doc(pEvent.title).delete().then(function() {
+    const r = window.confirm("Would you like to remove this event?")
+    if (r === true) {
+      var db = firebase.firestore();
+      db.collection("events").doc(pEvent.title).delete().then(function () {
         console.log("Document successfully deleted!");
-    }).catch(function(error) {
+      }).catch(function (error) {
         console.error("Error removing document: ", error);
-    });
-     this.setState((prevState, props) => {
-       const events = [...prevState.events]
-       const idx = events.indexOf(pEvent)
-       events.splice(idx, 1);
-       return { events };
-     });
-   }
- }
+      });
+      this.setState((prevState, props) => {
+        const events = [...prevState.events]
+        const idx = events.indexOf(pEvent)
+        events.splice(idx, 1);
+        return { events };
+      });
+    }
+  }
 
   resizeEvent = ({ event, start, end }) => {
     const { events } = this.state
@@ -143,7 +144,7 @@ class DNDCalendarScreen extends React.Component {
           onEventDrop={this.moveEvent}
           resizable
           onEventResize={this.resizeEvent}
-          onSelectEvent = {event => this.onSelectEvent(event)}
+          onSelectEvent={event => this.onSelectEvent(event)}
           onSelectSlot={this.newEvent}
           onDragStart={console.log}
           style={{ height: "100vh" }}
