@@ -12,7 +12,7 @@ import MiniMenu from './components/MiniMenu.js';
 import DJMiniMenu from './components/DJMiniMenu.js';
 import AdminMiniMenu from './components/AdminMiniMenu.js';
 import firebase from "./firebase.js"
-
+import $ from 'jquery';
 class App extends React.Component {
   state = {
     auth: null,
@@ -23,7 +23,13 @@ class App extends React.Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       var db = firebase.firestore();
-      var regularSizeScreen = false;
+      var regularSizeScreen = true;
+      if($(window).width() < 700) {
+        regularSizeScreen = false;
+      }
+      else {
+        regularSizeScreen = true;
+      }
 
 
       if(regularSizeScreen) {
