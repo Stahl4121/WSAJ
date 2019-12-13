@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import ProfileTabMenu from './ProfileTabMenu';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,7 +40,7 @@ export default function DJNavBar() {
           <Tab className={classes.tab} label="Profile" to='/dj/profile' component={Link} />
           <Tab className={classes.tab} label="Sets" to='/dj/sets' component={Link} />
           <Tab className={classes.tab} label="Add Set" to='/dj/add-set' component={Link} />
-          <Tab className={classes.loginTab} icon={<AccountCircle />} to='/login' component={Link} />
+          <ProfileTabMenu classes = {classes}/>      
         </Tabs>
       </AppBar>
       </React.Fragment>
