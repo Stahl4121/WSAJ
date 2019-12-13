@@ -11,67 +11,27 @@ import Typography from "@material-ui/core/Typography";
 import Paper from '@material-ui/core/Paper';
 import firebase from "../firebase.js"
 import $ from 'jquery';
+import { withRouter } from "react-router-dom";
+
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width:'100%',
-  },
-  header: {
-    textAlign: 'left',
+    width: '100%',
   },
   form: {
     marginTop: theme.spacing(1),
+    width: '60%',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
-  links: {
-    textDecoration: 'none'
-  },
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginLeft: '4em',
-    marginRight: '4em',
-    marginTop: '2em',
-    marginBottom: '2em',
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200
-  },
-  picker: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200
-  },
-  menu: {
-    width: 200
-  },
-  formControl: {
-    margin: theme.spacing(1)
-  },
-  button: {
-    paddingLeft: '4em',
-    paddingRight: '4em',
-    margin: '1em',
-    width: '10em',
   },
   songs: {
     marginTop: '1em',
     padding: '1em',
   },
-  songHeader: {
-    marginLeft: '1em',
-  },
-  songBox: {
-    opacity: '0.85',
-    marginLeft: "2.2em",
-  }
 });
 
 
@@ -235,6 +195,7 @@ class BetterAddSetScreen extends React.Component {
     db.collection("shows").doc(this.state.name).collection("sets").add(
       { songs: this.state.songsAdded }
     )
+    this.props.history.push("/shows/" + this.state.name.split(" ").join("-"));
   }
   clearSongs(e) {
     ////////////////////////////////////
@@ -246,76 +207,69 @@ class BetterAddSetScreen extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Container component="main" maxWidth="xl">
-        <div >
-          <Typography className={classes.root} component="h1" variant="h5" className={classes.header}>
+      <Container component="main" maxWidth="lg">
+        <div className={classes.root}>
+          <Typography className={classes.header} component="h1" variant="h5" className={classes.header}>
             Add Set
           </Typography>
           <div className={classes.form}>
-            <Grid container>
-              <Grid item xs={12} sm={6}>
-                <Autocomplete
-                  id="combo-box-demo"
-                  options={this.state.songs}
-                  autoComplete
-                  disableOpenOnFocus
-                  getOptionLabel={option => option.label}
-                  onChange={this.handleAutoChange}
-                  style={{ top: "auto", bottom: "auto", height: "auto", postion: "absolute" }}
-                  renderInput={params => (
-                    <TextField {...params}
-                      label="Song"
-                      variant="outlined"
-                      fullWidth
-                      name="song"
-                      onChange={this.handleInputChange}
-                      InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                          <React.Fragment>
-                            {this.state.loading ? <CircularProgress color="inherit" size={20} /> : null}
-                            {/*params.InputProps.endAdornment*/}
-                          </React.Fragment>
-                        ),
-                      }}
-                    />
-                  )}
+            <Autocomplete
+              id="combo-box-demo"
+              options={this.state.songs}
+              autoComplete
+              disableOpenOnFocus
+              getOptionLabel={option => option.label}
+              onChange={this.handleAutoChange}
+              style={{ top: "auto", bottom: "auto", height: "auto", postion: "absolute" }}
+              renderInput={params => (
+                <TextField {...params}
+                  label="Song"
+                  variant="outlined"
+                  fullWidth
+                  name="song"
+                  onChange={this.handleInputChange}
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <React.Fragment>
+                        {this.state.loading ? <CircularProgress color="inherit" size={20} /> : null}
+                        {/*params.InputProps.endAdornment*/}
+                      </React.Fragment>
+                    ),
+                  }}
                 />
+              )}
+            />
 
-                <Button
-                  className={classes.submit}
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={this.addSong}>
-                  Add Song
+            <Button
+              className={classes.submit}
+              variant="contained"
+              size="large"
+              color="primary"
+              fullWidth
+              onClick={this.addSong}>
+              Add Song
                       </Button>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Paper className={classes.songs}>
-                  {this.state.songsAddedComponent}
-                </Paper>
-              </Grid>
-          </Grid>
-                <Button className={classes.submit}
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  onClick={this.submit}
-                >
-                  Save
+            <Paper className={classes.songs}>
+              {this.state.songsAddedComponent}
+            </Paper>
+            <Button className={classes.submit}
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              onClick={this.submit}
+            >
+              Save
                 </Button>
-                <Button className={classes.submit}
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={this.cancel}
-                >
-                  Cancel
+            <Button className={classes.submit}
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={this.cancel}
+            >
+              Cancel
                 </Button>
-            
           </div>
         </div>
       </Container>
@@ -323,4 +277,4 @@ class BetterAddSetScreen extends React.Component {
   }
 }
 
-export default withStyles(styles)(BetterAddSetScreen);
+export default withRouter(withStyles(styles)(BetterAddSetScreen));
