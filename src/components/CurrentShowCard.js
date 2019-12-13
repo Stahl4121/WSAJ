@@ -181,6 +181,8 @@ export default function CurrentShowCard(props) {
             Date of Acceptance: {acceptanceDate}
           </Typography>
         </CardContent>
+        </CardActionArea>
+
         <CardActions>
           <Button
             fullWidth
@@ -230,7 +232,6 @@ export default function CurrentShowCard(props) {
           </Modal>
         </CardContent>
         <CardActions disableSpacing />
-      </CardActionArea>
     </Card >
   );
 }
