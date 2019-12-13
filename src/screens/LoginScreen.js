@@ -77,7 +77,11 @@ class LoginScreen extends React.Component {
       errors['login'] = "";
       this.setState({ errors: errors });
 
-      firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"]).catch((error) => {
+      firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"])
+      .then(() => {
+        this.props.history.push('/');
+      })
+      .catch((error) => {
         // Handle Errors 
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -86,10 +90,6 @@ class LoginScreen extends React.Component {
         errors['login'] = errorMessage;
         this.setState({ errors: errors });
       });
-
-      if(this.state.errors['login'] === ""){
-        this.props.history.push('/');
-      }
     }
   }
 
@@ -119,75 +119,91 @@ class LoginScreen extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    return (
-      <Container component="main" maxWidth="xs">
-        <div className={classes.root}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5" className={classes.header}>
-            Sign In
+    
+    if (this.props.auth !== "") {
+      return (
+        <Container component="main" maxWidth="xs">
+          <div className={classes.root}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5" className={classes.header}>
+              You're already signed in!
           </Typography>
-          <Typography component="h6" className={classes.errorMsg} >
-            {this.state.errors["login"]}
-          </Typography>
-          <div className={classes.form}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              name="email"
-              label="Email Address"
-              autoComplete="email"
-              autoFocus
-              onChange={this.handleChange}
-              error={!this.state.errors["email"] ? false : this.state.errors["email"] !== ""}
-              helperText={this.state.errors["email"]}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              onChange={this.handleChange}
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button className={classes.submit}
-              onClick={(e) => this.signIn(e)}
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to='/forgot' className={classes.links}>
-                  <MUILink variant="body2" component={'span'}>
-                    Forgot password?
-                </MUILink>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to='/signup' className={classes.links}>
-                  <MUILink variant="body2" component={'span'}>
-                    Don't have an account? Sign up
-                </MUILink>
-                </Link>
-              </Grid>
-            </Grid>
           </div>
-        </div>
-      </Container>
-    );
+        </Container>
+      )
+    }
+    else {
+      return (
+        <Container component="main" maxWidth="xs">
+          <div className={classes.root}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5" className={classes.header}>
+              Sign In
+          </Typography>
+            <Typography component="h6" className={classes.errorMsg} >
+              {this.state.errors["login"]}
+            </Typography>
+            <div className={classes.form}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                name="email"
+                label="Email Address"
+                autoComplete="email"
+                autoFocus
+                onChange={this.handleChange}
+                error={!this.state.errors["email"] ? false : this.state.errors["email"] !== ""}
+                helperText={this.state.errors["email"]}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                onChange={this.handleChange}
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button className={classes.submit}
+                onClick={(e) => this.signIn(e)}
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Sign In
+            </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link to='/forgot' className={classes.links}>
+                    <MUILink variant="body2" component={'span'}>
+                      Forgot password?
+                </MUILink>
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link to='/signup' className={classes.links}>
+                    <MUILink variant="body2" component={'span'}>
+                      Don't have an account? Sign up
+                </MUILink>
+                  </Link>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        </Container>
+      );
+    }
   }
 }
 

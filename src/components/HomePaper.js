@@ -2,55 +2,23 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Image from '../img/home91-1.png';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3, 2),
-    color: 'white',
-    backgroundImage: `url(${Image})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    minHeight: '100vh',
-    backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed',
-  },
-  announcement: {
-    margin: '20px',
-    padding: '20px',
+    marginBottom: '25px',
   },
   paperholder: {
     opacity: '0.85',
-  },
-  icon: {
-    marginRight: theme.spacing(2),
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 8),
   },
-  heroButtons: {
-    marginTop: theme.spacing(8),
-  },
   card: {
-    height: '100%',
+    height: '30%',
     display: 'flex',
     flexDirection: 'column',
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(6),
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-    height: 250,
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
   },
 }));
 
