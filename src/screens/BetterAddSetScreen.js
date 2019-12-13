@@ -104,13 +104,12 @@ class BetterAddSetScreen extends React.Component {
   addSong = () => {
     var songsList = this.state.songsAdded;
     var songs = this.state.songsAddedComponent;
-    console.log(this.state.songTextField);
-    console.log(this.state.fields["song"])
-    console.log(this.state.songsAdded);
-    songsList.push(this.state.fields['song']);
+    var newSong = this.state.songTextField;
+
+    songsList.push(newSong);
     songs.push(
       <Typography variant="body1" id="songList">
-        {this.state.fields['song']}
+        {newSong}
       </Typography>
     );
     this.setState({songsAddedComponent: songs, songsAdded: songsList});

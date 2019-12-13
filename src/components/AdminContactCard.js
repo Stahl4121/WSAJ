@@ -175,7 +175,7 @@ class AdminContactCard extends React.Component {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <div style = {{marginRight: 5px}}>
+          <div style = {{marginRight: '5px'}}>
           <Button variant="outlined" color="secondary" onClick={this.saveChanges} className={classes.button}>
             Save
               </Button>
