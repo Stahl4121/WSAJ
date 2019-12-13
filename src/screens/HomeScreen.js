@@ -4,6 +4,11 @@ import PaperSheet from '../components/HomePaper';
 import firebase from "../firebase.js";
 import Image from '../img/home91-1.png';
 import AdminPaperSheet from '../components/AdminHomePaper';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from '@material-ui/core/IconButton';
+
 
 const styles = theme => ({
     root: {
@@ -15,6 +20,7 @@ const styles = theme => ({
         minHeight: '100vh',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed',
+        
       },
     heroContent: {
         backgroundColor: theme.palette.background.paper,
@@ -24,6 +30,10 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
     },
+    floater: {
+        marginLeft: "auto",
+        marginRight: "-22",
+    }
 });
 
 class DJShowsScreen extends React.Component {
@@ -74,7 +84,20 @@ class DJShowsScreen extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.root}>            
+            <div className={classes.root}>  
+                <Toolbar>
+                <span className={classes.floater}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={addAnnouncment}
+                        className={classes.button}
+                        startIcon={<AddIcon fontSize="large" />}
+                    >
+                        Add New Announcement
+                    </Button>
+                </span>
+                </Toolbar>
                 {this.state.papers} 
             </div>
         );

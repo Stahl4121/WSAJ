@@ -5,13 +5,17 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import firebase from "../firebase.js"
-import Delete from '@material-ui/icons/Delete';
+import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
   root: {
     marginBottom: '25px',
+    
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
   },
   paperholder: {
     opacity: '0.85',
@@ -19,13 +23,14 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: '4em',
   },
   buttonHolder: {
+    paddingTop: '1.5em',
     marginLeft: "auto",
-    marginRight: "-12",
+    marginRight: "-22",
     alignContent: 'right',
   },
-  announcmentContent: {
+  announcementContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 2, 8),
+    padding: '.25em',
     borderRadius: '25px',
   },
   button: {
@@ -54,11 +59,14 @@ export default function AdminPaperSheet(props) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paperholder}>
-        <span className={classes.buttonHolder}>
-              <IconButton aria-label="delete" variant="outlined" color="primary" onClick={deleteAnnouncment} className={classes.button}>
-                <DeleteIcon fontSize="large"/>
-              </IconButton>
-            </span>
+        <Toolbar>
+          <span className={classes.buttonHolder}>
+            <IconButton aria-label="delete" variant="outlined" color="primary" onClick={deleteAnnouncment} className={classes.button}>
+              <DeleteIcon fontSize="large"/>
+            </IconButton>
+          </span>
+        </Toolbar>
+        
         <div className={classes.announcementContent}>
           
           <Container maxWidth="sm">
