@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SongSearch from './SongSearch.js';
 import firebase from "../firebase.js";
@@ -25,7 +26,8 @@ class SongRequest extends React.Component {
     this.state = {
       songs: {},
       songRequest: "",
-      suggestions: {}
+      suggestions: {},
+      msg: []
     }
     this.autofill = this.autofill.bind(this);
     this.getSong = this.getSong.bind(this);
@@ -65,6 +67,8 @@ class SongRequest extends React.Component {
         db.collection('shows').doc(this.props.showName).update({
           songRequests: songRequests
         });
+
+      this.setState({msg: [<Typography>Song Request Sent!</Typography>]})
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
@@ -102,6 +106,7 @@ class SongRequest extends React.Component {
                   </Button>
               </Grid>
             </Grid>
+            {this.state.msg}
           </div>
         </Container>
       </div>
