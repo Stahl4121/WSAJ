@@ -12,7 +12,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import MiriamsFace from '../img/headshot.jpg';
+import MiriamsFace from '../img/miriam.jpg';
+import LogansFace from '../img/logan.jpg';
+import SarahsFace from '../img/sarah.jpg';
+import NatesFace from '../img/nate.jpg';
 import CardHeader from '@material-ui/core/CardHeader';
 
 const useStyles = makeStyles(theme => ({

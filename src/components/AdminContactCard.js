@@ -5,7 +5,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
-import MiriamsFace from '../img/headshot.jpg';
 import firebase from "../firebase.js"
 import { withStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
@@ -36,6 +35,14 @@ const styles = theme => ({
     marginBottom: '10px',
   }
 });
+
+
+const pictures = {
+  President: require('../img/miriam.jpg'),
+  "Song Master": require('../img/nate.jpg'),
+  "Vice President": require('../img/sarah.jpg'),
+  "Public Relations": require('../img/logan.jpg'),
+};
 
 class AdminContactCard extends React.Component {
   constructor(props) {
@@ -114,7 +121,7 @@ class AdminContactCard extends React.Component {
         />
         <CardMedia
           className={classes.media}
-          image={MiriamsFace}
+          image={pictures[this.state.execPosition]}
           title="headshot"
         />
         <CardContent>
