@@ -79,8 +79,14 @@ const styles = theme => ({
 class BetterAddSetScreen extends React.Component {
   constructor(props) {
     super();
+    var d = new Date();
+    d = d.toString().split(' ');
+    var date = '';
+    for(var i = 0; i < 3; i++) {
+      date+=d[i] + ' ';
+    }
     this.state = {
-      date: new Date(),
+      date: date,
       name: '',
       songTextField: '',
       songsAdded: [],
