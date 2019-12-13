@@ -20,18 +20,31 @@ class App extends React.Component {
   componentWillMount() {
     firebase.auth().onAuthStateChanged((user) => {
       var auth = "";
+      var db = firebase.firestore();
 
       //Set state auth based on user
       if (user) {
-        console.log("USER EMAIL IS: " + user.email);
-        auth = "dj";
+        //If user exists in the adminAccounts table
+        db.collection("adminAccounts").where("email", "==", user.email).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              if(doc){
+                this.setState({ navbar: <AdminNavBar />, user: user, auth: "admin"});
+              }
+            });
+          })
+          .catch(function (error) {
+            console.log("Error verifying admin status: ", error);
+          });
+        
+        //Logged in but not admin, therefore dj
+        if(this.state.auth !== "dj"){
+          this.setState({ navbar: <DJNavBar />, user: user, auth: "dj"});
+        }
       }
-
-      var navbar = <NavBar />;
-      navbar = auth === "admin" ? <AdminNavBar /> : navbar;
-      navbar = auth === "dj" ? <DJNavBar /> : navbar;
-
-      this.setState({ navbar: navbar, user: user, auth: auth});
+      else{
+        this.setState({ navbar: <NavBar />, user: user, auth: ""});
+      }
     });
   }
 
