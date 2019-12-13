@@ -11,66 +11,27 @@ import Typography from "@material-ui/core/Typography";
 import Paper from '@material-ui/core/Paper';
 import firebase from "../firebase.js"
 import $ from 'jquery';
+import { withRouter } from "react-router-dom";
+
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  header: {
-    textAlign: 'left',
+    width: '100%',
   },
   form: {
     marginTop: theme.spacing(1),
+    width: '60%',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
-  links: {
-    textDecoration: 'none'
-  },
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginLeft: '4em',
-    marginRight: '4em',
-    marginTop: '2em',
-    marginBottom: '2em',
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200
-  },
-  picker: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200
-  },
-  menu: {
-    width: 200
-  },
-  formControl: {
-    margin: theme.spacing(1)
-  },
-  button: {
-    paddingLeft: '4em',
-    paddingRight: '4em',
-    margin: '1em',
-    width: '10em',
   },
   songs: {
     marginTop: '1em',
     padding: '1em',
   },
-  songHeader: {
-    marginLeft: '1em',
-  },
-  songBox: {
-    opacity: '0.85',
-    marginLeft: "2.2em",
-  }
 });
 
 
@@ -78,7 +39,14 @@ const styles = theme => ({
 class BetterAddSetScreen extends React.Component {
   constructor(props) {
     super();
+    var d = new Date();
+    d = d.toString().split(' ');
+    var date = '';
+    for(var i = 0; i < 3; i++) {
+      date+=d[i] + ' ';
+    }
     this.state = {
+      date: date,
       name: '',
       songTextField: '',
       songsAdded: [],
@@ -87,14 +55,13 @@ class BetterAddSetScreen extends React.Component {
       fields: {},
       errors: {},
       tags: [],
-    }
+      }
 
 
     this.handleChange = this.handleChange.bind(this);
     this.validateAll = this.validateAll.bind(this);
     this.signUp = this.signUp.bind(this);
     this.cancel = this.cancel.bind(this);
-    this.clearSongs = this.clearSongs.bind(this);
   };
 
   handleAutoChange = (event, values) => {
@@ -150,6 +117,7 @@ class BetterAddSetScreen extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.state.date);
     var db = firebase.firestore();
 
     //Get showname from logged in user email address
@@ -228,38 +196,28 @@ class BetterAddSetScreen extends React.Component {
     fields["description"] = "";
     fields["songs"] = "";
     this.setState({ fields: fields });
+    this.setState({songsAddedComponent: []});
   }
+  
   submit = (e) => {
     var db = firebase.firestore();
-    db.collection("shows").doc(this.state.name).collection("sets").add(
-      {songs: this.state.songsAdded}
-    )
-  }
-  clearSongs(e) {
-    ////////////////////////////////////
-    // CLEAR DATABASE  SONG REQUESTS ///
-    ////////////////////////////////////
+    db.collection("shows").doc(this.state.name).collection("sets").doc(this.state.date.toString()).set(
+      { songs: this.state.songsAdded }
+    ).then(() => {
+      this.props.history.push("/shows/" + this.state.name.split(" ").join("-"));
+  });
   }
 
   render() {
     const { classes } = this.props;
-    var db = firebase.firestore();
-    var showName = '';
-    var djNames = '';
-    var description = '';
-    var genre = '';
-    var timeSlot = '';
-    var songRequests = '';
-
 
     return (
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="lg">
         <div className={classes.root}>
-          <Typography component="h1" variant="h5" className={classes.header}>
+          <Typography className={classes.header} component="h1" variant="h5" className={classes.header}>
             Add Set
           </Typography>
           <div className={classes.form}>
-
             <Autocomplete
               id="combo-box-demo"
               options={this.state.songs}
@@ -297,11 +255,9 @@ class BetterAddSetScreen extends React.Component {
               onClick={this.addSong}>
               Add Song
                       </Button>
-
             <Paper className={classes.songs}>
               {this.state.songsAddedComponent}
             </Paper>
-
             <Button className={classes.submit}
               type="submit"
               fullWidth
@@ -319,7 +275,6 @@ class BetterAddSetScreen extends React.Component {
             >
               Cancel
                 </Button>
-
           </div>
         </div>
       </Container>
@@ -327,4 +282,4 @@ class BetterAddSetScreen extends React.Component {
   }
 }
 
-export default withStyles(styles)(BetterAddSetScreen);
+export default withRouter(withStyles(styles)(BetterAddSetScreen));

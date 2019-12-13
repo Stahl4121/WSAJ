@@ -158,6 +158,7 @@ class SignUpScreen extends React.Component {
   }
 
   validateAll() {
+    console.log(this.state.errors);
 
     for (const [value] of Object.entries(this.state.errors)) {
       if (!value || value !== "") {
@@ -170,11 +171,10 @@ class SignUpScreen extends React.Component {
   changeInfo(e) {
     e.preventDefault();
 
-    if (this.validateAll()) {
+    //if (this.validateAll()) {
       // Add a new document in collection "shows"
       var db = firebase.firestore();
       db.collection("shows").doc(this.state.showName).update({
-        showName: this.state.fields["showName"],
         dj: this.state.fields["djNames"],
         description: this.state.fields["description"],
         genre: this.state.fields["genre"],
@@ -192,7 +192,7 @@ class SignUpScreen extends React.Component {
       fields["description"] = "";
       fields["genre"] = "";
       this.setState({ fields: fields });
-    }
+    //}
 
   }
 
@@ -306,6 +306,7 @@ class SignUpScreen extends React.Component {
                   fullWidth
                   variant="contained"
                   color="secondary"
+                  onClick={this.changeInfo}
                 >
                   Save
                 </Button>
