@@ -23,6 +23,7 @@ class App extends React.Component {
 
       //Set state auth based on user
       if (user) {
+        console.log("USER EMAIL IS: " + user.email);
         auth = "dj";
       }
 
