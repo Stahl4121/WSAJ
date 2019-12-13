@@ -33,234 +33,156 @@ const styles = theme => ({
 });
 
 class AdminContactCard extends React.Component {
-    constructor(props) {
-      super();
-      this.state = {
-        execPosition: props.execPosition,
+  constructor(props) {
+    super();
+    this.state = {
+      execPosition: props.execPosition,
+      fields: {
         execName: props.execName,
         phoneNumber: props.phoneNumber,
         emailAddress: props.emailAddress,
         description: props.description,
-        fields: {},
-        errors: {},
-        originalData: {
-          execPosition: props.execPosition,
-          execName: props.execName,
-          phoneNumber: props.phoneNumber,
-          emailAddress: props.emailAddress,
-          description: props.description,
-        },
-      }
-      this.handleChange = this.handleChange.bind(this);
-      this.validateAll = this.validateAll.bind(this);
-      //this.signUp = this.signUp.bind(this);
-      //this.cancel = this.cancel.bind(this);
-      this.cancelChanges = this.cancelChanges.bind(this);
-      this.saveChanges = this.saveChanges.bind(this);
-    };
-
-    handleChange(e) {
-        let fields = this.state.fields;
-        fields[e.target.name] = e.target.value;
-    
-        this.setState({
-          fields
-        });
-      }
-    
-    validateAll(){
-    
-        for (const [value] of Object.entries(this.state.errors)) {
-            if (!value || value !== ""){
-            return false;
-            }
-        }
-        return true;
+      },
+      errors: {
+        execName: "",
+        phoneNumber: "",
+        emailAddress: "",
+        description: "",
+      },
+      originalData: {
+        execName: props.execName,
+        phoneNumber: props.phoneNumber,
+        emailAddress: props.emailAddress,
+        description: props.description,
+      },
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.cancelChanges = this.cancelChanges.bind(this);
+    this.saveChanges = this.saveChanges.bind(this);
+  };
 
-    // signUp(e) {
-    //     e.preventDefault();
+  handleChange(e) {
+    let fields = this.state.fields;
+    fields[e.target.name] = e.target.value;
 
-    //     if (this.validateAll()) {
-    //         // Add a new document in collection "shows"
-    //         var db = firebase.firestore();
-    //         db.collection("execContacts").doc(this.state.fields["execPosition"]).set({
-    //             execPosition: this.state.fields["execPosition"],
-    //             execName: this.state.fields["execName"],
-    //             phoneNumber: this.state.fields["phoneNumber"],
-    //             emailAddress: this.state.fields["emailAddress"],
-    //             description: this.state.fields["description"],
-    //             //picture: this.state.fields["picture"],
-    //         })
-    //         .then(function() {
-    //             console.log("Document successfully written!");
-    //         })
-    //         .catch(function(error) {
-    //             console.error("Error writing document: ", error);
-    //         });
-    //         //Clear Form
-    //         let fields = {};
-    //         fields["execName"] = "";
-    //         fields["phoneNumber"] = "";
-    //         fields["emailAddress"] = "";
-    //         fields["description"] = "";
-    //         //fields["picture"] = "",
-    //         this.setState({ fields: fields });
-    //     }
+    this.setState({
+      fields
+    });
+  }
 
-    // }
+  cancelChanges() {
+    // need to re render the old data
+    let fields = {};
+    fields["execName"] = this.state.originalData["execName"];
+    fields["phoneNumber"] = this.state.originalData["phoneNumber"];
+    fields["emailAddress"] = this.state.originalData["emailAddress"];
+    fields["description"] = this.state.originalData["description"];
+    this.setState({ fields: fields });
+  };
 
-    // cancel(e) {
-    //     e.preventDefault();
-        
-    //     //Clear Form
-    //     //DONT save CHANGES
-    //     let fields = {};
-    //     fields["execName"] = "";
-    //     fields["phoneNumber"] = "";
-    //     fields["emailAddress"] = "";
-    //     fields["description"] = "";
-    //     //fields["picture"] = "";
-    //     this.setState({ fields: fields });
-    // }
-
-    cancelChanges() {
-      // need to re render the old data
-      let fields = {};
-      fields["execName"] = this.state.originalData["execName"];
-      fields["phoneNumber"] = this.state.originalData["phoneNumber"];
-      fields["emailAddress"] = this.state.originalData["emailAddress"];
-      fields["description"] = this.state.originalData["description"];
-      this.setState({ fields: fields });
-    };
-  
-    saveChanges() {
-      var db = firebase.firestore();
-      console.log("the execPosition is: ", this.state.execPosition);
-      var contactFields = ["execName", "phoneNumber", "emailAddress", "description"];
-      contactFields.forEach(function (item, index) {
-        console.log(item, index);
-        if(item in this.state.fields) {
-          console.log("changing this field: ", item, "with val: ", this.state.fields[item]);
-          db.collection("execContacts").doc(this.state.execPosition).set({
-            execName: this.state.fields[item],
-          })
-          .then(function() {
-              console.log("Document successfully written!");
-          })
-          .catch(function(error) {
-              console.error("Error writing document: ", error);
-          });
-          this.state.execName = this.state.fields[item];
-        }
+  saveChanges() {
+    var db = firebase.firestore();
+    db.collection("execContacts").doc(this.state.execPosition).set({
+      execPosition: this.state.execPosition,
+      execName: this.state.fields["execName"],
+      phoneNumber: this.state.fields["phoneNumber"],
+      emailAddress: this.state.fields["emailAddress"],
+      description: this.state.fields["description"],
+    })
+      .then(function () {
+        console.log("Document successfully written!");
+      })
+      .catch(function (error) {
+        console.error("Error writing document: ", error);
       });
-      // db.collection("execContacts").doc(this.state.execPosition).set({
-      //   execName: this.state.fields["execName"],
-      //   phoneNumber: this.state.fields["phoneNumber"],
-      //   emailAddress: this.state.fields["emailAddress"],
-      //   description: this.state.fields["description"],
-      //   //picture: this.state.fields["picture"],
-      // })
-      // .then(function() {
-      //     console.log("Document successfully written!");
-      // })
-      // .catch(function(error) {
-      //     console.error("Error writing document: ", error);
-      // });
-      // this.state.execName = this.state.fields["execName"];
-      // this.state.phoneNumber = this.state.fields["phoneNumber"];
-      // this.state.emailAddress = this.state.fields["emailAddress"];
-      // this.state.description = this.state.fields["description"];
-    };
 
-    render() {
-      const { classes } = this.props;
+    this.setState({ originalData: this.state.fields });
+  }
 
-      return (
-        <Card className={classes.card}>
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <Card className={classes.card}>
         <CardHeader
-            title={this.state.execPosition}
+          title={this.state.execPosition}
         />
         <CardMedia
-            className={classes.media}
-            image={MiriamsFace}
-            title="headshot"
+          className={classes.media}
+          image={MiriamsFace}
+          title="headshot"
         />
         <CardContent>
-            <Typography variant="h4">
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="exec-name"
-                    name="execName"
-                    label="Exec Name"
-                    defaultValue={this.state.execName}
-                    autoFocus
-                    onChange={this.handleChange}
-                    error={!this.state.errors["execName"] ? false : this.state.errors["execName"] !== ""}
-                    helperText={this.state.errors["execName"]}
-                />
-            </Typography>
-            <Typography variant="h4">
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="description"
-                    name="description"
-                    label="Description"
-                    defaultValue={this.state.description}
-                    autoFocus
-                    onChange={this.handleChange}
-                    error={!this.state.errors["description"] ? false : this.state.errors["description"] !== ""}
-                    helperText={this.state.errors["description"]}
-                />
-            </Typography>
-            <Typography paragraph>
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="phone-number"
-                    name="phoneNumber"
-                    label="Phone Number"
-                    defaultValue={this.state.phoneNumber}
-                    autoFocus
-                    onChange={this.handleChange}
-                    error={!this.state.errors["phoneNumber"] ? false : this.state.errors["phoneNumber"] !== ""}
-                    helperText={this.state.errors["phoneNumber"]}
-                />
-            </Typography>
-            <Typography paragraph>
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email-address"
-                    name="emailAddress"
-                    label="Email Address"
-                    defaultValue={this.state.emailAddress}
-                    autoFocus
-                    onChange={this.handleChange}
-                    error={!this.state.errors["emailAddress"] ? false : this.state.errors["emailAddress"] !== ""}
-                    helperText={this.state.errors["emailAddress"]}
-                />
-            </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-              <Button variant="outlined" color="secondary" onClick={this.saveChanges} className={classes.button}>
-                Save
+          <Typography variant="h4">
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="exec-name"
+              name="execName"
+              label="Exec Name"
+              value={this.state.fields["execName"]}
+              onChange={this.handleChange}
+              error={!this.state.errors["execName"] ? false : this.state.errors["execName"] !== ""}
+              helperText={this.state.errors["execName"]}
+            />
+          </Typography>
+          <Typography variant="h4">
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="description"
+              name="description"
+              label="Description"
+              value={this.state.fields["description"]}
+              onChange={this.handleChange}
+              error={!this.state.errors["description"] ? false : this.state.errors["description"] !== ""}
+              helperText={this.state.errors["description"]}
+            />
+          </Typography>
+          <Typography paragraph>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="phone-number"
+              name="phoneNumber"
+              label="Phone Number"
+              value={this.state.fields["phoneNumber"]}
+              onChange={this.handleChange}
+              error={!this.state.errors["phoneNumber"] ? false : this.state.errors["phoneNumber"] !== ""}
+              helperText={this.state.errors["phoneNumber"]}
+            />
+          </Typography>
+          <Typography paragraph>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email-address"
+              name="emailAddress"
+              label="Email Address"
+              value={this.state.fields["emailAddress"]}
+              onChange={this.handleChange}
+              error={!this.state.errors["emailAddress"] ? false : this.state.errors["emailAddress"] !== ""}
+              helperText={this.state.errors["emailAddress"]}
+            />
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <Button variant="outlined" color="secondary" onClick={this.saveChanges} className={classes.button}>
+            Save
               </Button>
-              <Button variant="outlined" color="primary" onClick={this.cancelChanges} className={classes.button}>
-                Cancel
+          <Button variant="outlined" color="primary" onClick={this.cancelChanges} className={classes.button}>
+            Cancel
               </Button>
-            </CardActions>
-        </Card>
+        </CardActions>
+      </Card>
     );
   }
 }

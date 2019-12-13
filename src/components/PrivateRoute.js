@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import Typography from '@material-ui/core/Typography';
 
 export default function PrivateRoute({
   component: Component,
@@ -14,7 +15,7 @@ export default function PrivateRoute({
         ((type === "dj" && auth === "dj") || (type === "admin" && auth === "admin") ? (
           <Component {...props} {...rest} />
         ) : (
-            <Redirect to="/login" />
+            <Typography variant="h4"> You do not have access to this page. </Typography>
           )
         )
       }
