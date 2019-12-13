@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/styles';
 import PaperSheet from '../components/HomePaper';
 import firebase from "../firebase.js";
 import Image from '../img/home91-1.png';
-
+import AdminPaperSheet from '../components/AdminHomePaper';
 
 const styles = theme => ({
     root: {
@@ -35,18 +35,40 @@ class DJShowsScreen extends React.Component {
     };
 
     componentDidMount() {
-        var newCards = [];
-        var db = firebase.firestore();
+               
         
-        db.collection('announcements').get().then((querySnapshot) => {
-            querySnapshot.forEach(function (doc) {
-                var title = doc.data().title;
-                var date = doc.data().date;
-                var announcement = doc.data().announcement;
-                newCards.push(<PaperSheet title={title} date={date} announcement={announcement} />);
-            });
-            this.setState({ papers: newCards})
-        });
+
+        firebase.auth().onAuthStateChanged((user) => {
+            var newCards = [];
+            var auth = "";
+            var db = firebase.firestore();
+      
+            //Set state auth based on user
+            if (user && this.state.auth !== "dj") {
+              //If user exists in the adminAccounts table
+              db.collection('announcements').get().then((querySnapshot) => {
+                querySnapshot.forEach(function (doc) {
+                    var title = doc.data().title;
+                    var date = doc.data().date;
+                    var announcement = doc.data().announcement;
+                    newCards.push(<AdminPaperSheet title={title} date={date} announcement={announcement} />);
+                });
+                this.setState({ papers: newCards})
+              });
+            }
+            else{
+                db.collection('announcements').get().then((querySnapshot) => {
+                    querySnapshot.forEach(function (doc) {
+                        var title = doc.data().title;
+                        var date = doc.data().date;
+                        var announcement = doc.data().announcement;
+                        newCards.push(<PaperSheet title={title} date={date} announcement={announcement} />);
+                    });
+                    this.setState({ papers: newCards})
+                });
+            }
+          });
+
     };
 
     render() {
