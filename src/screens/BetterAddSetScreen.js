@@ -1,15 +1,16 @@
-//from a sandbox tutuorial
+//TODO: Make it so that when user clicks on an autocomplete suggestion, the field's state is saved to that suggestion
 import React from "react";
 import { withStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import TextField from "@material-ui/core/TextField";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from '@material-ui/core/Paper';
 import firebase from "../firebase.js"
-import SongRequest from "../components/SongRequest.js";
-import SongSearch from "../components/SongSearch.js";
+import $ from 'jquery';
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(8),
@@ -79,9 +80,12 @@ class BetterAddSetScreen extends React.Component {
     super();
     this.state = {
       name: '',
+      songsAdded: [],
+      songsAddedComponent: [],
       songs: [],
       fields: {},
-      errors: {}
+      errors: {},
+      tags: [],
     }
 
 
@@ -92,6 +96,53 @@ class BetterAddSetScreen extends React.Component {
     this.clearSongs = this.clearSongs.bind(this);
   };
 
+  addSong = () => {
+    var songsList = this.state.songsAdded;
+    var songs = this.state.songsAddedComponent;
+    console.log(this.state.fields["song"])
+    console.log(this.state.songsAdded);
+    songsList.push(this.state.fields['song']);
+    songs.push(
+      <Typography variant="body1" id="songList">
+        {this.state.fields['song']}
+      </Typography>
+    );
+    this.setState({songsAddedComponent: songs, songsAdded: songsList});
+  };
+
+  handleInputChange = (event) => {
+     var settings = {
+      async: "true",
+      crossDomain: "true",
+      url: "https://deezerdevs-deezer.p.rapidapi.com/search?q=" + event.target.value,
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+        "x-rapidapi-key": "f33e47e69fmshe427476175d1511p18d30djsn436f42242136"
+      },
+      context: this
+    }
+    $.ajax(settings).done(function (response) {
+      if (typeof response.data !== 'undefined') {
+        var newSongs = [];
+        for (var i = 0; i < response.data.length; i++) {
+          newSongs.push({ label: response.data[i].title + ' by ' + response.data[i].artist.name });
+        }
+
+        this.setState({ songs: newSongs, loading: false });
+      }
+    });
+
+    let fields = this.state.fields;
+    fields[event.target.name] = event.target.value;
+
+    this.setState({
+      fields
+    });
+
+    this.setState({ loading: true });
+  }
+
   componentDidMount() {
     var db = firebase.firestore();
 
@@ -101,8 +152,8 @@ class BetterAddSetScreen extends React.Component {
       db.collection("shows").where("emailAddress", "==", this.props.user.email).get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            if(doc){
-              this.setState({name: doc.data().showName})
+            if (doc) {
+              this.setState({ name: doc.data().showName })
             }
           });
         })
@@ -110,7 +161,7 @@ class BetterAddSetScreen extends React.Component {
           console.log("Error finding show name: ", error);
         });
     }
-    else{
+    else {
       console.log('No user logged in.');
     }
   }
@@ -124,10 +175,10 @@ class BetterAddSetScreen extends React.Component {
     });
   }
 
-  validateAll(){
-    
+  validateAll() {
+
     for (const [value] of Object.entries(this.state.errors)) {
-      if (!value || value !== ""){
+      if (!value || value !== "") {
         return false;
       }
     }
@@ -141,14 +192,14 @@ class BetterAddSetScreen extends React.Component {
       // Add a new document in collection "shows"
       var db = firebase.firestore();
       db.collection('shows').doc(this.state.name.split('-').join(' ')).collection('sets').add({
-        songs: this.state.songs,
+        songs: this.state.songsAdded,
       })
-      .then(function() {
-        console.log("Document successfully written!");
-      })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
-      });
+        .then(function () {
+          console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+          console.error("Error writing document: ", error);
+        });
       //Clear Form
       let fields = {};
       fields["setName"] = "";
@@ -159,10 +210,10 @@ class BetterAddSetScreen extends React.Component {
     }
 
   }
-
+  
   cancel(e) {
     e.preventDefault();
-    
+
     //Clear Form
     //DONT save CHANGES
     let fields = {};
@@ -245,6 +296,7 @@ class BetterAddSetScreen extends React.Component {
                   fullWidth
                   variant="contained"
                   color="secondary"
+                  onClick={this.submit}
                 >
                   Save
                 </Button>
@@ -266,13 +318,38 @@ class BetterAddSetScreen extends React.Component {
                   justify="space-around"
                   alignItems="center">
                   <Grid item xs={10}>
-                    <SongSearch/>
+                    <Autocomplete
+                      id="combo-box-demo"
+                      options={this.state.songs}
+                      autoComplete
+                      disableOpenOnFocus
+                      getOptionLabel={option => option.label}
+                      style={{ top: "auto", bottom: "auto", height: "auto", postion: "absolute" }}
+                      renderInput={params => (
+                        <TextField {...params}
+                          label="Song"
+                          variant="outlined"
+                          fullWidth
+                          name="song"
+                          onChange={this.handleInputChange}
+                          InputProps={{
+                            ...params.InputProps,
+                            endAdornment: (
+                              <React.Fragment>
+                                {this.state.loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                {/*params.InputProps.endAdornment*/}
+                              </React.Fragment>
+                            ),
+                          }}
+                        />
+                      )}
+                    />
                   </Grid>
                   <Grid item xs={2}>
-                    <Button 
+                    <Button
                       variant="contained"
-                      size="large" 
-                      color="primary" 
+                      size="large"
+                      color="primary"
                       fullWidth
                       className={classes.button}
                       onClick={this.addSong}>
@@ -280,13 +357,11 @@ class BetterAddSetScreen extends React.Component {
                       </Button>
                   </Grid>
                 </Grid>
-                <Paper className={classes.songBox}>
-                  <div className={classes.announcement}>
-                    <Typography component="p">
-                      {this.state.songs}
-                    </Typography>
-                  </div>
-                </Paper>
+                <Grid item xs={10}>
+                  <Paper className={classes.songs}>
+                    {this.state.songsAddedComponent}
+                  </Paper>
+                </Grid>
               </Grid>
             </Grid>
           </form>
