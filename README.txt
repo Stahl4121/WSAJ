@@ -1,5 +1,6 @@
 
-
+Our application is written in ReactJS with Firebase.
+The website can be accessed by going to the URL https://wsaj-7626d.firebaseapp.com/
 
 ADMIN CREDENTIALS:
 Email: admin@wsaj.com
