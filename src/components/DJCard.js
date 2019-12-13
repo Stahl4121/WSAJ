@@ -1,14 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
-import MiriamsFace from '../img/headshot.jpg';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -39,32 +38,47 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
-}));
+});
 
-export default function DJCard(props) {
-  const classes = useStyles();
-  var name = props.show;
-  var dj = props.djName;
-  console.log('show ' + props.show)
-  var linkTo = "/shows/" + name.split(' ').join('-');
+const pictures = {
+  President: require('../img/miriam.jpg'),
+  "Song Master": require('../img/nate.jpg'),
+  "Vice President": require('../img/sarah.jpg'),
+  "Public Relations": require('../img/logan.jpg'),
+};
+
+class DJCard extends React.Component {
+  constructor(props) {
+    super();
+    this.state = {
+      name: props.name,
+      dj: props.djName,
+      execPosition: props.execPosition,
+    }
+  }
   
-  return (
-    <Card className={classes.card}>
-      <CardActionArea component={Link} to={linkTo}>
-        <CardMedia
-          className={classes.cardMedia}
-          image={MiriamsFace}
-          title="Show Image"
-        />
-        <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            {name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Hosted by {dj}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  );
+  render() {
+    const { classes } = this.props;
+    var linkTo = "/shows/" + this.state.name.split(' ').join('-');
+    return (
+      <Card className={classes.card}>
+        <CardActionArea component={Link} to={linkTo}>
+          <CardMedia
+            className={classes.cardMedia}
+            image={pictures[this.state.execPosition]}
+            title="Show Image"
+          />
+          <CardContent className={classes.cardContent}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {this.state.name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Hosted by {this.state.dj}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    );
+  }
 }
+export default withStyles(styles)(DJCard);
