@@ -24,13 +24,14 @@ class App extends React.Component {
       //Set state auth based on user
       if (user) {
         this.setState({ navbar: <NavBar />, user: user, auth: "badDJ"});
-
+        console.log("AUTHED A USER " + user.email);
         //If user exists in the adminAccounts table
         db.collection("adminAccounts").where("email", "==", user.email).get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               if(doc){
                 this.setState({ navbar: <AdminNavBar />, user: user, auth: "admin"});
+                console.log("AUTHED AN ADMIN " + user.email);
               }
             });
           })
@@ -39,7 +40,7 @@ class App extends React.Component {
           });
 
           //If dj exists in the shows table with current status
-        db.collection("shows").where("email", "==", user.email).where("status", "==", "current").get()
+        db.collection("shows").where("emailAddress", "==", user.email).where("status", "==", "current").get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             if(doc){
@@ -48,7 +49,7 @@ class App extends React.Component {
           });
         })
         .catch(function (error) {
-          console.log("Error verifying admin status: ", error);
+          console.log("Error verifying dj status: ", error);
         });
       }
       else{
