@@ -18,13 +18,17 @@ import ProfileScreen from "../screens/DJProfileScreen.js";
 import AdminExecContactScreen from "../screens/AdminExecContactScreen.js";
 import AddAnnouncementScreen from "../screens/AddAnnouncementScreen.js";
 import BetterAddSetScreen from "../screens/BetterAddSetScreen.js";
+import Add from "../screens/AddAnnouncementScreen.js";
+
 import { realpathSync } from "fs";
 
 class Routes extends React.Component {
     render() {
         return (
             <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" 
+                    render={(props) => <Home {...props} auth={this.props.auth} />}
+                />
                 <Route exact path="/shows" component={DJShows} />
                 <Route exact path="/schedule" component={Schedule} />
                 <Route exact path="/contact" component={ContactsPage} />
@@ -41,6 +45,7 @@ class Routes extends React.Component {
                 <PrivateRoute exact path="/dj/add-set"  type="dj" auth={this.props.auth} user={this.props.user} component={BetterAddSetScreen} />
                 <PrivateRoute exact path="/dj/profile" component={ProfileScreen} user={this.props.user} type="dj" auth={this.props.auth} />
                 <PrivateRoute exact path="/admin/schedule" component={DNDCalendarScreen} type="admin" auth={this.props.auth} />
+                <PrivateRoute exact path="/admin/add-announcement" component={AddAnnouncementScreen} type="admin" auth={this.props.auth} />
                 <PrivateRoute exact path="/admin/current-shows" component={AdminCurrentShowScreen} type="admin" auth={this.props.auth} />
                 <PrivateRoute exact path="/admin/current-shows/:name" type="admin" auth={this.props.auth} component={DJSetsScreen} />
                 <PrivateRoute exact path="/admin/show-requests" component={AdminShowRequestScreen} type="admin" auth={this.props.auth} />
