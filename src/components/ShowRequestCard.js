@@ -92,12 +92,6 @@ export default function ShowRequestCard(props) {
     }).catch(function(error) {
         console.error("Error removing document: ", error);
     });
-    // var db = firebase.firestore();
-    // db.collection("shows").doc(props.showName).delete().then(function () {
-    //   console.log("Document successfully deleted!");
-    // }).catch(function (error) {
-    //   console.error("Error removing document: ", error);
-    // });
   };
 
   function approveDJ() {
