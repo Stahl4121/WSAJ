@@ -2,44 +2,45 @@ import React, { Component } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-
+import firebase from "../firebase.js";
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
 
-
+// from the react-big-calendar and the intl-justice-mission github examples and issues
+// with some changes of our own
 class DNDCalendarScreen extends React.Component {
   constructor() {
     super();
     this.state = {
       fields: {},
       errors: {},
-      events: [
-        {
-          id: 0,
-          start: new Date(),
-          end: new Date(moment().add(1, "h")),
-          title: "First Event"
-        },
-        {
-          id: 1,
-          start: new Date(),
-          end: new Date(moment().add(1, "h")),
-          title: "Ice Cream Time"
-        },
-        {
-          id: 2,
-          start: new Date(),
-          end: new Date(moment().add(1, "h")),
-          title: "Snack Time"
-        },
-      ],
+      events: [],
     }
     this.moveEvent = this.moveEvent.bind(this);
     //this.newEvent = this.newEvent.bind(this);
   };
+
+  componentDidMount() {
+        var newEvents = [];
+        var db = firebase.firestore();
+        db.collection("events").get().then((querySnapshot) => {
+            querySnapshot.forEach(function (doc) {
+                var name = doc.data().name;
+                var startStr = doc.data().start;
+                var endStr = doc.data().end;
+                var start = new Date(startStr);
+                var end = new Date(endStr);               
+                console.log({"start": start, "end": end, "title": name});
+                //console.log(start);
+                newEvents.push({"start": start, "end": end, "title": name});
+            });
+            this.setState({ events: newEvents})
+            console.log(this.state.events);
+        });
+    };
 
   moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
     const { events } = this.state
@@ -65,6 +66,53 @@ class DNDCalendarScreen extends React.Component {
     // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
   }
 
+  newEvent = ({ start, end }) => {
+    const title = window.prompt('New Event name')
+    if (title)
+      this.setState({
+        events: [
+          ...this.state.events,
+          {
+            start,
+            end,
+            title,
+          },
+        ],
+      })
+      console.log("these are the dates");
+      console.log(end.toString());
+      var db = firebase.firestore();
+      db.collection("events").doc(title).set({
+          name: title,
+          end: end.toString(),
+          start: start.toString()
+      })
+      .then(function() {
+          console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
+  }
+
+  onSelectEvent(pEvent) {
+   const r = window.confirm("Would you like to remove this event?")
+   if(r === true){
+    var db = firebase.firestore();
+    db.collection("events").doc(pEvent.title).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+     this.setState((prevState, props) => {
+       const events = [...prevState.events]
+       const idx = events.indexOf(pEvent)
+       events.splice(idx, 1);
+       return { events };
+     });
+   }
+ }
+
   resizeEvent = ({ event, start, end }) => {
     const { events } = this.state
 
@@ -87,6 +135,7 @@ class DNDCalendarScreen extends React.Component {
     return (
       <div className="dnd">
         <DnDCalendar
+          selectable
           defaultDate={new Date()}
           defaultView="month"
           events={this.state.events}
@@ -94,6 +143,7 @@ class DNDCalendarScreen extends React.Component {
           onEventDrop={this.moveEvent}
           resizable
           onEventResize={this.resizeEvent}
+          onSelectEvent = {event => this.onSelectEvent(event)}
           onSelectSlot={this.newEvent}
           onDragStart={console.log}
           style={{ height: "100vh" }}

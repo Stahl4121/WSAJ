@@ -59,6 +59,7 @@ class AdminExecContactScreen extends React.Component {
                 var phoneNumber = doc.data().phoneNumber;
                 var emailAddress = doc.data().emailAddress;
                 var description = doc.data().description;
+                //var picture = doc.data().picture;
                 console.log(execName)
                 console.log(phoneNumber)
                 newCards.push(<Grid item xs={12} sm={6} md={4}>
@@ -68,6 +69,7 @@ class AdminExecContactScreen extends React.Component {
                                     phoneNumber={phoneNumber} 
                                     emailAddress={emailAddress} 
                                     description={description}
+                                    //picture={picture}
                                 />
                               </Grid>);
             });

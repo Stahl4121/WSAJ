@@ -16,47 +16,25 @@ const useStyles = makeStyles(theme => ({
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
   },
-  announcement: {
-    margin: '20px',
-    padding: '20px',
-  },
   paperholder: {
     opacity: '0.85',
-  },
-  icon: {
-    marginRight: theme.spacing(2),
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 8),
   },
-  heroButtons: {
-    marginTop: theme.spacing(8),
-  },
   card: {
-    height: '100%',
+    height: '30%',
     display: 'flex',
     flexDirection: 'column',
   },
-  cardGrid: {
-    paddingTop: theme.spacing(6),
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-    height: 250,
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
 }));
 
-export default function PaperSheet() {
+export default function PaperSheet(props) {
   const classes = useStyles();
-
+  var title=props.title;
+  var date=props.date;
+  var announcement=props.announcement;
   return (
     <div className={classes.root}>
       <Paper className={classes.paperholder}>
@@ -68,14 +46,21 @@ export default function PaperSheet() {
               align="center"
               color="textPrimary"
               gutterBottom>
-              Announcements
+              {title}
             </Typography>
             <Typography
               variant="h5"
               align="center"
               color="textSecondary"
               paragraph>
-              Check out the other tabs:)
+              {date}
+            </Typography>
+            <Typography
+              variant="h5"
+              align="center"
+              color="textSecondary"
+              paragraph>
+              {announcement}
             </Typography>
           </Container>
         </div>

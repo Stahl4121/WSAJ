@@ -44,12 +44,27 @@ class SignUpScreen extends React.Component {
         password: "",
         emailConfirm: "",
         passwordConfirm: "",
+        studentNames: "",
+        djNames: "",
+        timeSlot: "",
+        showName: "",
+        genre: "",
+        description: "",
+        phoneNumber: "",
+
       },
       errors: {
         email: "",
         password: "",
         emailConfirm: "",
         passwordConfirm: "",
+        studentNames: "",
+        djNames: "",
+        timeSlot: "",
+        showName: "",
+        genre: "",
+        description: "",
+        phoneNumber: "",
       }
     }
 
@@ -110,19 +125,20 @@ class SignUpScreen extends React.Component {
 
       //create dj
       var db = firebase.firestore();
-      db.collection("shows").doc(this.state.fields["djNames"]).set({
+      db.collection("shows").doc(this.state.fields["showName"]).set({
         confirmDate: '',
-        description: '',
+        description: this.state.fields["description"],
         dj: this.state.fields["djNames"],
         emailAddress: this.state.fields["email"],
-        genre: "Country",
+        genre: this.state.fields["genre"],
         password: this.state.fields["password"],
-        phoneNumber: 0,
-        requestDate: '',
+        phoneNumber: this.state.fields["phoneNumber"], 
+        requestDate: Date().toString(),
         showName: this.state.fields["showName"],
+        timeSlot: this.state.fields["timeSlot"],
         songRequests: [],
-        status: 'current',
-        timeSlot: '',
+        studentNames: this.state.fields["studentNames"],
+        status: 'requested',
       })
         .then(function () {
           console.log("Document successfully written!");
@@ -139,6 +155,7 @@ class SignUpScreen extends React.Component {
     let fields = {};
     fields["email"] = "";
     fields["password"] = "";
+    
     this.setState({ fields: fields });
   }
 

@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   tabs: {
   },
   tab: {
-    width: '100%',
+    //width: '100%',
 
   },
   loginTab: {
@@ -34,14 +34,16 @@ export default function AdminNavBar() {
     <React.Fragment>
       <AppBar className={classes.appBar} title="WSAJ">
         <Tabs className={classes.tabs}>
-          <Tab className={classes.tab} label="Account Requests" to='/admin/show-requests' component={Link} />
-          <Tab className={classes.tab} label="Current Shows" to='/admin/current-shows' component={Link} />
+          <Tab className={classes.tab} label="Home" to='/' component={Link} />
+          <Tab className={classes.tab} label="DJ Shows" to='/shows' component={Link} />
           <Tab className={classes.tab} label="Calendar" to='/admin/schedule' component={Link} />
           <Tab className={classes.tab} label="Contact" to='/admin/contact' component={Link} />
+          <Tab className={classes.tab} label="Account Requests" to='/admin/show-requests' component={Link} />
+          <Tab className={classes.tab} label="Current Shows" to='/admin/current-shows' component={Link} />
           <ProfileTabMenu classes = {classes}/>      
         </Tabs>
       </AppBar>
-      </React.Fragment>
+    </React.Fragment>
 
   );
 }

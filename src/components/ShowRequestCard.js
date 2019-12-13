@@ -86,21 +86,32 @@ export default function ShowRequestCard(props) {
 
   function deleteDJ() {
     var db = firebase.firestore();
-    db.collection("shows").doc(props.dj).delete().then(function () {
-      console.log("Document successfully deleted!");
-    }).catch(function (error) {
-      console.error("Error removing document: ", error);
+    console.log("showName is: ", props.name);
+    db.collection("shows").doc(props.name).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
     });
+    // var db = firebase.firestore();
+    // db.collection("shows").doc(props.showName).delete().then(function () {
+    //   console.log("Document successfully deleted!");
+    // }).catch(function (error) {
+    //   console.error("Error removing document: ", error);
+    // });
   };
 
   function approveDJ() {
     var db = firebase.firestore();
-    db.collection('shows').doc(props.dj).set({
+    
+    db.collection("shows").doc(props.name).update({
         status: 'current'
-    }, { merge: true }).then(function () {
-      console.log("Document successfully updated!");
-    }).catch(function (error) {
-      console.error("Error updating document: ", error);
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
     });
   };
 
