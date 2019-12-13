@@ -18,6 +18,7 @@ import ProfileScreen from "../screens/DJProfileScreen.js";
 import AdminExecContactScreen from "../screens/AdminExecContactScreen.js";
 import AddAnnouncementScreen from "../screens/AddAnnouncementScreen.js";
 import BetterAddSetScreen from "../screens/BetterAddSetScreen.js";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen.js";
 import Add from "../screens/AddAnnouncementScreen.js";
 
 import { realpathSync } from "fs";
@@ -38,6 +39,7 @@ class Routes extends React.Component {
                 <Route exact path="/signup"
                     render={(props) => <SignUpScreen {...props} auth={this.props.auth} />}
                 />
+                <Route exact path="/forgot" component = {ForgotPasswordScreen} />
                 <Route exact path="/shows/:name" component={DJSetsScreen} />
                 <Route exact path="/dj/set-history" component={SetsScreen} />
                 <PrivateRoute exact path="/shows/:name/add-set"  type="dj" auth={this.props.auth} component={BetterAddSetScreen} />

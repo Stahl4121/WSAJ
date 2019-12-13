@@ -100,6 +100,7 @@ class SignUpScreen extends React.Component {
     this.cancel = this.cancel.bind(this);
     this.clearSongs = this.clearSongs.bind(this);
   };
+
   componentDidMount() {
     const { classes } = this.props;
     var songs = [];
@@ -124,6 +125,7 @@ class SignUpScreen extends React.Component {
     });
     
   }
+
 
   handleChange(e) {
     let fields = this.state.fields;
