@@ -124,11 +124,11 @@ class AdminContactCard extends React.Component {
         <CardHeader
             title={this.state.execPosition}
         />
-        {/* <CardMedia
+        <CardMedia
             className={classes.media}
             image={this.state.picture}
             title="headshot"
-        /> */}
+        />
         <CardContent>
             <Typography variant="h4">
                 <TextField

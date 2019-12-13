@@ -50,11 +50,11 @@ class ContactCard extends React.Component {
         title={this.state.execPosition}
         subheader={this.state.execName}
       />
-      {/* <CardMedia
+      <CardMedia
         className={classes.media}
         image={MiriamsFace}
         title="headshot"
-      /> */}
+      />
       <CardContent>
         <Typography>
           <p>
