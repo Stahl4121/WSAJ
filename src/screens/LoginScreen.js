@@ -79,7 +79,12 @@ class LoginScreen extends React.Component {
 
       firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"])
         .then(() => {
-          this.props.history.push('/');
+          if(this.props.auth === "dj") {
+            this.props.history.push('/dj/profile');
+          }
+          else{
+            this.props.history.push('/');
+          }
         })
         .catch((error) => {
           // Handle Errors 
