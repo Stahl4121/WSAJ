@@ -73,6 +73,8 @@ class SignUpScreen extends React.Component {
       fields: {},
       errors: {},
       songRequests: [],
+      showName: "",
+      loaded: false,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -83,15 +85,20 @@ class SignUpScreen extends React.Component {
   };
 
   componentDidMount() {
-    const { classes } = this.props;
+    this.getSongRequests();
+  }
+
+  getSongRequests = () => {
     var songs = [];
     var db = firebase.firestore();
     var dbRef = db.collection("shows");
+    var showName = "";
+
     dbRef.get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         if (doc.data().emailAddress === this.props.user.email) {
           var songRequests = doc.data().songRequests;
-          console.log(songRequests);
+          showName = doc.data().showName;
           for (var i = 0; i < songRequests.length; i++) {
             songs.push (
                 <Typography variant="body1" id="songList">
@@ -101,9 +108,25 @@ class SignUpScreen extends React.Component {
           }
         }
       });
-      this.setState({ songRequests: songs })
+
+      this.setState({ songRequests: songs, showName: showName })
+      
+      if(this.state.loaded === false){
+        this.observeSongRequests();
+        this.setState({ loaded: true })
+      }
     });
-    
+  }
+
+  observeSongRequests = () => {
+    var songs = [];
+    var db = firebase.firestore();
+    var dbRef = db.collection("shows");
+
+    dbRef.doc(this.state.showName)
+    .onSnapshot((doc) => {
+      this.getSongRequests();
+    });
   }
 
 
