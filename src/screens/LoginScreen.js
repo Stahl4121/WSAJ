@@ -78,18 +78,18 @@ class LoginScreen extends React.Component {
       this.setState({ errors: errors });
 
       firebase.auth().signInWithEmailAndPassword(this.state.fields["email"], this.state.fields["password"])
-      .then(() => {
-        this.props.history.push('/');
-      })
-      .catch((error) => {
-        // Handle Errors 
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        .then(() => {
+          this.props.history.push('/');
+        })
+        .catch((error) => {
+          // Handle Errors 
+          var errorCode = error.code;
+          var errorMessage = error.message;
 
-        let errors = this.state.errors;
-        errors['login'] = errorMessage;
-        this.setState({ errors: errors });
-      });
+          let errors = this.state.errors;
+          errors['login'] = errorMessage;
+          this.setState({ errors: errors });
+        });
     }
   }
 
@@ -117,9 +117,19 @@ class LoginScreen extends React.Component {
     return (errorMsg === "" ? true : false);
   }
 
+
+  logout = () => {
+    firebase.auth().signOut().then(() => {
+      // Sign-out successful.
+      this.props.history.push('/login');
+    }).catch((error) => {
+      // An error happened
+    });
+  }
+
   render() {
     const { classes } = this.props;
-    
+
     if (this.props.auth !== "") {
       return (
         <Container component="main" maxWidth="xs">
@@ -130,6 +140,14 @@ class LoginScreen extends React.Component {
             <Typography component="h1" variant="h5" className={classes.header}>
               You're already signed in!
           </Typography>
+            <Button className={classes.submit}
+              onClick={(e) => this.logout(e)}
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Sign Out
+            </Button>
           </div>
         </Container>
       )
