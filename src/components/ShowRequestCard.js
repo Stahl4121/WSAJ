@@ -102,6 +102,7 @@ export default function ShowRequestCard(props) {
 
   function approveDJ() {
     var db = firebase.firestore();
+    
     db.collection("shows").doc(props.name).update({
         status: 'current'
     })
