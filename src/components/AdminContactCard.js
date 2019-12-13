@@ -137,23 +137,40 @@ class AdminContactCard extends React.Component {
     saveChanges() {
       var db = firebase.firestore();
       console.log("the execPosition is: ", this.state.execPosition);
-      db.collection("execContacts").doc(this.state.execPosition).set({
-        //execName: this.state.fields["execName"],
-        phoneNumber: this.state.fields["phoneNumber"],
-        emailAddress: this.state.fields["emailAddress"],
-        description: this.state.fields["description"],
-        //picture: this.state.fields["picture"],
-      })
-      .then(function() {
-          console.log("Document successfully written!");
-      })
-      .catch(function(error) {
-          console.error("Error writing document: ", error);
+      var contactFields = ["execName", "phoneNumber", "emailAddress", "description"];
+      contactFields.forEach(function (item, index) {
+        console.log(item, index);
+        if(item in this.state.fields) {
+          console.log("changing this field: ", item, "with val: ", this.state.fields[item]);
+          db.collection("execContacts").doc(this.state.execPosition).set({
+            execName: this.state.fields[item],
+          })
+          .then(function() {
+              console.log("Document successfully written!");
+          })
+          .catch(function(error) {
+              console.error("Error writing document: ", error);
+          });
+          this.state.execName = this.state.fields[item];
+        }
       });
-      this.state.execName = this.state.fields["execName"];
-      this.state.phoneNumber = this.state.fields["phoneNumber"];
-      this.state.emailAddress = this.state.fields["emailAddress"];
-      this.state.description = this.state.fields["description"];
+      // db.collection("execContacts").doc(this.state.execPosition).set({
+      //   execName: this.state.fields["execName"],
+      //   phoneNumber: this.state.fields["phoneNumber"],
+      //   emailAddress: this.state.fields["emailAddress"],
+      //   description: this.state.fields["description"],
+      //   //picture: this.state.fields["picture"],
+      // })
+      // .then(function() {
+      //     console.log("Document successfully written!");
+      // })
+      // .catch(function(error) {
+      //     console.error("Error writing document: ", error);
+      // });
+      // this.state.execName = this.state.fields["execName"];
+      // this.state.phoneNumber = this.state.fields["phoneNumber"];
+      // this.state.emailAddress = this.state.fields["emailAddress"];
+      // this.state.description = this.state.fields["description"];
     };
 
     render() {
