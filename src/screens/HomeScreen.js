@@ -7,7 +7,6 @@ import AdminPaperSheet from '../components/AdminHomePaper';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
 
 
@@ -21,8 +20,8 @@ const styles = theme => ({
         minHeight: '100vh',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed',
-        
-      },
+
+    },
     heroContent: {
         backgroundColor: theme.palette.background.paper,
     },
@@ -46,59 +45,55 @@ class DJShowsScreen extends React.Component {
     };
 
     componentDidMount() {
-               
-        firebase.auth().onAuthStateChanged((user) => {
-            var newCards = [];
-            var auth = "";
-            var db = firebase.firestore();
-      
-            //Set state auth based on user
-            if (user && this.state.auth !== "dj") {
-              //If user exists in the adminAccounts table
-              db.collection('announcements').get().then((querySnapshot) => {
+        var newCards = [];
+        var db = firebase.firestore();
+
+        if (this.props.auth === "admin") {
+            db.collection('announcements').get().then((querySnapshot) => {
                 querySnapshot.forEach(function (doc) {
                     var title = doc.data().title;
                     var date = doc.data().date;
                     var announcement = doc.data().announcement;
                     newCards.push(<AdminPaperSheet title={title} date={date} announcement={announcement} />);
                 });
-                this.setState({ papers: newCards})
-              });
-            }
-            else{
-                db.collection('announcements').get().then((querySnapshot) => {
-                    querySnapshot.forEach(function (doc) {
-                        var title = doc.data().title;
-                        var date = doc.data().date;
-                        var announcement = doc.data().announcement;
-                        newCards.push(<PaperSheet title={title} date={date} announcement={announcement} />);
-                    });
-                    this.setState({ papers: newCards})
+                this.setState({ papers: newCards })
+            });
+        }
+        else {
+            db.collection('announcements').get().then((querySnapshot) => {
+                querySnapshot.forEach(function (doc) {
+                    var title = doc.data().title;
+                    var date = doc.data().date;
+                    var announcement = doc.data().announcement;
+                    newCards.push(<PaperSheet title={title} date={date} announcement={announcement} />);
                 });
-            }
-          });
-
+                this.setState({ papers: newCards })
+            });
+        }
     };
 
     render() {
         const { classes } = this.props;
         var linkTo = "/admin/add-announcement";
         return (
-            <div className={classes.root}>  
+            <div className={classes.root}>
+                <div style = {{display: (this.props.auth === "admin" ? "inline" : "none")}}>
                 <Toolbar>
-                <span className={classes.floater}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        
-                        className={classes.button}
-                        startIcon={<AddIcon fontSize="large" />}
-                    >
-                        Add New Announcement
+                    <span className={classes.floater}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            component={Link}
+                            to={linkTo}
+                            className={classes.button}
+                            startIcon={<AddIcon fontSize="large" />}
+                        >
+                            Add New Announcement
                     </Button>
-                </span>
+                    </span>
                 </Toolbar>
-                {this.state.papers} 
+                </div>
+                {this.state.papers}
             </div>
         );
     }
