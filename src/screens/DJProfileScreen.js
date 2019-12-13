@@ -72,7 +72,7 @@ class SignUpScreen extends React.Component {
     this.state = {
       fields: {},
       errors: {},
-      songRequests: '',
+      songRequests: [],
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -88,14 +88,18 @@ class SignUpScreen extends React.Component {
     var dbRef = db.collection("shows");
     dbRef.get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        //if (doc.data().showName === name) {
-        var songRequests = doc.data().songRequests;
-        console.log(songRequests);
-        for (var i = 0; i < songRequests.length; i++) {
-          songs += songRequests[i];
+        if (doc.data().emailAddress === this.props.user.email) {
+          var songRequests = doc.data().songRequests;
+          console.log(songRequests);
+          for (var i = 0; i < songRequests.length; i++) {
+            songs.push (
+                <Typography variant="body1" id="songList">
+                  {songRequests[i]}
+                </Typography>
+            );
+          }
         }
       });
-      // }
       this.setState({ songRequests: songs })
     });
     
@@ -260,11 +264,9 @@ class SignUpScreen extends React.Component {
                 <Typography component="h1" variant="h5" className={classes.header}>
                   Song Requests
                 </Typography>
-                <Paper className={classes.songs}>
-                  <Typography variant="body1" id="songList">
+                  <Paper className={classes.songs}>
                     {this.state.songRequests}
-                  </Typography>
-                </Paper>
+                  </Paper>
                 <Button className={classes.submit}
                   fullWidth
                   variant="contained"

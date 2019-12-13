@@ -55,6 +55,7 @@ class AdminExecContactScreen extends React.Component {
         db.collection("execContacts").get().then((querySnapshot) => {
             querySnapshot.forEach(function (doc) {
                 var execPosition = doc.data().execPosition;
+                console.log("these are the execPositions: ", execPosition);
                 var execName = doc.data().execName;
                 var phoneNumber = doc.data().phoneNumber;
                 var emailAddress = doc.data().emailAddress;
