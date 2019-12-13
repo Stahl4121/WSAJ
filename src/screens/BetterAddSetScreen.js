@@ -75,9 +75,10 @@ const styles = theme => ({
 
 
 class BetterAddSetScreen extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
+      name: props.match.params.name.split('-').join(' '),
       songs: [],
       fields: {},
       errors: {}
@@ -115,11 +116,8 @@ class BetterAddSetScreen extends React.Component {
     if (this.validateAll()) {
       // Add a new document in collection "shows"
       var db = firebase.firestore();
-      db.collection("shows").doc(this.state.fields["setName"]).set({
-        setName: this.state.fields["setName"],
-        songs: this.state.fields["songs"],
-        description: this.state.fields["description"],
-        tags: this.state.fields["tags"],
+      db.collection('shows').doc(this.state.name.split('-').join(' ')).collection('sets').add({
+        songs: ["Bloodbuzz Ohio by The National", "Lightyears by The National"] /*this.state.fields["songs"]*/,
       })
       .then(function() {
         console.log("Document successfully written!");
