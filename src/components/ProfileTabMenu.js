@@ -6,41 +6,48 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import firebase from "../firebase.js"
 import { withRouter } from "react-router-dom";
 
-function ProfileTabMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = event => {
-        setAnchorEl(event.currentTarget);
+class ProfileTabMenu extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            anchorEl: null,            
+        };
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
+
+    handleClick = event => {
+        this.setState({anchorEl: event.currentTarget});
     };
 
-    const logout = () => {
-        firebase.auth().signOut().then(function() {
+    handleClose = () => {
+        this.setState({anchorEl: null});
+    };
+
+    logout = () => {
+        firebase.auth().signOut().then(() => {
             // Sign-out successful.
-            this.props.history.push('/');
-          }).catch(function(error) {
-            // An error happened.
-          });
+            this.props.history.push('/login');
+        }).catch((error) => {
+            // An error happened
+        });
     }
 
-
-    return (
-        <div>
-            <Tab className={props.classes.loginTab} aria-controls="simple-menu"   aria-haspopup="true" onClick={handleClick} icon={<AccountCircle />} />
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={logout}>Logout</MenuItem>
-            </Menu>
-        </div>
-    );
+    render() {
+        return (
+            <div>
+                <Tab className={this.props.classes.loginTab} aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick} icon={<AccountCircle />} />
+                <Menu
+                    id="simple-menu"
+                    anchorEl={this.state.anchorEl}
+                    keepMounted
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={this.handleClose}
+                >
+                    <MenuItem onClick={this.logout}>Logout</MenuItem>
+                </Menu>
+            </div >
+        );
+    }
 }
 
 export default withRouter(ProfileTabMenu);

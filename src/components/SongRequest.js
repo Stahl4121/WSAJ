@@ -23,10 +23,28 @@ class SongRequest extends React.Component {
     super();
     this.state = {
       songs: {},
+      songRequest: "",
       suggestions: {}
     }
     this.autofill = this.autofill.bind(this);
+    this.getSong = this.getSong.bind(this);
   };
+  
+  getSong(_State){
+    const songString = _State.songString;
+		this.setState(
+			{
+				songRequest: songString
+			},
+			() => {
+				console.log(this.state.songRequest);
+			}
+    );
+  }
+
+  submitRequest = (event) => {
+    console.log("I've been clicked!");
+  }
 
   autofill(e) {
 
@@ -43,7 +61,9 @@ class SongRequest extends React.Component {
               justify="space-around"
               alignItems="center">
               <Grid item xs={10}>
-                <SongSearch/>
+                <SongSearch
+                  getSong={this.getSong}
+                />
               </Grid>
               <Grid item xs={2}
               >
@@ -52,6 +72,7 @@ class SongRequest extends React.Component {
                   size="large" 
                   color="primary" 
                   fullWidth
+                  onclick={this.submitRequest}
                   className={classes.button}>
                   Submit
                   </Button>
