@@ -249,20 +249,7 @@ class SignUpScreen extends React.Component {
               <Grid item xs={12} sm={6}>
                 <Typography component="h1" variant="h5" className={classes.header}>
                   DJ Profile
-              </Typography>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="show-name"
-                  name="showName"
-                  label="Show Name"
-                  autoFocus
-                  onChange={this.handleChange}
-                  error={!this.state.errors["showName"] ? false : this.state.errors["showName"] !== ""}
-                  helperText={this.state.errors["showName"]}
-                />
+              </Typography>np
                 <TextField
                   variant="outlined"
                   margin="normal"
