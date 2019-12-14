@@ -1,5 +1,4 @@
-
-Our application is written in ReactJS with Firebase.
+Our application is written in ReactJS with Firebase. The attached zip contains all files minus some configuration and the node_modules folder.
 The website can be accessed by going to the URL https://wsaj-7626d.firebaseapp.com/
 
 Our website has different functionality for visitors, djs, and admins. Please explore each account to see the full scope of our project.
